@@ -1,11 +1,12 @@
 # GUI
+from typing import Generator
 
 import rdflib.term
 from PyQt5.QtWidgets import *
 import gui
 import sys
 import os
-from rdflib import Graph, Dataset, RDFS
+from rdflib import Graph, Dataset, RDFS, RDF
 from pyshacl import validate
 
 
@@ -73,6 +74,25 @@ class SHACLvalidator(QDialog, gui.Ui_Dialog):
                     FILTER isLiteral(?o)
                 }"""
         )
+
+        # # Define the subject variable outside the query
+        # user_input_subject = "http://example.org/subject1"
+        #
+        # # Parameterized SPARQL query with proper URI formatting
+        # query_template = """
+        # SELECT ?subject ?predicate ?object
+        # WHERE {{
+        #   ?subject ?predicate ?object .
+        #   FILTER(?predicate = <{predicate}>)
+        # }}
+        # """
+        #
+        # # Format the query by substituting the subject variable
+        # formatted_query = query_template.format(predicate=RDF.type)
+        #
+        # # Execute the formatted query
+        # results = instance_data_graph.query(formatted_query)
+
         # then loop on the literals and if the literal is in tha datatype map then add teh datatype
         for literal in graph_literals:
             datatype = datatype_mapping_graph.triples((literal[0], RDFS.range, None))
@@ -82,6 +102,7 @@ class SHACLvalidator(QDialog, gui.Ui_Dialog):
                     # print(f"{s_i} has predicate {p_i} which is {o_i}")
                     instance_data_graph.add((s_i, p_i, rdflib.Literal(o_i, datatype=o_d.__str__()))) # this triggers a warning that can be ignorred
                     instance_data_graph.remove((s_i, p_i, o_i))
+
 
 
         # this is validation without inference
