@@ -4,60 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e973f85d-401d-443d-8234-56233ed0b894" name="Changes" comment="Adding readme.">
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/DatatypeMapping/RDFdatatypes.rdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/EQinv.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/OP_452_cp_explicit.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/OPinv.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SC_452_cp.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SV_456_cp_explicit.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SVinv.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/TP_456_cp_explicit.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level3_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level3_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level4_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level4_IGMdiff.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level5_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level5_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level6_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level8_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level8_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level3_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level3_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level4_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level4_IGMdiff.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level5_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level5_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level6_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_IGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level8_CGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level8_IGMCGM.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/DiagramLayoutProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/DynamicsProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/EquipmentBoundaryProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/EquipmentProfileCoreOperationShortCircuit.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/FileHeaderProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/GeographicalLocationProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/StateVariablesProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/SteadyStateHypothesisProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/TopologyBoundaryProfile.ttl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/TopologyProfile.ttl" afterDir="false" />
+    <list default="true" id="e973f85d-401d-443d-8234-56233ed0b894" name="Changes" comment="Adding constraints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SHACLvalidator.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/SHACLvalidator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/application/gui.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +103,7 @@
       <workItem from="1703653838805" duration="3648000" />
       <workItem from="1704292997614" duration="1552000" />
       <workItem from="1704483355454" duration="3401000" />
-      <workItem from="1704722614612" duration="5888000" />
+      <workItem from="1704722614612" duration="7453000" />
     </task>
     <task id="LOCAL-00001" summary="Adding readme.">
       <option name="closed" value="true" />
@@ -172,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704725167550</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding constraints">
+      <option name="closed" value="true" />
+      <created>1704738023263</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704738023263</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +137,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adding readme." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding readme." />
+    <MESSAGE value="Adding constraints" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding constraints" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SHACLvalidator$main.coverage" NAME="SHACLvalidator Coverage Results" MODIFIED="1703505958186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
