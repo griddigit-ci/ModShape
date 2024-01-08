@@ -1,4 +1,4 @@
-# ModShape - A Python & SHACL based Model Validation
+# ModShape (Model Shape) - A Python & SHACL based Model Validation
 
 ## General
 This [SHACL](https://www.w3.org/TR/shacl/) based model validator is an open source Python application. Main contributors are [gridDigIt Kft.](https://www.griddigit.eu/) and [Associmates GmbH](http://www.associmates.eu/). The code is Licensed under the Mozilla Public Licence (MPL) v2.
