@@ -12,9 +12,9 @@ from pyshacl import validate
 from application import gui
 
 
-class SHACLvalidator(QDialog, gui.Ui_Dialog):
+class ModShape(QDialog, gui.Ui_Dialog):
     def __init__(self, parent=None):
-        super(SHACLvalidator, self).__init__(parent)
+        super(ModShape, self).__init__(parent)
         self.setupUi(self)
         global projectPath
 
@@ -151,7 +151,7 @@ def main():
     exitcode = 1
     try:
         # self.app.PrintPlain("Starting OSA AP2 GUI application ...")
-        form = SHACLvalidator()
+        form = ModShape()
         form.show()
         exitcode = QtApp.exec_()
     finally:
