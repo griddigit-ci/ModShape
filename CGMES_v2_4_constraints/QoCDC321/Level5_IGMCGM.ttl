@@ -1,0 +1,391 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level5-IGMCGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l5com: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level5-IGMCGM#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l5com:Level5-IGMCGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level5-IGMCGM" ;
+        sh:order    0 .
+
+l5com:SvPowerFlow  a  sh:NodeShape ;
+        sh:property     l5com:SvPowerFlow-SvPowerFlowBranchInstances2;
+		sh:targetClass cim:SeriesCompensator , cim:ACLineSegment , cim:PowerTransformer , cim:Switch , cim:Cut , cim:Fuse , cim:GroundDisconnector , cim:Jumper , cim:Disconnector , cim:Breaker , cim:DisconnectingCircuitBreaker , cim:LoadBreakSwitch.
+#sh:target  
+#       [
+#             a sh:SPARQLTarget ;
+#             sh:prefixes cim: ;
+#             sh:select """
+#               SELECT ?this
+#               WHERE {
+#                ?this  ^cim:Terminal.ConductingEquipment  ?any.
+#                ?this rdf:type  ?type.
+#                FILTER (?type IN (cim:SeriesCompensator , cim:ACLineSegment , cim:PowerTransformer , cim:Switch , cim:Cut , cim:Fuse , cim:GroundDisconnector , cim:Jumper , cim:Disconnector # , cim:Breaker , cim:DisconnectingCircuitBreaker , cim:LoadBreakSwitch)).
+#               }
+#               """ ;
+#       ] .  
+
+l5com:SvPowerFlow-SvPowerFlowBranchInstances2
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:SvPowerFlow-SvPowerFlowBranchInstances2Sparql ;
+        sh:path         rdf:type ;
+        sh:description  "Branches should have cim:SvPowerFlow instantiated at its cim:Terminals for the following branch classes: 		- cim:SeriesCompensator		- cim:ACLineSegment		- cim:PowerTransformer		- cim:Switch where cim:Switch.retained is true." ;
+        sh:name         "SvPowerFlowBranchInstances2" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        1 ;
+        sh:severity     sh:Warning .
+        
+l5com:SvPowerFlow-SvPowerFlowBranchInstances2Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Missing cim:SvPowerFlow for branch." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value 
+			WHERE {
+        $this rdf:type ?value .
+#        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topologicalisland }.
+#        OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  ?svstatus} .
+        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal ?svpowerflow }.
+        OPTIONAL {$this  cim:Switch.retained  ?retained} .
+        FILTER ((!bound(?retained) && !bound(?svpowerflow)) || (bound(?retained) && ?retained=true && !bound(?svpowerflow))).
+			}""" . 
+# 		FILTER ((!bound(?retained) && bound(?topologicalisland) && bound(?svstatus) && ?svstatus=true && !bound(?svpowerflow)) || 
+#       (bound(?retained) && ?retained=true && bound(?topologicalisland) && bound(?svstatus) && ?svstatus=true && !bound(?svpowerflow))).
+#			}""" . 
+
+l5com:SvTapStep  a  sh:NodeShape ;
+        sh:property     l5com:SvTapStep-SV__4 ;
+        sh:targetClass  cim:RatioTapChanger, cim:PhaseTapChangerTabular , cim:PhaseTapChangerSymmetrical , cim:PhaseTapChangerAsymmetrical , cim:PhaseTapChangerLinear .  
+
+l5com:SvTapStep-SV__4
+        a               sh:PropertyShape ;
+        sh:minCount     1 ;
+        #sh:maxCount     1 ;
+		sh:message 		"Missing SvTapStep for TapChanger." ;
+        sh:path         [sh:inversePath  cim:SvTapStep.TapChanger] ;
+        sh:description  "A cim:SvTapStep instance is expected for all cim:TapChanger instances defined in EQ." ;
+        sh:name         "SvTapStepInstances" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        2 ;
+        sh:severity     sh:Violation .
+		
+l5com:SvPowerFlow-SvPowerFlowInstances  a  sh:NodeShape ;
+        sh:property     l5com:SvPowerFlow-instance;
+        sh:targetClass  cim:SynchronousMachine , cim:AsynchronousMachine , cim:StationSupply , cim:ConformLoad , cim:NonConformLoad , cim:EnergyConsumer , cim:EquivalentInjection , cim:LinearShuntCompensator , cim:NonlinearShuntCompensator , cim:StaticVarCompensator , cim:EnergySource , cim:ExternalNetworkInjection.
+ 
+
+l5com:SvPowerFlow-instance
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:SvPowerFlow-instanceSparql ;
+        sh:path         rdf:type ;
+        sh:description  "cim:SvPowerFlow class is required to be instantiated for the following classes:- subclasses of the cim:RotatingMachine	- subclasses of the cim:EnergyConsumer	- cim:EquivalentInjection	- cim:ExternalNetworkInjection	- cim:ShuntCompensator	- cim:StaticVarCompensator 	- cim:EnergySource." ;
+        sh:name         "SvPowerFlowInstances" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        3 ;
+        sh:severity     sh:Violation .
+        
+l5com:SvPowerFlow-instanceSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Missing SvPowerFlow for Equipment." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value 
+			WHERE {
+        #$this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  true .
+        #$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes #?topologicalisland .
+        $this rdf:type ?value .
+        #OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes #?topologicalisland }.
+        #OPTIONAL {$this  ^cim:SvStatus.ConductingEquipment/cim:SvStatus.inService  ?svstatus} .
+        OPTIONAL {$this ^cim:Terminal.ConductingEquipment/^cim:SvPowerFlow.Terminal ?svpowerflow }.
+        #FILTER (bound(?topologicalisland) && bound(?svstatus) && ?svstatus=true && !bound(?svpowerflow)).
+        FILTER (!bound(?svpowerflow)).
+			}""" . 	
+
+l5com:SvPowerFlowBranchInstances  a  sh:NodeShape ;
+        sh:property     l5com:TieFlow-SvPowerFlowBranchInstances;
+        sh:targetClass  cim:TieFlow .
+ 
+
+l5com:TieFlow-SvPowerFlowBranchInstances
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:TieFlow-SvPowerFlowBranchInstancesSparql ;
+        sh:path         cim:TieFlow.Terminal ;
+        sh:description  "The following shall conform:  1)	For cim:TieFlow, which association end cim:TieFlow.ControlArea refers to a cim:ControlArea with cim:ControlArea.type equal to cim:ControlAreaTypeKind.Interchange, the association end cim:TieFlow.Terminal shall refer to a cim:Terminal of either cim:ACLineSegment, cim:PowerTransformer or cim:Switch	 and its subclasses. The cim:Terminal referenced by the association end cim:TieFlow.Terminal shall be associated with a boundary cim:TopologicalNode that conforms to item 2).   2)	A boundary cim:TopologicalNode that is connected to an IGM shall have     -	One cim:EquivalentInjection    -	One of the following equipment: cim:ACLineSegment, cim:PowerTransformer or a retained cim:Switch (cim:Switch.retained=true) and its subclasses." ;
+        sh:name         "SvPowerFlowBranchInstances" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        4 ;
+        sh:severity     sh:Violation .
+        
+l5com:TieFlow-SvPowerFlowBranchInstancesSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "One of the following occurs: 1) A cim:TieFlow with a cim:TieFlow.Terminal referring to either a cim:Terminal that is not connected to a boundary cim:TopologicalNode or it is not a cim:Terminal of one of the following: cim:ACLineSegment, cim:PowerTransformer or a retained cim:Switch and its subclasses; 2) A boundary cim:TopologicalNode connected to the IGM that does not have one cim:EquivalentInjection and one of the following:  cim:ACLineSegment, cim:PowerTransformer, or a retained cim:Switch and its subclasses." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value 
+			WHERE {
+        $this $PATH ?value .
+		?value cim:Terminal.ConductingEquipment/rdf:type ?cetype .
+		BIND(EXISTS{?value cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true} AS ?isbp).
+		#?value cim:Terminal.TopologicalNode/^cim:Terminal.TopologicalNode/cim:Terminal.ConductingEquipment/rdf:type ?cebdtype .
+		OPTIONAL {?value cim:Terminal.TopologicalNode/^cim:Terminal.TopologicalNode/cim:Terminal.ConductingEquipment/cim:Switch.retained ?retained}.
+		#?isbp=false ||
+		#|| ?cebdtype NOT IN (cim:ACLineSegment, cim:PowerTransformer, cim:Switch, cim:LoadBreakSwitch , cim:Breaker, cim:Disconnector , cim:LoadBreakSwitch , cim:Breaker , cim:GroundDisconnector) 
+	
+        FILTER (?isbp=false || ?cetype NOT IN (cim:ACLineSegment, cim:PowerTransformer, cim:Switch, cim:LoadBreakSwitch , cim:Breaker, cim:Disconnector , cim:LoadBreakSwitch , cim:Breaker , cim:GroundDisconnector) || (?cetype IN (cim:Switch, cim:LoadBreakSwitch , cim:Breaker, cim:Disconnector , cim:LoadBreakSwitch , cim:Breaker , cim:GroundDisconnector) && bound(?retained) && ?retained=false)).
+			}""" . 	
+			
+l5com:DisconnectedTerminal  a  sh:NodeShape ;
+        sh:property     l5com:SvPowerFlow-DisconnectedTerminal;
+        sh:targetClass  cim:SvPowerFlow .
+ 
+
+l5com:SvPowerFlow-DisconnectedTerminal
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:SvPowerFlow-DisconnectedTerminalSparql ;
+        sh:path         cim:SvPowerFlow.Terminal ;
+        sh:description  "If the associated cim:Terminal.connected status is false, the flow specified in the cim:SvPowerFlow.p and cim:SvPowerFlow.q shall be zero." ;
+        sh:name         "DisconnectedTerminal" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        5 ;
+        sh:severity     sh:Violation .
+        
+l5com:SvPowerFlow-DisconnectedTerminalSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Zero flow expected for disconnected terminal." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value 
+			WHERE {
+        $this $PATH ?term .
+		?term cim:ACDCTerminal.connected false .
+		$this cim:SvPowerFlow.p ?p .
+		$this cim:SvPowerFlow.q ?q .
+
+		FILTER (?p!=0 || ?q!=0).
+			}""" . 		
+
+l5com:TopologicalIslandCountShape
+       a sh:NodeShape ;
+       sh:property   l5com:TopologicalIsland-instance;
+       sh:targetNode cim:TopologicalIsland .
+       
+l5com:TopologicalIsland-instance
+           a               sh:PropertyShape ;
+           sh:path [ sh:inversePath rdf:type ] ;
+           sh:minCount      1 ;
+           sh:description  "In case a solved model is exchanged for a single MAS the state variables profile must include at least one instance of cim:TopologicalIsland." ;
+           sh:group        l5com:Level5-IGMCGM ;
+           sh:message      "Missing cim:TopologicalIsland." ;
+           sh:name         "TopologicalIslandInstance" ;
+           sh:order        6 ;
+           sh:severity     sh:Violation .		
+
+
+l5com:SmallTopologicalIsland
+        a               sh:NodeShape ;
+        sh:property     l5com:TI-SmallTopologicalIsland ;
+        sh:targetClass  cim:TopologicalIsland .  
+        
+l5com:TI-SmallTopologicalIsland
+        a               sh:PropertyShape ;
+		sh:sparql       l5com:TI-SmallTopologicalIslandSparql ;
+        sh:description  "A small cim:TopologicalIsland with TNs having zero voltage is in most cases meaningless and should not be exchanged.A cim:TopologicalIsland with three or fewer cim:TopologicalNodes is small." ;
+        sh:name         "SmallTopologicalIsland" ;
+        sh:path         cim:TopologicalIsland.TopologicalNodes;
+        sh:order        7 ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:severity     sh:Warning .  
+
+l5com:TI-SmallTopologicalIslandSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "Small cim:TopologicalIsland found." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?tnodes) AS ?counts) (SUM(?value) AS ?sv)
+			WHERE {
+          $this $PATH ?tnodes.
+		  ?tnodes rdf:type ?type .
+		  ?tnodes ^cim:SvVoltage.TopologicalNode/cim:SvVoltage.v ?value .
+          #FILTER(?o!=cim:Equipment).
+			}
+		GROUP BY $this ?type 
+		HAVING(?counts<=3 && ?sv=0 )
+		""" .	
+
+l5com:SlackNode  a  sh:NodeShape ;
+        sh:property     l5com:Model-angleReference ;
+        sh:targetNode  cim:AngleReference  .    
+    
+l5com:Model-angleReference
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:Model-angleReferenceSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every cim:TopologicalIsland the cim:TopologicalIsland.AngleRefTopologicalNode should refer to the cim:TopologicalNode with a cim:SynchronousMachine having the highest cim:SynchronousMachine.referencePriority. The priority values are - 0 not included in slack node determination.	- 1 is the highest.	- 2 and on are decreasing priorities. If no cim:SynchronousMachine with	cim:SynchronousMachine.referencePriority specified is available the cim:TopologicalIsland.AngleRefTopologicalNode can be set to any cim:TopologicalNode." ;
+        sh:name         "SlackNode" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        8 ;
+        sh:severity     sh:Warning .
+        
+l5com:Model-angleReferenceSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A cim:SynchronousMachine with valid ReferencePriority exists but is not used for defining the angle reference node in topological island. The angle reference slack is located outside the model or the SynchronousMachine with the highest SynchronousMachine.referencePriority (ID: {?sm1}) is not in the SSH or the TopologicalNode (ID: {?tn}) is not the one referenced by TopologicalIsland.AngleRefTopologicalNode (TopologicalNode ID: {?tn1}) or there are multiple machines with SynchronousMachine.referencePriority=1." ;
+		sh:prefixes cim: ;
+		sh:select """
+    	SELECT $this ?sm1 ?tn ?value ?tn1
+			WHERE {
+          {
+          #SELECT $this (COUNT(?smrp) as ?count)
+          SELECT $this (COUNT(?type) as ?count)
+          WHERE {
+              #?sm cim:SynchronousMachine.referencePriority ?smrp .
+              ?sm cim:SynchronousMachine.referencePriority 1 .
+              ?sm rdf:type cim:SynchronousMachine .
+              ?sm rdf:type ?type .
+              #FILTER (?smrp=1).
+            }
+            GROUP BY $this ?type
+          }
+          ?sm1 cim:SynchronousMachine.referencePriority 1 .
+          ?sm1 rdf:type cim:SynchronousMachine .
+          
+          
+          OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode|^cim:Terminal.ConductingEquipment/cim:Terminal.TopologicalNode ?tn .
+                    ?tn ^cim:TopologicalIsland.TopologicalNodes ?ti .
+                    }.
+          OPTIONAL {?ti2 cim:TopologicalIsland.AngleRefTopologicalNode ?tn1 .
+                     ?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 .
+                     }.
+          
+          #OPTIONAL {?sm1 ^cim:Terminal.ConductingEquipment/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti }.
+          #OPTIONAL {?ti cim:TopologicalIsland.AngleRefTopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?ti1 .
+          
+          #OPTIONAL {?tn ^cim:TopologicalIsland.TopologicalNodes ?ti }.
+          #OPTIONAL {?tn1 ^cim:TopologicalIsland.TopologicalNodes ?ti1 }.
+          
+          BIND("" as ?value).
+      
+          FILTER (?count!=1 || !bound(?ti) || !bound(?ti1) || (bound(?ti) && bound(?ti1) && ?ti!=?ti1)).
+      } 
+      LIMIT 1
+      """ . 		
+	  
+l5com:TapChangerTargetRange
+        a               sh:NodeShape ;
+        sh:property     l5com:RegulatingControl.targetValue-tapChanger ;
+        sh:targetClass  cim:TapChangerControl .
+
+
+l5com:RegulatingControl.targetValue-tapChanger
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:RegulatingControl.targetValue-tapChangerSparql ;
+        sh:path         rdf:type ;
+        sh:description  "A tap changer cannot reach a cim:RegulatingControl.targetValue outside its	capability. The tap changer upper capability limit (TCUC) in per unit is 		- TCUC = 1+cim:RatioTapChanger.stepVoltageIncrement/100*		(cim:TapChanger.highStep-cim:TapChanger.neutralStep)	The tap changer lower capability limit (TCLC) in per unit is	- TCLC = 1-cim:RatioTapChanger.stepVoltageIncrement/100*	(cim:TapChanger.neutralStep-cim:TapChanger.lowStep)	The TCUC and TCLC are in per unit (PU)	The target value in PU is TargetValuePU =		cim:RegulatingControl.targetValue/cim:BaseVoltage.nominalVoltage	where the cim:BaseVoltage is from the controlled Terminal.	The rule is	- min(TCLC,TCUC) GreaterOrEqual TargetValuePU LessOrEqual max(TCLC,TCUC) Note1: The cim:TapChanger.controlEnabled and  cim:RequlatingControl.enabled flags are to be considered. Note2: cim:TapChangerControlMode shall be set to voltage control." ;
+        sh:name         "TapChangerTargetRange" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        9 ;
+        sh:severity     sh:Warning .
+    
+l5com:RegulatingControl.targetValue-tapChangerSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The cim:RegulatingControl.targetValue outside the cim:TapChanger capability." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT $this ?value
+			WHERE {
+        $this cim:RegulatingControl.targetValue ?value .
+        $this cim:RegulatingControl.mode cim:RegulatingControlModeKind.voltage .
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.controlEnabled true .
+        $this cim:RegulatingControl.enabled true .
+        $this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.stepVoltageIncrement ?svi .
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.highStep ?highstep .
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.lowStep ?lowstep .
+        $this ^cim:TapChanger.TapChangerControl/cim:TapChanger.neutralStep ?neutralstep .
+        #$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu .
+        $this cim:RegulatingControl.Terminal/cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage|cim:RegulatingControl.Terminal/cim:Terminal.TopologicalNode/cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?valuenomu .
+        
+				FILTER (!( ?value/?valuenomu>=(1-(?svi/100)*(?neutralstep-?lowstep)) && ?value/?valuenomu<=(1+(?svi/100)*(?highstep-?neutralstep)) ) ) .
+			}""" .
+			
+l5com:IDuniqueness a  sh:NodeShape ;
+        sh:property     l5com:All-GENC1;
+        sh:targetNode   cim:IDuniqueness.  
+
+l5com:All-GENC1
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:All-GENC1Sparql ;
+        sh:path         rdf:type ;
+        sh:description  "All mRIDs (rdf:ID or rdf:about) in a model shall be unique." ;
+        sh:name         "IDuniqueness" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        10 ;	
+        sh:severity     sh:Violation .
+        
+l5com:All-GENC1Sparql
+		a         sh:SPARQLConstraint ;  
+    sh:message      "mRID (rdf:ID or rdf:about) not unique within model." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?value) AS ?counts) ?value
+			WHERE {
+          ?value rdf:type ?o.
+          #FILTER(?o!=cim:Equipment).
+			}
+      GROUP BY $this ?value
+      HAVING(?counts>1)
+      """ . 
+	  
+l5com:SynchronousCondenserMode a  sh:NodeShape ;
+        sh:property     l5com:SynchronousMachine-SynchronousCondenserMode;
+        sh:targetClass   cim:SynchronousMachine.  
+
+l5com:SynchronousMachine-SynchronousCondenserMode
+        a               sh:PropertyShape ;
+        sh:sparql       l5com:SynchronousMachine-SynchronousCondenserModeSparql ;
+        sh:path         cim:SynchronousMachine.type ;
+        sh:description  "For a synchronous condenser (cim:SynchronousMachine.type = condenser)	there is no capability for real power output. In this case, the cim:SynchronousMachine.operationMode should be condenser." ;
+        sh:name         "SynchronousCondenserMode" ;
+        sh:group        l5com:Level5-IGMCGM ;
+        sh:order        11 ;	
+        sh:severity     sh:Warning .
+        
+l5com:SynchronousMachine-SynchronousCondenserModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "A synchronous condenser should have cim:SynchronousMachine.operatingMode set to condenser." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value 
+			WHERE {
+        $this $PATH cim:SynchronousMachineKind.condenser .
+		$this cim:SynchronousMachine.operatingMode ?opmode .
+
+		FILTER (?opmode!=cim:SynchronousMachineOperatingMode.condenser).
+			}""" .	  
+      			
+        
+

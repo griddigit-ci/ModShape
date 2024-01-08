@@ -1,0 +1,580 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level5-IGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l5igm: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level5-IGM#> .
+@prefix md:  <http://iec.ch/TC57/61970-552/ModelDescription/1#> .
+@prefix dm:  <http://iec.ch/TC57/61970-552/DifferenceModel/1#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l5igm:Level5-IGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level5-IGM" ;
+        sh:order    0 .
+
+l5igm:BranchBaseVoltage  a  sh:NodeShape ;
+        sh:property     l5igm:ConductingEquipment.BaseVoltage-BranchBaseVoltage;
+        sh:targetClass  cim:ACLineSegment, cim:SeriesCompensator, cim:EquivalentBranch .		
+		
+
+l5igm:ConductingEquipment.BaseVoltage-BranchBaseVoltage
+        a               sh:PropertyShape ;
+        sh:description  "Every instance of cim:ACLineSegment, cim: SeriesCompensator or cim:EquivalentBranch must have an association cim:ConductingEquipment.BaseVoltage. Note: PowerTransformerEnd already has required association with	cim:TransformerEnd.BaseVoltage." ;
+        sh:message      "Either cim:ACLineSegment, cim:EquivalentBranch, or cim:SeriesCompensator has no BaseVoltage." ;
+        sh:name         "BranchBaseVoltage" ;
+        sh:minCount     1;
+        sh:maxCount     1;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        1 ;
+        sh:path         cim:ConductingEquipment.BaseVoltage ;
+        sh:severity     sh:Violation . 	
+
+l5igm:GeographicalRegionCountShape
+       a sh:NodeShape ;
+       sh:property   l5igm:GeographicalRegion-EQ__4;
+       sh:targetNode cim:GeographicalRegion .
+       
+l5igm:GeographicalRegion-EQ__4
+           a               sh:PropertyShape ;
+           sh:path 			[ sh:inversePath rdf:type ] ;
+           sh:maxCount      1 ;
+           sh:description  "An IGM shall have a single cim:GeographicalRegion. cim:SubGeographicalRegion-s in an IGM shall refer to a single cim:GeographicalRegion." ;
+           sh:group        l5igm:Level5-IGM ;
+           sh:message      "More than one GeographicalRegion in IGM or cim:SubGeographicalRegion-s refer to multiple cim:GeographicalRegion-s." ;
+           sh:name         "GeographicalRegion" ;
+           sh:order        2 ;
+           sh:severity     sh:Violation .	
+
+l5igm:GeographicalRegionBD
+       a sh:NodeShape ;
+       sh:property   l5igm:GeographicalRegion-BD;
+       sh:targetNode cim:SubGeographicalRegion .
+       
+l5igm:GeographicalRegion-BD
+           a               sh:PropertyShape ;
+           sh:path 			cim:SubGeographicalRegion.Region ;
+           sh:description  "cim:GeographicalRegion-s should be agreed on by modelling authorities and be described in the equipment boundary." ;
+           sh:group        l5igm:Level5-IGM ;
+           sh:message      "cim:GeographicalRegion fom the boundary is not used." ;
+		   sh:in           ( "http://iec.ch/TC57/2013/CIM-schema-cim16#_7e6dab44-5e92-4698-92d1-dcc3421cce1a"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_d81cedde-fca0-4ab8-9604-33e4a8839325"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_5ea19994-4728-41da-a0bb-33f611a7d55f"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_f294c506-4098-4e42-9691-fb97c76beab3"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_78f33e50-e9e6-403b-bf36-5b5e05c8f2c8"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_550dd529-d483-4d7e-a471-e1bb73c6e27e"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_e809c536-0733-41b7-b05f-3e2e43df7351"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_e10adc82-8cbd-4cb7-80f1-d7bd7a461a24"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_ab9ba255-f4d5-4c91-8d94-b6ba512fabc8"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_b0d6289a-b3f6-43d2-b0ba-e165178ca107"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_c9f6846c-0f51-436d-9239-0d2f767130fd"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_89438050-50e5-41d7-a072-ca3e274c5eb5"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_b6110c7c-61e0-4c00-bc62-943461754bff"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_0dcbc64b-d06a-480d-80fd-182c0342680a"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_952f0d5f-cf4d-40fc-932c-1c973266bd90"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_bc1184a7-cb75-4e29-bac9-00071373bb91"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_b59aa20e-f448-4220-8b55-46fd65934b96"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_3a620330-db70-4517-a772-76acf325bde0"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_1bf98b93-0e6b-49c1-bb19-715fad9293ed"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_3ac9d23c-9dc8-4439-932c-5ba139c55ff0"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_3f8d73f3-bc52-4b0f-a568-ea6bf5e65845"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_efcd447e-63ef-48bf-809e-1fde6db75523"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_c816a91b-7214-495c-8cbb-64688a2c687e"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_97376dd1-c711-419d-bb5e-9ef8b142097f"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_df80281f-2bef-4ec6-8f80-4da2da71c6ab"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_1cb34656-b7c8-4d17-9fb1-6fafaa2776eb"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_78963970-8155-4d8d-b799-e70ae5e2145b"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_d383cad8-f2ca-4d3d-84f5-85e4225ea0e7"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_03e204ad-d0cd-4332-b5c2-ee6d269dd5de"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_92db284a-2cd2-47f5-860b-5fa27bf6b03d"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_d9daf137-31d1-449e-9ed7-9ef6d5353bf5"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_60671603-d076-421d-93e0-b6fc1605c239"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_dbc33d3a-d42c-4d3b-a35a-8a6d9a215c10"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_30ddfa7d-8f6c-410c-a9b5-6191282ed6d2"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_38c7f570-0b0a-4d23-ad7c-4f4595b7dfeb"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_833dc8d1-8fdb-4c13-b802-4df1e44a00c9"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_20e593ea-30d4-4b95-99ed-948d5dcc96f6"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_43c59e0c-7cc3-47b5-acd2-37b10e90b732"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_92fb36b2-1ff4-49b6-a103-8b913a132a19"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_37a472a1-997c-4d6e-ad1e-cefefca251b4"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_4d8af96c-5c4d-4cf7-a258-d21b6f563651"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_26e703ad-6460-41d6-9d13-c3ff1f0e095a"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_6908d486-69e4-41d2-a479-9cf1b81178ef"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_64b54ab0-264a-4a3c-afdc-52a05a938225"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_916aee87-9c66-4794-a431-895f756c4d97"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_3ad5710e-7792-473d-8796-86c2ac8b8cc3"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_df31a973-2442-4beb-bbf9-601dc30675c4"^^xsd:anyURI "http://iec.ch/TC57/2013/CIM-schema-cim16#_243c9adc-9d51-420b-983f-d6075a69b0d3"^^xsd:anyURI ) ;
+           sh:name         "GeographicalRegionBD" ;
+           sh:order        3 ;
+           sh:severity     sh:Warning .	
+		   
+l5igm:Conductor
+        a               sh:NodeShape ;
+        sh:property     l5igm:Conductor-containment ;
+        sh:targetClass  cim:ACLineSegment .  
+        
+l5igm:Conductor-containment
+        a               sh:PropertyShape ;
+        sh:in           (cim:Line) ;
+        sh:description  "For every instance of cim:ACLineSegment, the cim:Equipment.EquipmentContainer referred to, if provided, must be of type cim:Line." ;
+        sh:message      "cim:ACLineSegments can only be contained in a cim:Line." ;
+        sh:name         "LineContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type) ;
+        sh:order        4 ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:severity     sh:Violation .  	
+
+l5igm:EquivalentInjection
+        a               sh:NodeShape ;
+        sh:property     l5igm:EquivalentInjection-containment ;
+        sh:targetClass  cim:EquivalentInjection .  
+        
+l5igm:EquivalentInjection-containment
+        a               sh:PropertyShape ;
+		sh:sparql       l5igm:EquivalentInjection-containmentSparql ;
+        sh:description  "Every cim:EquivalentInjection shall be contained by a	- cim:VoltageLevel if not in a boundary point.	- If in a boundary point, preferably it is contained in a cim:Line or not contained at all with provided association to cim:BaseVoltage." ;
+        sh:name         "EquivalentInjectionContainment" ;
+        sh:path         rdf:type;
+        sh:order        5 ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:severity     sh:Violation .  
+
+l5igm:EquivalentInjection-containmentSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "cim:EquivalentInjection containment error." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          BIND(EXISTS{$this ^cim:Terminal.ConductingEquipment/cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true } AS ?bp) .
+		  OPTIONAL {$this cim:Equipment.EquipmentContainer/rdf:type ?type} .
+		  OPTIONAL {$this cim:ConductingEquipment.BaseVoltage ?bv} .
+          
+          FILTER ( (?bp=true && ((bound(?type) && ?type!=cim:Line) || (!bound(?type) && !bound(?bv)))) || (?bp=false && ?type!=cim:VoltageLevel)).
+        } """ .	
+
+l5igm:DCLineSegment
+        a               sh:NodeShape ;
+        sh:property     l5igm:DCLineSegment-containment ;
+        sh:targetClass  cim:DCLineSegment .  
+        
+l5igm:DCLineSegment-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:DCLine cim:Substation );
+        sh:description  "For every instance of cim:DCLineSegment, the cim:Equipment.EquipmentContainer referred to, must be of type cim:DCLine. In the case of modelling back to back configuration the association shall point to EquipmentContainer of type cim:Substation. Missing containment is not allowed." ;
+        sh:message      "cim:DCLineSegment must be contained in a cim:DCLine or a cim:Substation." ;
+        sh:name         "DCLineContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        6 ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:severity     sh:Violation .	
+
+l5igm:BaseVoltageNotInBoundary
+        a               sh:NodeShape ;
+        sh:property     l5igm:BaseVoltage-BaseVoltageNotInBoundary ;
+        sh:targetClass  cim:BaseVoltage .  
+        
+l5igm:BaseVoltage-BaseVoltageNotInBoundary
+        a               sh:PropertyShape ;
+		sh:sparql       l5igm:BaseVoltage-BaseVoltageNotInBoundarySparql ;
+        sh:description  "All cim:BaseVoltages should be agreed on by modeling authorities and be in the boundary. If a matching base voltage is already in the boundary it should be used. If a matching base voltage is not in the boundary, consider to add it in the boundary so that it can be reused by others." ;
+        sh:name         "BaseVoltageNotInBoundary" ;
+        sh:path         cim:BaseVoltage.nominalVoltage;
+        sh:order        7 ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:severity     sh:Warning .  
+
+l5igm:BaseVoltage-BaseVoltageNotInBoundarySparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "cim:BaseVoltage not in boundary." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?value) AS ?counts) (COUNT(DISTINCT ?value) AS ?countd)  ?value
+			WHERE {
+          ?s $PATH ?value.
+		  ?s rdf:type ?bvtype .
+          #FILTER(?o!=cim:Equipment).
+			}
+		GROUP BY $this ?bvtype ?value
+		HAVING(?counts!=?countd)
+		""" .	
+
+l5igm:StaticVarCompensator
+        a               sh:NodeShape ;
+        sh:property     l5igm:StaticVarCompensator-controlMode;
+        sh:targetClass  cim:StaticVarCompensator .
+
+l5igm:StaticVarCompensator-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:StaticVarCompensator-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The association end cim:RegulatingCondEq.RegulatingControl is required. cim:RequlatingControl.targetValue shall be greater than zero if cim:RequlatingControl.mode is RegulatingControlModeKind.voltage. The attributes cim:StaticVarCompensator.sVCControlMode and cim:StaticVarCompensator.voltageSetPoint are ignored at both model validation and control logic of the SVC." ;
+        sh:name         "SVCVoltage" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        8 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:StaticVarCompensator-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:RegulatingCondEq.RegulatingControl is not provided or cim:RequlatingControl.targetValue is not greater than zero." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        OPTIONAL {$this cim:RegulatingCondEq.RegulatingControl ?rc}  .
+        OPTIONAL {$this cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.mode ?value} .
+		OPTIONAL {$this cim:RegulatingCondEq.RegulatingControl/cim:RequlatingControl.targetValue ?tv} .
+        #BIND(EXISTS{$this cim:StaticVarCompensator.sVCControlMode ?a} AS ?hassvcmode).
+        #BIND(EXISTS{$this cim:StaticVarCompensator.voltageSetPoint ?b} AS ?hasvsetpoint).
+
+        FILTER (!bound(?rc) || (bound(?rc) && ?value=cim:RegulatingControlModeKind.voltage && ?tv<=0)).
+        }""" . 		
+
+l5igm:TapChanger
+        a               sh:NodeShape ;
+        sh:property     l5igm:TapChanger.neutralU-valueRangePair ;
+        sh:targetClass  cim:RatioTapChanger , cim:PhaseTapChangerTabular , cim:PhaseTapChangerSymmetrical , cim:PhaseTapChangerAsymmetrical , cim:PhaseTapChangerLinear .
+
+l5igm:TapChanger.neutralU-valueRangePair
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:TapChanger.neutralU-valueRangePairSparql ;
+        sh:description  "The cim:TapChanger.neutralU shall be the same as cim:PowerTransformerEnd.ratedU." ;
+        sh:name         "TapChangerNeutralU" ;
+        sh:path         cim:TapChanger.neutralU ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        9 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:TapChanger.neutralU-valueRangePairSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The neutralU differs from ratedU." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        $this $PATH ?value .
+        OPTIONAL {$this cim:RatioTapChanger.TransformerEnd/cim:PowerTransformerEnd.ratedU ?rratedu } .
+        OPTIONAL {$this cim:PhaseTapChanger.TransformerEnd/cim:PowerTransformerEnd.ratedU ?pratedu } .
+        FILTER ((bound(?rratedu) && ?value!=?rratedu) || (bound(?pratedu) && ?value!=?pratedu)).
+        }""" . 
+		
+l5igm:ControlLinkedToTopology
+        a               sh:NodeShape ;
+        sh:property     l5igm:Control-ControlLinkedToTopology ;
+        sh:targetClass  cim:RegulatingControl,  cim:TapChangerControl.
+
+l5igm:Control-ControlLinkedToTopology
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:Control-ControlLinkedToTopologySparql ;
+        sh:description  "The controlled cim:Terminal at a cim:RegulatingControl (RC) or cim:TapChangerControl (TCC) must be linked to a cim:TopologicalNode (TN). In case cim:Switch cim:Terminals are not included in TP and if the controlled point is a cim:Switch cim:Terminal the controlled point is lost.	The cardinality for cim:Terminal.TopologicalNode is 1 so it is required, hence all cim:Terminals must be present in TP regardless of the type of  conducting equipment, it is linked to. This rule shouldn't be needed if all cim:Terminals where present in TP." ;
+        sh:name         "ControlLinkedToTopology" ;
+        sh:path         cim:RegulatingControl.Terminal ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        10 ;
+        sh:severity     sh:Warning .
+        
+    
+l5igm:Control-ControlLinkedToTopologySparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Terminal controlled by cim:RegulatingControl or cim:TapChangerControl is not linked to a cim:TopologicalNode" ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        $this $PATH ?value .
+        OPTIONAL {?value cim:Terminal.TopologicalNode ?ttn } .
+        FILTER (!bound(?ttn)).
+        }""" . 		
+		
+l5igm:EquivalentInjection  a  sh:NodeShape ;
+        sh:property     l5igm:EquivalentInjection-regulation ;
+        sh:targetClass  cim:EquivalentInjection .
+
+l5igm:EquivalentInjection-regulation
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:EquivalentInjection-regulationSparql ;
+        sh:description  "Boundary cim:EquivalentInjections should have control disabled, cim:EquivalentInjection.regulationCapability should be false, and cim:EquivalentInjection.regulationStatus shall also be set to false. An cim:EquivalentInjection may have control enabled only if it represents an HVDC converter. cim:EquivalentInjections that are result of network reduction may have control	enabled, if so realistic reactive power limits shall be provided. Note: An HVDC Boundary Point has a cim:IdentifiedObject.description attribute equal to HVDC." ;
+        sh:name         "EquivalentInjectionControlEnabled" ;
+        sh:path         cim:EquivalentInjection.regulationCapability ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        11 ;
+        sh:severity     sh:Warning .
+        
+l5igm:EquivalentInjection-regulationSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Boundary cim:EquivalentInjections representing AC networks should not control voltage." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this ^cim:Terminal.ConductingEquipment/cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true.
+		$this $PATH ?value.
+		$this ^cim:Terminal.ConductingEquipment/cim:Terminal.TopologicalNode/cim:IdentifiedObject.description ?desc .
+		 
+        OPTIONAL {$this cim:EquivalentInjection.regulationStatus ?rstatus}.
+        OPTIONAL {$this cim:EquivalentInjection.regulationTarget ?rtarget}. 
+        FILTER ((?value=true && ?desc!="HVDC" && (!bound(?rstatus) || !bound(?rtarget))) || (?value=false && (bound(?rstatus) || bound(?rtarget)))) .        
+			}""" .	
+
+l5igm:TapChanger
+        a               sh:NodeShape ;
+        sh:property     l5igm:TapChanger.ltcFlag-tapChangerControl ;
+        sh:targetClass  cim:RatioTapChanger , cim:PhaseTapChangerTabular , cim:PhaseTapChangerSymmetrical , cim:PhaseTapChangerAsymmetrical , cim:PhaseTapChangerLinear  .  
+
+l5igm:TapChanger.ltcFlag-tapChangerControl
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:TapChanger.ltcFlag-tapChangerControlSparql ;
+        sh:description  "If cim:TapChanger.ltcFlag is false, no TapChangerControl object is referenced by cim:TapChanger.TapChangerControl." ;
+        sh:name         "NoLTCTapChangerControl" ;
+        sh:path         cim:TapChanger.ltcFlag;
+        sh:order        12 ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:severity     sh:Warning .                 
+
+   
+l5igm:TapChanger.ltcFlag-tapChangerControlSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "TapChangerControl found for TapChanger.step that cannot be changed under load." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value  
+			WHERE {      
+        $this $PATH ?value .
+        BIND(EXISTS{$this cim:TapChanger.TapChangerControl ?tcc } AS ?hastcc).
+        
+        FILTER (?hastcc=true && ?value=false) .
+			}""" . 
+			
+l5igm:SwitchTerminals
+        a               sh:NodeShape ;
+        sh:property     l5igm:Terminal-connection , l5igm:Switch-connection , l5igm:Switch-sameTopologicalNode , l5igm:SwitchOpenVsConnected;
+        sh:targetClass  cim:Switch, cim:Breaker, cim:Disconnector, cim:GroundDisconnector, cim:LoadBreakSwitch .
+
+l5igm:Terminal-connection
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:Terminal-connectionSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:Switch, cim:Breaker, cim:Disconnector, cim:GroundDisconnector, cim:LoadBreakSwitch and cim:ProtectedSwitch, it is not allowed to have its cim:Terminals connected to the same cim:ConnectivityNode." ;
+        sh:name         "SwitchTerminals" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        13 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:Terminal-connectionSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A switch cannot have its terminals connect the same cim:ConnectivityNode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?value
+        WHERE {
+          ?term1 cim:Terminal.ConductingEquipment $this .
+          ?term2 cim:Terminal.ConductingEquipment $this .
+
+          ?term1 cim:ACDCTerminal.sequenceNumber 1 .
+          ?term2 cim:ACDCTerminal.sequenceNumber 2 .
+          
+          ?term1 cim:Terminal.ConnectivityNode ?cn1 .         
+          ?term2 cim:Terminal.ConnectivityNode ?cn2 .
+          FILTER (?cn1=?cn2).
+        } """ .  			
+		
+l5igm:Switch-connection
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:Switch-connectionSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:Switch, cim:Breaker, cim:Disconnector, cim:GroundDisconnector, cim:LoadBreakSwitch and cim:ProtectedSwitch, it is not allowed to connect cim:ConnectivityNode or cim:TopologicalNode in different cim:VoltageLevels." ;
+        sh:name         "SwitchVL" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        14 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:Switch-connectionSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A cim:Switch cannot connect to cim:ConnectivityNodes or cim:TopologicalNodes in different cim:VoltageLevels." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+        {
+          SELECT $this ?cnc2 ?cnc1
+          WHERE {
+            ?term1 cim:Terminal.ConductingEquipment $this .
+            ?term2 cim:Terminal.ConductingEquipment $this .
+            ?term1 cim:ACDCTerminal.sequenceNumber 1 .
+            ?term2 cim:ACDCTerminal.sequenceNumber 2 .
+            #OPTIONAL {?term1 cim:Terminal.ConnectivityNode ?cn1 } .
+            #OPTIONAL {?cn1 cim:ConnectivityNode.ConnectivityNodeContainer ?cnc1 } .
+            ?term1 cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer|cim:Terminal.TopologicalNodeNode/cim:TopologicalNodeNode.ConnectivityNodeContainer ?cnc1 .
+            #BIND(EXISTS{?term1 cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer ?cnc1a} AS ?hascnc1).
+            #OPTIONAL {?term2 cim:Terminal.ConnectivityNode ?cn2 } .
+            #OPTIONAL {?cn2 cim:ConnectivityNode.ConnectivityNodeContainer ?cnc2 } .
+            ?term2 cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer|cim:Terminal.TopologicalNodeNode/cim:TopologicalNodeNode.ConnectivityNodeContainer ?cnc2 .
+            #BIND(EXISTS{?term2 cim:Terminal.ConnectivityNode/cim:ConnectivityNode.ConnectivityNodeContainer ?cnc2a} AS ?hascnc2).
+            #FILTER (?hascnc1=true && ?hascnc2=true).
+            }
+        }
+        
+		?cnc1 rdf:type ?cnc1type .
+		?cnc2 rdf:type ?cnc2type .
+		
+        #OPTIONAL {?cnc1 cim:Bay.VoltageLevel/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn1nv } .
+        #OPTIONAL {?cnc1 cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn1nv } .
+        #OPTIONAL {?cnc1 ^cim:VoltageLevel.Substation/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn1nv } .
+        #OPTIONAL {?cnc1 cim:DCConverterUnit.Substation/^cim:VoltageLevel.Substation/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn1nv } .
+		#
+        #
+        #OPTIONAL {?cnc2 cim:Bay.VoltageLevel/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn2nv } .
+        #OPTIONAL {?cnc2 cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn2nv } .
+        #OPTIONAL {?cnc2 ^cim:VoltageLevel.Substation/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn2nv } .
+        #OPTIONAL {?cnc2 cim:DCConverterUnit.Substation/^cim:VoltageLevel.Substation/cim:VoltageLevel.BaseVoltage/cim:BaseVoltage.nominalVoltage ?cn2nv } .
+        
+        #FILTER (bound(?cn1) && bound(?cn2) && bound(?cn1nv) && bound(?cn2nv) && ?cn1nv!=?cn2nv).
+        #FILTER (bound(?cn1nv) && bound(?cn2nv) && ?cn1nv!=?cn2nv).
+		FILTER (?cnc1type=cim:VoltageLevel && ?cnc2type=cim:VoltageLevel && ?cnc1!=?cnc2).
+        }""" .		
+		
+
+l5igm:Switch-sameTopologicalNode
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:Switch-sameTopologicalNodeSparql ;
+        sh:description  "For every instance of cim:Switch, cim:Breaker, cim:Disconnector, cim:GroundDisconnector, cim:LoadBreakSwitch and cim:ProtectedSwitch, with cim:Switch.retained is true, its cim:Terminals shall be associated with different cim:TopologicalNodes." ;
+        sh:name         "SwitchTN1" ;
+        sh:path         cim:Switch.retained ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        15 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:Switch-sameTopologicalNodeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Retained cim:Switch cim:Terminals cannot be associated with the same cim:TopologicalNode. (ID via cim:ConnectivityNode.TopologicalNode: {?cntn1}; ID via cim:Terminal.TopologicalNode: {?tn1})." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?cntn1 ?tn1
+			WHERE {
+             $this $PATH true .
+             ?terminal1 cim:Terminal.ConductingEquipment $this .
+             ?terminal1 cim:ACDCTerminal.sequenceNumber 1 .
+             OPTIONAL {?terminal1 cim:Terminal.ConnectivityNode ?cn1}.
+             OPTIONAL {?terminal1 cim:Terminal.TopologicalNode ?tn1}.
+             ?cn1 cim:ConnectivityNode.TopologicalNode ?cntn1 .
+             
+             ?terminal2 cim:Terminal.ConductingEquipment $this .
+             ?terminal2 cim:ACDCTerminal.sequenceNumber 2 .
+             OPTIONAL {?terminal2 cim:Terminal.ConnectivityNode ?cn2}.
+             OPTIONAL {?terminal2 cim:Terminal.TopologicalNode ?tn2}.
+             ?cn2 cim:ConnectivityNode.TopologicalNode ?cntn2 .          
+				FILTER (?terminal1!=?terminal2 && (?tn1=?tn2 || ?cntn1=?cntn2)) .
+			}""" .		
+			
+l5igm:SwitchOpenVsConnected
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:Switch-SwitchOpenVsConnectedSparql ;
+        sh:description  "The attribute cim:ACDCTerminal.connected shall always be set to true for terminals of cim:Switch or its subclasses." ;
+        sh:name         "SwitchOpenVsConnected" ;
+        sh:path         rdf:type ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        16 ;
+        sh:severity     sh:Violation .
+        
+    
+l5igm:Switch-SwitchOpenVsConnectedSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:ACDCTerminal.connected is not set to true for a cim:Switch or its subclasses." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+			 $this ^cim:Terminal.ConductingEquipment/cim:ACDCTerminal.connected ?value .
+			          
+				FILTER (?value=false) .
+			}""" .	
+
+l5igm:ParticipatingGeneratingUnit  a  sh:NodeShape ;
+        sh:property     l5igm:GeneratingUnit-singleActivePowerSlack ;
+        sh:targetNode   cim:AllGeneratingUnit.
+
+l5igm:GeneratingUnit-singleActivePowerSlack
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:GeneratingUnit-singleActivePowerSlackSparql ;
+        sh:path         rdf:type ;
+        sh:description  "This rule applies when generation slack is used. cim:GeneratingUnit-s that pick-up mismatch shall have a cim:GeneratingUnit.normalPF greater than 0. At least one such unit is required in every electrical island." ;
+        sh:name         "ParticipatingGeneratingUnit" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        17 ;
+        sh:severity     sh:Warning .
+        
+    
+l5igm:GeneratingUnit-singleActivePowerSlackSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "No GeneratingUnit with .normalPF greater than 0 in an island." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value ?countm ?countd (COUNT(?npf1) as ?counte) ?countall
+        WHERE {
+          ?gu cim:GeneratingUnit.normalPF ?npf1 .
+          BIND ("" AS ?value).
+          FILTER (?npf1=?countm)
+          {
+            SELECT $this (COUNT(DISTINCT ?npf) as ?countd) (MAX(?npf) as ?countm) (COUNT(?npf) as ?countall)
+            WHERE {
+              ?gu cim:GeneratingUnit.normalPF ?npf .
+            }
+            GROUP BY $this datatype(?npf)
+          }
+        }
+        GROUP BY $this ?value ?countm ?countd datatype(?npf1) ?countall
+        HAVING((?countd<2 && ?countall!=1) || ?countm=0 || ?counte!=1)
+      """ .  	
+
+l5igm:ControlOfAnotherIsland  a  sh:NodeShape ;
+        sh:property     l5igm:RegulatingControl-point ;
+        sh:targetClass  cim:RegulatingControl , cim:TapChangerControl  .    
+    
+l5igm:RegulatingControl-point
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:RegulatingControl-pointSparql ;
+        sh:path         rdf:type ;
+        sh:description  "A cim:RegulatingControl or cim:TapChangerControl should not control a cim:TopologicalNode in another cim:TopologicalIsland than its controlling equipment is located. The rule is applied for cim:RegulatingControl.enabled equal true. In addition, the rule applies to objects only within the IGM as references to objects in another MAS will be reported as dangling references." ;
+        sh:name         "ControlOfAnotherIsland" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        18 ;
+        sh:severity     sh:Warning .
+        
+l5igm:RegulatingControl-pointSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A controlled cim:TopologicalNode is in another cim:TopologicalIsland than the controlling equipment. TopologicalIsland ID (via RegulatingControl.Terminal):{?topislandterminal} TopologicalIsland ID (via RatioTapChanger):{?topislandterminalratio} TopologicalIsland ID (via PhaseTapChanger):{?topislandterminalphase} TopologicalIsland ID (via ConductingEquipment):{?topislandterminalcondeq}." ;
+		sh:prefixes cim: ;
+		sh:select """
+    	SELECT $this ?topislandterminal ?topislandterminalratio ?topislandterminalphase ?topislandterminalcondeq
+			WHERE {
+          $this cim:RegulatingControl.enabled true .
+          $this cim:RegulatingControl.Terminal/cim:Terminal.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminal .
+          
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalratio}.
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal/cim:Terminal.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalphase}.
+          OPTIONAL {$this ^cim:RegulatingCondEq.RegulatingControl/^cim:Terminal.ConductingEquipment/cim:Terminal.TopologicalNode/^cim:TopologicalIsland.TopologicalNodes ?topislandterminalcondeq}.
+          ##FILTER ( ?tni=true && ((bound(?topislandterminalratio) && !bound(?topislandterminalphase) && !bound(?topislandterminalcondeq) && ?topislandterminalratio!=?topislandterminal) ||
+          #(!bound(?topislandterminalratio) && bound(?topislandterminalphase) && !bound(?topislandterminalcondeq) && ?topislandterminalphase!=?topislandterminal) ||
+          #(!bound(?topislandterminalratio) && !bound(?topislandterminalphase) && bound(?topislandterminalcondeq) && ?topislandterminalcondeq!=?topislandterminal) )).
+          FILTER ( ((bound(?topislandterminalratio) && !bound(?topislandterminalphase) && !bound(?topislandterminalcondeq) && ?topislandterminalratio!=?topislandterminal) ||
+          (!bound(?topislandterminalratio) && bound(?topislandterminalphase) && !bound(?topislandterminalcondeq) && ?topislandterminalphase!=?topislandterminal) ||
+          (!bound(?topislandterminalratio) && !bound(?topislandterminalphase) && bound(?topislandterminalcondeq) && ?topislandterminalcondeq!=?topislandterminal) )
+          ).
+      } """ . 	
+
+l5igm:TCCRemoteReactiveFlow
+        a               sh:NodeShape ;
+        sh:property     l5igm:TapChangerControl-remoteQcontrol ;
+        sh:targetClass  cim:TapChangerControl   . 
+
+l5igm:TapChangerControl-remoteQcontrol
+        a               sh:PropertyShape ;
+        sh:sparql       l5igm:TapChangerControl-remoteQcontrolSparql ;
+        sh:path         rdf:type ;
+        sh:description  "A cim:TapChangerControl (TCC) controlling reactive power flow should control the flow at one of the cim:Terminal-s belonging to cim:PowerTransformerEnd-s in the cim:PowerTransformer where the cim:TapChanger is located.	Control a remote cim:Terminal (even if it is within the MAS) not belonging to the cim:PowerTransformer	with the cim:TapChanger is not allowed.	Note: A result of this is that multiple cim:TapChanger-s cannot be controlled by the same TCC." ;
+        sh:name         "TCCRemoteReactiveFlow" ;
+        sh:group        l5igm:Level5-IGM ;
+        sh:order        19 ;
+        sh:severity     sh:Warning .
+        
+    
+l5igm:TapChangerControl-remoteQcontrolSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A cim:TapChangerControl for reactive power flow is controlling a cim:Terminal that is not connected to one of the cim:PowerTransformerEnd-s." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          $this cim:RegulatingControl.mode cim:RegulatingControlModeKind.reactivePower .
+          $this cim:RegulatingControl.Terminal ?rcterm .
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:RatioTapChanger.TransformerEnd/cim:TransformerEnd.Terminal ?tcterm1 }.
+          OPTIONAL {$this ^cim:TapChanger.TapChangerControl/cim:PhaseTapChanger.TransformerEnd/cim:TransformerEnd.Terminal ?tcterm2 }.
+        
+          FILTER (((?rcterm!=?tcterm1 && !bound(?tcterm2) && bound(?tcterm1)) || (?rcterm!=?tcterm2 && !bound(?tcterm1) && bound(?tcterm2)))).
+        }""" .   	  
+
+ 

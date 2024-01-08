@@ -1,0 +1,358 @@
+@base   <http://iec.ch/TC57/61970-552/ModelDescription/Constraints> .
+@prefix cim:    <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix cims:   <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+@prefix dm:     <http://iec.ch/TC57/61970-552/DifferenceModel/1#> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix fh:     <http://iec.ch/TC57/61970-552/ModelDescription/Constraints#> .
+@prefix ido:    <http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#> .
+@prefix md:     <http://iec.ch/TC57/61970-552/ModelDescription/1#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+fh:Model.Supersedes-nodeKind
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the node kind of the association at the used direction.";
+        sh:group        fh:AssociationsGroup;
+        sh:message      "The node kind shall be IRI (rdf:resource is expected).";
+        sh:name         "Model.Supersedes-nodeKind";
+        sh:nodeKind     sh:IRI;
+        sh:order        3;
+        sh:path         md:Model.Supersedes;
+        sh:severity     sh:Violation .
+
+fh:Statements.object-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required attribute.";
+        sh:minCount     1;
+        sh:name         "Statements.object-cardinality";
+        sh:order        0;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.object );
+        sh:severity     sh:Violation .
+
+fh:Model.version-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "Model.version-cardinality";
+        sh:order        9;
+        sh:path         md:Model.version;
+        sh:severity     sh:Violation .
+
+fh:Model.description-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.description-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        6;
+        sh:path         md:Model.description;
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.reverseDifferences-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:message      "Cardinality violation. Lower bound shall be 1";
+        sh:minCount     1;
+        sh:name         "DifferenceModel.reverseDifferences-cardinality";
+        sh:order        1;
+        sh:path         dm:DifferenceModel.reverseDifferences;
+        sh:severity     sh:Violation .
+
+fh:Model.scenarioTime-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "Model.scenarioTime-cardinality";
+        sh:order        0;
+        sh:path         md:Model.scenarioTime;
+        sh:severity     sh:Violation .
+
+fh:Model.DependentOn-nodeKind
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the node kind of the association at the used direction.";
+        sh:group        fh:AssociationsGroup;
+        sh:message      "The node kind shall be IRI (rdf:resource is expected).";
+        sh:name         "Model.DependentOn-nodeKind";
+        sh:nodeKind     sh:IRI;
+        sh:order        7;
+        sh:path         md:Model.DependentOn;
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.preconditions-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:message      "Cardinality violation. Lower bound shall be 1";
+        sh:minCount     1;
+        sh:name         "DifferenceModel.preconditions-cardinality";
+        sh:order        2;
+        sh:path         dm:DifferenceModel.preconditions;
+        sh:severity     sh:Violation .
+
+fh:Model.created-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:dateTime;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.created-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        1;
+        sh:path         md:Model.created;
+        sh:severity     sh:Violation .
+
+fh:AssociationsGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Associations";
+        sh:order    2 .
+
+fh:Statements.object-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Statements.object-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.object );
+        sh:severity     sh:Violation .
+
+fh:Model.scenarioTime-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:dateTime;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.scenarioTime-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0;
+        sh:path         md:Model.scenarioTime;
+        sh:severity     sh:Violation .
+
+fh:Model.description-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "Model.description-cardinality";
+        sh:order        6;
+        sh:path         md:Model.description;
+        sh:severity     sh:Violation .
+
+fh:Model.DependentOn-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     fh:Model.DependentOn-nodeKind;
+        sh:targetClass  dm:DifferenceModel , md:FullModel .
+
+fh:Model.profile-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:message      "Cardinality violation. Lower bound shall be 1";
+        sh:minCount     1;
+        sh:name         "Model.profile-cardinality";
+        sh:order        5;
+        sh:path         md:Model.profile;
+        sh:severity     sh:Violation .
+
+fh:DatatypesGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Datatypes";
+        sh:order    1 .
+
+fh:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Cardinality";
+        sh:order    0 .
+
+ido:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "CardinalityIO";
+        sh:order    0 .
+
+fh:DifferenceModel  rdf:type  sh:NodeShape;
+        sh:property     fh:Statements.subject-cardinality , fh:Model.modelingAuthoritySet-cardinality , fh:Statements.predicate-cardinality , fh:Model.version-cardinality , fh:Model.description-cardinality , fh:Model.description-datatype , fh:Model.scenarioTime-datatype , fh:Model.profile-cardinality , fh:Statements.object-cardinality , fh:Model.version-datatype , fh:Statements.predicate-datatype , fh:DifferenceModel.preconditions-cardinality , fh:DifferenceModel.reverseDifferences-datatype , fh:Statements.subject-datatype , fh:Model.modelingAuthoritySet-datatype , fh:DifferenceModel.reverseDifferences-cardinality , fh:Model.created-datatype , fh:DifferenceModel.forwardDifferences-datatype , fh:DifferenceModel.forwardDifferences-cardinality , fh:Model.profile-datatype , fh:Statements.object-datatype , fh:Model.created-cardinality , fh:Model.scenarioTime-cardinality , fh:DifferenceModel.preconditions-datatype;
+        sh:targetClass  dm:DifferenceModel .
+
+fh:Statements.subject-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Statements.subject-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        1;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.subject );
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.reverseDifferences-datatype
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:in           ( cim:Statements );
+        sh:message      "Blank node (compound datatype) violation. Either it is not a blank node (nested structure, compound datatype) or it is not the right class.";
+        sh:name         "DifferenceModel.reverseDifferences-datatype";
+        sh:nodeKind     sh:BlankNode;
+        sh:order        1;
+        sh:path         ( dm:DifferenceModel.reverseDifferences rdf:type );
+        sh:severity     sh:Violation .
+
+fh:Statements.predicate-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Statements.predicate-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        -1;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.predicate );
+        sh:severity     sh:Violation .
+
+fh:Model.modelingAuthoritySet-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:anyURI;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.modelingAuthoritySet-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        4;
+        sh:path         md:Model.modelingAuthoritySet;
+        sh:severity     sh:Violation .
+
+fh:Statements.predicate-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required attribute.";
+        sh:minCount     1;
+        sh:name         "Statements.predicate-cardinality";
+        sh:order        -1;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.predicate );
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.forwardDifferences-datatype
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:in           ( cim:Statements );
+        sh:message      "Blank node (compound datatype) violation. Either it is not a blank node (nested structure, compound datatype) or it is not the right class.";
+        sh:name         "DifferenceModel.forwardDifferences-datatype";
+        sh:nodeKind     sh:BlankNode;
+        sh:order        0;
+        sh:path         ( dm:DifferenceModel.forwardDifferences rdf:type );
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.forwardDifferences-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:message      "Cardinality violation. Lower bound shall be 1";
+        sh:minCount     1;
+        sh:name         "DifferenceModel.forwardDifferences-cardinality";
+        sh:order        0;
+        sh:path         dm:DifferenceModel.forwardDifferences;
+        sh:severity     sh:Violation .
+
+fh:Model.created-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "Model.created-cardinality";
+        sh:order        1;
+        sh:path         md:Model.created;
+        sh:severity     sh:Violation .
+
+fh:Model.version-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:integer;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.version-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        9;
+        sh:path         md:Model.version;
+        sh:severity     sh:Violation .
+
+fh:Model.profile-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:anyURI;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "Model.profile-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        5;
+        sh:path         md:Model.profile;
+        sh:severity     sh:Violation .
+
+fh:Statements.subject-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required attribute.";
+        sh:minCount     1;
+        sh:name         "Statements.subject-cardinality";
+        sh:order        1;
+        sh:path         ( dm:DifferenceModel.forwardDifferences cim:Statements.subject );
+        sh:severity     sh:Violation .
+
+ido:DatatypesGroupIO  rdf:type  sh:PropertyGroup;
+        rdfs:label  "DatatypesIO";
+        sh:order    1 .
+
+fh:Model.Supersedes-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     fh:Model.Supersedes-nodeKind;
+        sh:targetClass  dm:DifferenceModel , md:FullModel .
+
+fh:FullModel  rdf:type  sh:NodeShape;
+        sh:property     fh:Model.version-cardinality , fh:Model.version-datatype , fh:Model.modelingAuthoritySet-cardinality , fh:Model.created-datatype , fh:Model.modelingAuthoritySet-datatype , fh:Model.created-cardinality , fh:Model.profile-cardinality , fh:Model.profile-datatype , fh:Model.scenarioTime-cardinality , fh:Model.description-datatype , fh:Model.scenarioTime-datatype , fh:Model.description-cardinality;
+        sh:targetClass  md:FullModel .
+
+fh:Model.modelingAuthoritySet-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        fh:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "Model.modelingAuthoritySet-cardinality";
+        sh:order        4;
+        sh:path         md:Model.modelingAuthoritySet;
+        sh:severity     sh:Violation .
+
+fh:DifferenceModel.preconditions-datatype
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        fh:DatatypesGroup;
+        sh:in           ( cim:Statements );
+        sh:message      "Blank node (compound datatype) violation. Either it is not a blank node (nested structure, compound datatype) or it is not the right class.";
+        sh:name         "DifferenceModel.preconditions-datatype";
+        sh:nodeKind     sh:BlankNode;
+        sh:order        2;
+        sh:path         ( dm:DifferenceModel.preconditions rdf:type );
+        sh:severity     sh:Violation .

@@ -1,0 +1,307 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level2-IGMCGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l2com: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level2-IGMCGM#> .
+@prefix md:  <http://iec.ch/TC57/61970-552/ModelDescription/1#> .
+@prefix dm:  <http://iec.ch/TC57/61970-552/DifferenceModel/1#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+	    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/61970-552/ModelDescription/1#"^^xsd:anyURI ;
+        sh:prefix "md" ;
+    ] ;
+	    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/61970-552/DifferenceModel/1#"^^xsd:anyURI ;
+        sh:prefix "dm" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l2com:Level2-IGMCGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level2-IGMCGM" ;
+        sh:order    0 .
+
+l2com:FullModel
+        a               sh:NodeShape ;
+        sh:property     l2com:FileHeader ;
+        sh:targetNode  	md:Header  .
+		#sh:or           (sh:targetNode  md:FullModel  sh:targetNode  dm:DifferenceModel).
+
+l2com:FileHeader
+        a               sh:PropertyShape ;
+        sh:description  "Each type of instance file shall have exactly one file header of type FullModel or DifferenceModel." ;
+		sh:sparql       l2com:FileHeaderSparql ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:name         "FileHeader" ;
+        sh:order        1 ;
+        sh:path         rdf:type ;
+        sh:severity     sh:Violation .
+		
+l2com:FileHeaderSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "Missing file header.(or multiple headers)  FullModel count: {?countfh}; DifferenceModel count: {?countdh}." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value ?countfh ?countdh
+			WHERE {
+					{
+				SELECT $this (COUNT(?s1) AS ?countfh) (COUNT(?s2) AS ?countdh)
+				WHERE {
+				OPTIONAL {?s1 $PATH md:FullModel }.
+				OPTIONAL {?s2 $PATH dm:DifferenceModel }.
+
+				}
+				GROUP BY $this $PATH
+				}
+			
+          BIND(EXISTS{?s $PATH md:FullModel} AS ?fullm).
+		  BIND(EXISTS{?s $PATH dm:DifferenceModel} AS ?diffm).
+          FILTER((?fullm=false && ?diffm=false) || (?fullm=true && ?diffm=true) || ?countfh>1 || ?countdh>1).
+			}""" . 		
+
+
+l2com:FullModelDateTime a  sh:NodeShape ;
+        sh:property     l2com:Model.created-ModelCreated , l2com:Model.scenarioTime-ScenarioTime;
+        sh:targetClass  md:FullModel , dm:DifferenceModel. 
+
+l2com:Model.created-ModelCreated
+        a               sh:PropertyShape ;
+        sh:sparql       l2com:Model.created-ModelCreatedSparql ;
+        sh:description  "The date and time when the model was created. It is the time of the serialization. The format is an extended format according to the ISO 8601-2005.		The ENTSO-E exchanges should refer to UTC. The 'md:Model.created' attribute must be valid datetime in accordance with ISO 8601, extended format with time designator [T] between date and time ending with UTC designator [Z]. The characters [:-] shall be used. For example, 2018-01-18T11:30:12Z or 2018-01-18T11:30:12.015Z. The restriction describes the minimum required specification that a receiver shall be prepared to consume. A more precisely specified time defined by characters [+YMDHSWP] will be ignored." ;
+        sh:name         "ModelCreated" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:path         md:Model.created ;
+        sh:order        2 ;
+        sh:severity     sh:Violation .
+        
+l2com:Model.created-ModelCreatedSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid Model.created attribute." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+          $this $PATH ?value .
+          FILTER(!STRENDS(str(?value),"Z")).
+			}""" . 
+			
+
+l2com:Model.scenarioTime-ScenarioTime
+        a               sh:PropertyShape ;
+        sh:sparql       l2com:Model.scenarioTime-ScenarioTimeSparql ;
+        sh:description  "The 'md:Model.scenarioTime' attribute must be valid datetime in accordance with ISO 8601, extended format with time designator [T]	between date and time ending with UTC designator [Z]. The characters [:-] shall be used. For example, 2018-01-18T11:30:00Z, 2018-01-18T11:30:12.000Z or 2018-01-18T11:30Z.	The restriction describes the minimum required specification that a receiver shall be prepared to consume. A more precisely specified time defined by characters [+YMDHSWP] will be ignored." ;
+        sh:name         "ScenarioTime" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:path         md:Model.scenarioTime ;
+        sh:order        3 ;
+        sh:severity     sh:Violation .
+        
+l2com:Model.scenarioTime-ScenarioTimeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid Model.scenarioTime attribute." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+          $this $PATH ?value .
+          FILTER(!STRENDS(str(?value),"Z")).
+			}""" .  
+			
+    
+l2com:FullModelProf11 a  sh:NodeShape ;
+        sh:property     l2com:Model.profile-ProfileSpecification ;
+        sh:targetClass  md:FullModel , dm:DifferenceModel. 
+
+l2com:Model.profile-ProfileSpecification
+        a               sh:PropertyShape ;
+        sh:description  "The 'md:Model.profile' description in the file header is restricted. Note: The profile declarations in the file header are leading and shall be used as meta data to request data.	The enumeration values are centrally maintained in 	QoCDC Reference Data document." ;
+        sh:message      "Invalid profile specification." ;
+        sh:name         "ProfileSpecification" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:path         md:Model.profile ;
+        sh:in           ("http://entsoe.eu/CIM/TopologyBoundary/3/1"^^xsd:anyURI "http://entsoe.eu/CIM/SteadyStateHypothesis/1/1"^^xsd:anyURI "http://entsoe.eu/CIM/EquipmentBoundaryOperation/3/1"^^xsd:anyURI "http://entsoe.eu/CIM/StateVariables/4/1"^^xsd:anyURI "http://entsoe.eu/CIM/EquipmentCore/3/1"^^xsd:anyURI "http://entsoe.eu/CIM/EquipmentShortCircuit/3/1"^^xsd:anyURI "http://entsoe.eu/CIM/Topology/4/1"^^xsd:anyURI "http://entsoe.eu/CIM/EquipmentBoundary/3/1"^^xsd:anyURI "http://entsoe.eu/CIM/EquipmentOperation/3/1"^^xsd:anyURI );
+        sh:order        4 ;
+        sh:severity     sh:Violation .    
+
+ 
+l2com:IDuuidCheck a  sh:NodeShape ;
+        #sh:property     l2com:ValidResourceValue, l2com:ValidResourceValue1, l2com:ValidResourceValue2 ;
+		sh:property     l2com:ValidResourceValue1 ;
+        sh:targetNode   cim:IDchecks.			
+			
+#l2com:ValidResourceValue
+#        a               sh:PropertyShape ;
+#        sh:sparql       l2com:ValidResourceValueSparql ;
+#        sh:path         rdf:type ;
+#        sh:description  "For all rdf:resource except the references to enumerations, the value of rdf:resource shall start with '#_' or 'urn:uuid:'. The 'urn:uuid:' form is used in the md:Model.Supersedes and md:Model.DependentOn references." ;
+#        sh:name         "ValidResourceValue" ;
+#        sh:group        l2com:Level2-IGMCGM ;
+#        sh:order        5 ;
+#        sh:severity     sh:Violation .
+#        
+#l2com:ValidResourceValueSparql
+#		a         sh:SPARQLConstraint ;  
+#		sh:message "Invalid reference, rdf:resource." ;
+#		sh:prefixes cim: ;
+#		sh:select """
+#			SELECT  $this ?value
+#			WHERE {
+#          ?value rdf:type ?o.
+#          BIND(str(?value) AS ?uuid) .
+#          BIND(STRAFTER(?uuid,"#_") AS ?secondpart) .
+#          FILTER((!REGEX(?secondpart, "^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") && ?o NOT IN (md:FullModel, dm:DifferenceModel)) || (!REGEX(STR(?uuid), "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") && ?o IN (md:FullModel, dm:DifferenceModel))).
+#			}""" . 			
+
+l2com:ValidResourceValue1
+        a               sh:PropertyShape ;
+        sh:sparql       l2com:ValidResourceValue1Sparql ;
+        sh:path         rdf:type ;
+        sh:description  "For all rdf:resource except the references to enumerations, the value of rdf:resource shall start with '#_' or 'urn:uuid:'. The 'urn:uuid:' form is used in the md:Model.Supersedes and md:Model.DependentOn references." ;
+        sh:name         "ValidResourceValue" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:order        6 ;
+        sh:severity     sh:Violation .
+        
+l2com:ValidResourceValue1Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid reference, rdf:resource." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+          #?s md:Model.Supersedes|md:Model.DependentOn ?value.
+          #BIND(startswith(str(?value),"urn:uuid:") AS ?uuid) .
+          ##FILTER(!REGEX(?uuid, "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") ).
+		  #FILTER(?uuid=false ).
+		  
+		  ?s !rdf:type ?value.
+		  ?s ?p ?value.
+		  BIND(str(?value) AS ?strvalue) .
+          BIND(startswith(?strvalue,"urn:uuid:") AS ?uuid) .
+		  BIND(startswith(?strvalue,"#_") AS ?res) .
+          ##FILTER(!REGEX(?uuid, "^urn:uuid:[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$", "i") ).
+		  FILTER((?uuid=false && ?p IN (md:Model.Supersedes , md:Model.DependentOn)) || (isIRI() && ?res=false ) && !REGEX(?strvalue, "[A-Za-z]+'\'.+[a-z]$")). 
+		  
+			}""" . 	
+
+#l2com:ValidResourceValue2
+#        a               sh:PropertyShape ;
+#        sh:sparql       l2com:ValidResourceValueSparq2 ;
+#        sh:path         rdf:type ;
+#        sh:description  "For all rdf:resource except the references to enumerations, the value of rdf:resource shall start with '#_' or 'urn:uuid:'. The 'urn:uuid:' form is used in the md:Model.Supersedes and md:Model.DependentOn references." ;
+#        sh:name         "ValidResourceValue" ;
+#        sh:group        l2com:Level2-IGMCGM ;
+#        sh:order        7 ;
+#        sh:severity     sh:Violation .
+#        
+#l2com:ValidResourceValueSparq2
+#		a         sh:SPARQLConstraint ;  
+#		sh:message "Empty reference, rdf:resource." ;
+#		sh:prefixes cim: ;
+#		sh:select """
+#			SELECT  $this ?value 
+#			WHERE {
+#			{
+#			SELECT $this ?value
+#			WHERE {
+#				?s !rdf:type ?value.
+#				FILTER(!isLiteral(?value)).
+#			}
+#			}
+#		  
+#          BIND(str(?value) AS ?uuid) .
+#          BIND(STRLEN(STRAFTER(?uuid,"#")) AS ?lensp) .
+#		  BIND(STRLEN(STRAFTER(?uuid,"urn:uuid:")) AS ?lenspheader) .
+#		  BIND(STRSTARTS(?uuid,"urn:uuid:") AS ?headerref) .
+#          FILTER(((?lensp=0 && ?headerref=false) || (?lenspheader=0 && ?headerref=true))).
+#			}""" . 			
+#
+
+l2com:Float a  sh:NodeShape ;
+        sh:property     l2com:NotaNumber , l2com:AttributeAndRoleValues;
+        sh:targetNode   cim:AttributeAndRoleValues .
+
+
+l2com:NotaNumber
+        a               sh:PropertyShape ;
+        sh:sparql       l2com:NotaNumberSparql ;
+        sh:path         rdf:type ;
+        sh:description  "If data is missing for a CIM/CGMES attribute, or if 'NaN', 'INF' or '-nan(ind)' etc. is used when a numeric value is expected, the model is considered erroneous. If a code is allowed for a numeric value this shall be specifically stated for that attribute." ;
+        sh:name         "NotaNumber" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:order        8 ;
+        sh:severity     sh:Violation .
+        
+l2com:NotaNumberSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "No valid value provided." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+          ?s !rdf:type ?value .
+          #BIND(str($this) AS ?value).
+		  FILTER(isLiteral(?value)).
+		  FILTER(DATATYPE(?value)=xsd:float).
+          FILTER(REGEX(str(?value), "^[-+]?[0-9]*'\'.?[0-9]+([eE][-+]?[0-9]+)?$" , "i"))).
+		  #FILTER(isLiteral(?value) && DATATYPE(?value)=xsd:float && (!isNumeric(?value) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF") || CONTAINS(?value, "-nan(ind)"))).
+          #FILTER(!isNumeric($this) || CONTAINS(?value, "NaN") || CONTAINS(?value, "INF")).
+			}""" . 
+			
+l2com:AttributeAndRoleValues
+        a               sh:PropertyShape ;
+        sh:sparql       l2com:AttributeAndRoleValuesSparql ;
+        sh:path         rdf:type ;
+        sh:description  "Attribute and role values appearing in a CIMXML document shall have a value. The rule checks empty attributes that are not of type String.	Notes:   -	Example of empty attribute: [cim:class.attribute/] or  [cim:class.attribute][/cim:class.attribute]    -	Example of empty rdf:resource [cim:class.attribute rdf:resouce=], note this is not a valid reference and it is part of rule XMLStructure.	Note: the xml angle brackets has been replaced by square parenthesis in  above examples." ;
+        sh:name         "AttributeAndRoleValues" ;
+        sh:group        l2com:Level2-IGMCGM ;
+        sh:order        9 ;
+        sh:severity     sh:Violation .
+        
+l2com:AttributeAndRoleValuesSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Empty attribute or rdf:resource is present. Subject: {?s}; Attribute: {?p}" ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value ?s ?p
+			WHERE {
+          #?s !rdf:type ?value .
+		  ?s ?p ?value .
+		  BIND(str(?value) AS ?strvalue).
+		  BIND(strlen(?strvalue) AS ?strvaluelen).
+		  BIND(isLiteral(?value) AS ?lit).
+		  FILTER((?lit=true && DATATYPE(?value)!=xsd:string && ?strvaluelen=0) || (?lit=false && strlen(strafter(?strvalue,"#"))=0 && !contains(?strvalue,"urn:uuid:")) || (?lit=false && (strlen(strafter(?strvalue,"urn:uuid:"))=0 || ?strvaluelen=0) && !contains(?strvalue,"#"))).
+		  
+          #FILTER((isLiteral(?this) && DATATYPE(?value)!=xsd:string && strlen(str(?value))=0) || (!isLiteral(?this) && strlen(strafter(str(?value),"#"))=0)).
+		  #FILTER((isLiteral(?value) && DATATYPE(?value)!=xsd:string && strlen(str(?value))=0) || (!isLiteral(?value) && strlen(strafter(str(?value),"#"))=0 && !contains(str(?value),"urn:uuid:")) || #(!isLiteral(?value) && (strlen(strafter(str(?value),"urn:uuid:"))=0 || strlen(str(?value))=0) && !contains(str(?value),"#"))).
+         
+			}""" .			
+    
+
+
+

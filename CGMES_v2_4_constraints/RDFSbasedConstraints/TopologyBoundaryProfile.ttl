@@ -1,0 +1,405 @@
+@base   <http://entsoe.eu/CIM/TopologyBoundary/3/1/Constraints> .
+@prefix cim:    <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix cims:   <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix ido:    <http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix tpbd:   <http://entsoe.eu/CIM/TopologyBoundary/3/1/Constraints#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+tpbd:TopologicalNode.fromEndName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.fromEndName-cardinality";
+        sh:order        8;
+        sh:path         entsoe:TopologicalNode.fromEndName;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.fromEndIsoCode-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.fromEndIsoCode-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        6;
+        sh:path         entsoe:TopologicalNode.fromEndIsoCode;
+        sh:severity     sh:Violation .
+
+tpbd:ConnectivityNode
+        rdf:type        sh:NodeShape;
+        sh:property     tpbd:ConnectivityNode.TopologicalNode-valueType , tpbd:ConnectivityNode.TopologicalNode-cardinality;
+        sh:targetClass  cim:ConnectivityNode .
+
+tpbd:TopologicalNode.ConnectivityNodeContainer-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tpbd:AssociationsGroup;
+        sh:in           ( cim:EquivalentNetwork cim:Line cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer cim:Substation cim:VoltageLevel cim:Bay );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "TopologicalNode.ConnectivityNodeContainer-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        9;
+        sh:path         ( cim:TopologicalNode.ConnectivityNodeContainer rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.mRID-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.mRID-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.shortName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.shortName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.boundaryPoint-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.boundaryPoint-cardinality";
+        sh:order        7;
+        sh:path         entsoe:TopologicalNode.boundaryPoint;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.ConnectivityNodeContainer-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.ConnectivityNodeContainer-cardinality";
+        sh:order        9;
+        sh:path         cim:TopologicalNode.ConnectivityNodeContainer;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.boundaryPoint-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:boolean;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.boundaryPoint-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        7;
+        sh:path         entsoe:TopologicalNode.boundaryPoint;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.BaseVoltage-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tpbd:AssociationsGroup;
+        sh:in           ( cim:BaseVoltage );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:BaseVoltage";
+        sh:name         "TopologicalNode.BaseVoltage-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:TopologicalNode.BaseVoltage rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.energyIdentCodeEic-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndNameTso-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.toEndNameTso-cardinality";
+        sh:order        3;
+        sh:path         entsoe:TopologicalNode.toEndNameTso;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.toEndName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        2;
+        sh:path         entsoe:TopologicalNode.toEndName;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.mRID-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.mRID-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+tpbd:ConnectivityNode.TopologicalNode-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tpbd:AssociationsGroup;
+        sh:in           ( cim:TopologicalNode );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:TopologicalNode";
+        sh:name         "ConnectivityNode.TopologicalNode-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:ConnectivityNode.TopologicalNode rdf:type );
+        sh:severity     sh:Violation .
+
+tpbd:ConnectivityNode.TopologicalNode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "ConnectivityNode.TopologicalNode-cardinality";
+        sh:order        0;
+        sh:path         cim:ConnectivityNode.TopologicalNode;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.fromEndNameTso-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.fromEndNameTso-cardinality";
+        sh:order        5;
+        sh:path         entsoe:TopologicalNode.fromEndNameTso;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.energyIdentCodeEic-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode  rdf:type  sh:NodeShape;
+        sh:property     tpbd:TopologicalNode.boundaryPoint-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.name-cardinality , tpbd:TopologicalNode.BaseVoltage-cardinality , tpbd:TopologicalNode.fromEndName-datatype , tpbd:TopologicalNode.toEndNameTso-datatype , tpbd:TopologicalNode.toEndName-datatype , tpbd:TopologicalNode.fromEndNameTso-cardinality , ido:IdentifiedObject.shortName-cardinality , tpbd:TopologicalNode.fromEndIsoCode-datatype , tpbd:TopologicalNode.BaseVoltage-valueType , ido:IdentifiedObject.energyIdentCodeEic-datatype , tpbd:TopologicalNode.boundaryPoint-cardinality , ido:IdentifiedObject.description-cardinality , tpbd:TopologicalNode.fromEndIsoCode-cardinality , tpbd:TopologicalNode.fromEndNameTso-datatype , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.description-datatype , tpbd:TopologicalNode.toEndNameTso-cardinality , tpbd:TopologicalNode.ConnectivityNodeContainer-cardinality , tpbd:TopologicalNode.fromEndName-cardinality , tpbd:TopologicalNode.toEndName-cardinality , tpbd:TopologicalNode.toEndIsoCode-datatype , tpbd:TopologicalNode.toEndIsoCode-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.shortName-datatype;
+        sh:targetClass  cim:TopologicalNode .
+
+ido:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "CardinalityIO";
+        sh:order    0 .
+
+ido:IdentifiedObject.shortName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.shortName-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.toEndName-cardinality";
+        sh:order        2;
+        sh:path         entsoe:TopologicalNode.toEndName;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndIsoCode-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.toEndIsoCode-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        1;
+        sh:path         entsoe:TopologicalNode.toEndIsoCode;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.fromEndName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.fromEndName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        8;
+        sh:path         entsoe:TopologicalNode.fromEndName;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.name-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.name-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndIsoCode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.toEndIsoCode-cardinality";
+        sh:order        1;
+        sh:path         entsoe:TopologicalNode.toEndIsoCode;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.fromEndIsoCode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.fromEndIsoCode-cardinality";
+        sh:order        6;
+        sh:path         entsoe:TopologicalNode.fromEndIsoCode;
+        sh:severity     sh:Violation .
+
+tpbd:DatatypesGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Datatypes";
+        sh:order    1 .
+
+tpbd:CardinalityGroup
+        rdf:type    sh:PropertyGroup;
+        rdfs:label  "Cardinality";
+        sh:order    0 .
+
+ido:IdentifiedObject.description-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.description-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.ConnectivityNodeContainer-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     tpbd:TopologicalNode.ConnectivityNodeContainer-valueType;
+        sh:targetClass  cim:TopologicalNode .
+
+ido:IdentifiedObject.name-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.name-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.description-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.description-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+ido:DatatypesGroupIO  rdf:type  sh:PropertyGroup;
+        rdfs:label  "DatatypesIO";
+        sh:order    1 .
+
+tpbd:TopologicalNode.fromEndNameTso-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.fromEndNameTso-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        5;
+        sh:path         entsoe:TopologicalNode.fromEndNameTso;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.BaseVoltage-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tpbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.BaseVoltage-cardinality";
+        sh:order        0;
+        sh:path         cim:TopologicalNode.BaseVoltage;
+        sh:severity     sh:Violation .
+
+tpbd:TopologicalNode.toEndNameTso-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        tpbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "TopologicalNode.toEndNameTso-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        3;
+        sh:path         entsoe:TopologicalNode.toEndNameTso;
+        sh:severity     sh:Violation .
+
+tpbd:AssociationsGroup
+        rdf:type    sh:PropertyGroup;
+        rdfs:label  "Associations";
+        sh:order    2 .

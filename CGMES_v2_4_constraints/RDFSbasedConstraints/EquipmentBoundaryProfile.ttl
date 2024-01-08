@@ -1,0 +1,513 @@
+@base   <http://entsoe.eu/CIM/EquipmentBoundary/3/1/Constraints> .
+@prefix cim:    <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix cims:   <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix eqbd:   <http://entsoe.eu/CIM/EquipmentBoundary/3/1/Constraints#> .
+@prefix ido:    <http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+eqbd:ConnectivityNode.fromEndIsoCode-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.fromEndIsoCode-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        4;
+        sh:path         entsoe:ConnectivityNode.fromEndIsoCode;
+        sh:severity     sh:Violation .
+
+eqbd:Line  rdf:type     sh:NodeShape;
+        sh:property     ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.name-cardinality , eqbd:Line.Region-cardinality , eqbd:Line.Region-valueType , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.mRID-datatype;
+        sh:targetClass  cim:Line .
+
+ido:IdentifiedObject.mRID-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.mRID-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+eqbd:BaseVoltage  rdf:type  sh:NodeShape;
+        sh:property     ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , eqbd:BaseVoltage.nominalVoltage-datatype , eqbd:BaseVoltage.nominalVoltage-cardinality;
+        sh:targetClass  cim:BaseVoltage .
+
+eqbd:BaseVoltage.nominalVoltage-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "BaseVoltage.nominalVoltage-cardinality";
+        sh:order        0;
+        sh:path         cim:BaseVoltage.nominalVoltage;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.boundaryPoint-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:boolean;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.boundaryPoint-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        5;
+        sh:path         entsoe:ConnectivityNode.boundaryPoint;
+        sh:severity     sh:Violation .
+
+eqbd:Equipment.EquipmentContainer-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        eqbd:AssociationsGroup;
+        sh:in           ( cim:Line cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer cim:Substation cim:VoltageLevel cim:Bay );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "Equipment.EquipmentContainer-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        1;
+        sh:path         ( cim:Equipment.EquipmentContainer rdf:type );
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.boundaryPoint-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.boundaryPoint-cardinality";
+        sh:order        5;
+        sh:path         entsoe:ConnectivityNode.boundaryPoint;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.shortName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.shortName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.fromEndIsoCode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.fromEndIsoCode-cardinality";
+        sh:order        4;
+        sh:path         entsoe:ConnectivityNode.fromEndIsoCode;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode
+        rdf:type        sh:NodeShape;
+        sh:property     ido:IdentifiedObject.shortName-datatype , eqbd:ConnectivityNode.toEndNameTso-cardinality , eqbd:ConnectivityNode.toEndIsoCode-cardinality , eqbd:ConnectivityNode.fromEndNameTso-cardinality , ido:IdentifiedObject.name-datatype , eqbd:ConnectivityNode.toEndNameTso-datatype , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype , eqbd:ConnectivityNode.fromEndName-datatype , ido:IdentifiedObject.description-datatype , eqbd:ConnectivityNode.toEndName-cardinality , eqbd:ConnectivityNode.toEndName-datatype , eqbd:ConnectivityNode.boundaryPoint-datatype , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , eqbd:ConnectivityNode.fromEndNameTso-datatype , eqbd:ConnectivityNode.boundaryPoint-cardinality , eqbd:ConnectivityNode.fromEndIsoCode-cardinality , eqbd:ConnectivityNode.fromEndIsoCode-datatype , ido:IdentifiedObject.description-cardinality , eqbd:ConnectivityNode.toEndIsoCode-datatype , eqbd:ConnectivityNode.ConnectivityNodeContainer-cardinality , eqbd:ConnectivityNode.fromEndName-cardinality , ido:IdentifiedObject.shortName-cardinality;
+        sh:targetClass  cim:ConnectivityNode .
+
+eqbd:ConnectivityNode.ConnectivityNodeContainer-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.ConnectivityNodeContainer-cardinality";
+        sh:order        0;
+        sh:path         cim:ConnectivityNode.ConnectivityNodeContainer;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.energyIdentCodeEic-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.fromEndName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.fromEndName-cardinality";
+        sh:order        6;
+        sh:path         entsoe:ConnectivityNode.fromEndName;
+        sh:severity     sh:Violation .
+
+eqbd:Terminal  rdf:type  sh:NodeShape;
+        sh:property     eqbd:Terminal.ConductingEquipment-cardinality;
+        sh:targetClass  cim:Terminal .
+
+eqbd:Terminal.ConductingEquipment-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "Terminal.ConductingEquipment-cardinality";
+        sh:order        0;
+        sh:path         cim:Terminal.ConductingEquipment;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.mRID-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.mRID-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+eqbd:AssociationsGroup
+        rdf:type    sh:PropertyGroup;
+        rdfs:label  "Associations";
+        sh:order    2 .
+
+ido:IdentifiedObject.energyIdentCodeEic-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+ido:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "CardinalityIO";
+        sh:order    0 .
+
+ido:IdentifiedObject.shortName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.shortName-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.toEndNameTso-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.toEndNameTso-cardinality";
+        sh:order        3;
+        sh:path         entsoe:ConnectivityNode.toEndNameTso;
+        sh:severity     sh:Violation .
+
+eqbd:SubGeographicalRegion
+        rdf:type        sh:NodeShape;
+        sh:property     eqbd:SubGeographicalRegion.Region-valueType , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.shortName-cardinality , eqbd:SubGeographicalRegion.Region-cardinality , ido:IdentifiedObject.shortName-datatype;
+        sh:targetClass  cim:SubGeographicalRegion .
+
+ido:IdentifiedObject.name-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.name-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.toEndNameTso-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.toEndNameTso-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        3;
+        sh:path         entsoe:ConnectivityNode.toEndNameTso;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.ConnectivityNodeContainer-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     eqbd:ConnectivityNode.ConnectivityNodeContainer-valueType;
+        sh:targetClass  cim:ConnectivityNode .
+
+eqbd:DatatypesGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Datatypes";
+        sh:order    1 .
+
+eqbd:ConnectivityNode.fromEndName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.fromEndName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        6;
+        sh:path         entsoe:ConnectivityNode.fromEndName;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.toEndName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.toEndName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        7;
+        sh:path         entsoe:ConnectivityNode.toEndName;
+        sh:severity     sh:Violation .
+
+eqbd:Terminal.ConductingEquipment-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        eqbd:AssociationsGroup;
+        sh:in           ( cim:Junction cim:SynchronousMachine cim:EnergyConsumer cim:EquivalentInjection cim:ConformLoad cim:GroundDisconnector cim:NonConformLoad cim:NonlinearShuntCompensator cim:Disconnector cim:LinearShuntCompensator cim:PetersenCoil cim:SeriesCompensator cim:Breaker cim:GroundingImpedance cim:LoadBreakSwitch cim:ACLineSegment cim:Ground cim:EquivalentShunt cim:BusbarSection cim:AsynchronousMachine cim:CsConverter cim:VsConverter cim:EnergySource cim:ExternalNetworkInjection cim:Switch cim:PowerTransformer cim:StaticVarCompensator cim:EquivalentBranch cim:StationSupply );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "Terminal.ConductingEquipment-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:Terminal.ConductingEquipment rdf:type );
+        sh:severity     sh:Violation .
+
+eqbd:Equipment.EquipmentContainer-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     eqbd:Equipment.EquipmentContainer-valueType;
+        sh:targetClass  cim:Junction .
+
+eqbd:Equipment.EquipmentContainer-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "Equipment.EquipmentContainer-cardinality";
+        sh:order        1;
+        sh:path         cim:Equipment.EquipmentContainer;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.description-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.description-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+eqbd:Line.Region-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        eqbd:AssociationsGroup;
+        sh:in           ( cim:SubGeographicalRegion );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:SubGeographicalRegion";
+        sh:name         "Line.Region-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:Line.Region rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.name-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.name-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.ConnectivityNodeContainer-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        eqbd:AssociationsGroup;
+        sh:in           ( cim:Line cim:EquivalentNetwork cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer cim:Substation cim:VoltageLevel cim:Bay );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "ConnectivityNode.ConnectivityNodeContainer-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:ConnectivityNode.ConnectivityNodeContainer rdf:type );
+        sh:severity     sh:Violation .
+
+eqbd:Junction  rdf:type  sh:NodeShape;
+        sh:property     ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.description-datatype , eqbd:Equipment.EquipmentContainer-cardinality , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.shortName-cardinality;
+        sh:targetClass  cim:Junction .
+
+eqbd:Terminal.ConductingEquipment-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     eqbd:Terminal.ConductingEquipment-valueType;
+        sh:targetClass  cim:Terminal .
+
+eqbd:ConnectivityNode.toEndIsoCode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.toEndIsoCode-cardinality";
+        sh:order        2;
+        sh:path         entsoe:ConnectivityNode.toEndIsoCode;
+        sh:severity     sh:Violation .
+
+eqbd:EnergySchedulingType
+        rdf:type        sh:NodeShape;
+        sh:property     ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.mRID-datatype;
+        sh:targetClass  entsoe:EnergySchedulingType .
+
+eqbd:ConnectivityNode.fromEndNameTso-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.fromEndNameTso-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        1;
+        sh:path         entsoe:ConnectivityNode.fromEndNameTso;
+        sh:severity     sh:Violation .
+
+eqbd:SubGeographicalRegion.Region-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "SubGeographicalRegion.Region-cardinality";
+        sh:order        0;
+        sh:path         cim:SubGeographicalRegion.Region;
+        sh:severity     sh:Violation .
+
+eqbd:ConnectivityNode.toEndName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.toEndName-cardinality";
+        sh:order        7;
+        sh:path         entsoe:ConnectivityNode.toEndName;
+        sh:severity     sh:Violation .
+
+eqbd:CardinalityGroup
+        rdf:type    sh:PropertyGroup;
+        rdfs:label  "Cardinality";
+        sh:order    0 .
+
+eqbd:ConnectivityNode.toEndIsoCode-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "ConnectivityNode.toEndIsoCode-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        2;
+        sh:path         entsoe:ConnectivityNode.toEndIsoCode;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.description-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "IdentifiedObject.description-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+ido:DatatypesGroupIO  rdf:type  sh:PropertyGroup;
+        rdfs:label  "DatatypesIO";
+        sh:order    1 .
+
+eqbd:GeographicalRegion
+        rdf:type        sh:NodeShape;
+        sh:property     ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.description-datatype;
+        sh:targetClass  cim:GeographicalRegion .
+
+eqbd:ConnectivityNode.fromEndNameTso-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Missing required property (attribute).";
+        sh:minCount     1;
+        sh:name         "ConnectivityNode.fromEndNameTso-cardinality";
+        sh:order        1;
+        sh:path         entsoe:ConnectivityNode.fromEndNameTso;
+        sh:severity     sh:Violation .
+
+eqbd:SubGeographicalRegion.Region-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        eqbd:AssociationsGroup;
+        sh:in           ( cim:GeographicalRegion );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:GeographicalRegion";
+        sh:name         "SubGeographicalRegion.Region-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:SubGeographicalRegion.Region rdf:type );
+        sh:severity     sh:Violation .
+
+eqbd:BaseVoltage.nominalVoltage-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:float;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        eqbd:DatatypesGroup;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "BaseVoltage.nominalVoltage-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0;
+        sh:path         cim:BaseVoltage.nominalVoltage;
+        sh:severity     sh:Violation .
+
+eqbd:Line.Region-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        eqbd:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "Line.Region-cardinality";
+        sh:order        0;
+        sh:path         cim:Line.Region;
+        sh:severity     sh:Violation .

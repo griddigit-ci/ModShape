@@ -1,0 +1,106 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level8-IGMCGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l8com: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level8-IGMCGM#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l8com:Level8-IGMCGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level8-IGMCGM" ;
+        sh:order    0 .
+
+l8com:TIConvergenceStatMissing  a  sh:NodeShape ;
+        sh:property     l8com:TI-TIConvergenceStatMissing ;
+        sh:targetClass  cim:TopologicalIsland .
+
+l8com:TI-TIConvergenceStatMissing
+        a               sh:PropertyShape ;
+        sh:path         cim:IdentifiedObject.description ;
+		sh:maxCount     1 ;
+        sh:minCount     1 ;
+		sh:in           ( "converged" "diverged" ) ;
+		sh:message "Convergence status (cim:IdentifiedObject.description) is not provided for cim:TopologicalIsland." ;
+        sh:description  "This rule applies to both IGMs and CGMs. cim:IdentifiedObject.description is added to State Variables profile as required attribute. The cim:IdentifiedObject.description of cim:TopologicalIsland shall have one the following string values: “converged” and “diverged” which represents the convergence status of the cim:TopologicalIsland." ;
+        sh:name         "TIConvergenceStatMissing" ;
+        sh:group        l8com:Level8-IGMCGM ;
+        sh:order        1 ;
+        sh:severity     sh:Warning .
+		
+l8com:Congestion  a  sh:NodeShape ;
+        sh:property     l8com:Limits-Congestion ;
+        sh:targetClass  cim:OperationalLimitSet .
+
+l8com:Limits-Congestion
+        a               sh:PropertyShape ;
+        sh:sparql       l8com:Limits-CongestionSparql ;
+        sh:path         rdf:type ;
+        sh:description  "This rule applies to both IGMs and CGMs. There should be no base case violations considering PATL limits. The rule is applied only for PATL limits in cases where there is a cim:SvPowerFlow at the terminal where the cim:OperationalLimitSet is." ;
+        sh:name         "Congestion" ;
+        sh:group        l8com:Level8-IGMCGM ;
+        sh:order        2 ;
+        sh:severity     sh:Warning .
+        
+    
+l8com:Limits-CongestionSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Base case violation. Ilimit: {?olclvalue}; Slimit {?olappvalue}; Plimit: {?olapvalue}; P: {?p}; Q: {?q}." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?olclvalue ?olappvalue ?olapvalue ?p ?q
+			WHERE {
+				
+				
+				
+				$this cim:OperationalLimitSet.Terminal/^cim:SvPowerFlow.Terminal ?svpf.
+				$this cim:OperationalLimitSet.Terminal/cim:Terminal.TopologicalNode/^cim:SvVoltage.TopologicalNode/cim:SvVoltage.v ?v.
+				?svpf cim:SvPowerFlow.p ?p.
+				?svpf cim:SvPowerFlow.q ?q.
+				
+				OPTIONAL {
+					?olcl cim:OperationalLimit.OperationalLimitSet $this .
+					?olcl rdf:type cim:CurrentLimit.
+					?olcl cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl.
+					?olcl cim:CurrentLimit.value ?olclvalue.	
+					} .
+				OPTIONAL {
+					?olapp cim:OperationalLimit.OperationalLimitSet $this .
+					?olapp rdf:type cim:ApparentPowerLimit.
+					?olapp cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl.
+					?olapp cim:ApparentPowerLimit.value ?olappvalue.	
+					} .	
+				OPTIONAL {
+					?olap cim:OperationalLimit.OperationalLimitSet $this .
+					?olap rdf:type cim:ActivePowerLimit.
+					?olap cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl.
+					?olap cim:ActivePowerLimit.value ?olapvalue.	
+					} .
+				BIND ( (?p*?p+?q*?q) AS ?app2).
+
+        FILTER ( (bound(?olclvalue) && ?olclvalue*?olclvalue<(?app2*1000000*1000000/1.73/1.73/?v/?v/1000/1000) ) || (bound(?olappvalue) && ?olappvalue*?olappvalue<?app2) || (bound(?olapvalue) && ?olapvalue<?p)) .
+			} """ . 		
+

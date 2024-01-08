@@ -1,0 +1,64 @@
+@base          <http://iec.ch/TC57/ns/CIM/SC-CrossProfile/constraints/IEC61970-452/2.4> .
+@prefix entsoe:    <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix sc452cp: <http://iec.ch/TC57/ns/CIM/SC-CrossProfile/constraints/IEC61970-452/2.4#> .
+
+
+sc452cp:SCcrossProfile
+        a           sh:PropertyGroup ;
+        rdfs:label  "SCcrossProfile" ;
+        sh:order    1 .
+
+sc452cp:MutualCoupling.First_Terminal
+        a               sh:NodeShape ;
+        sh:property     sc452cp:MutualCoupling.First_Terminal-valueType ;
+        sh:targetClass  cim:MutualCoupling  .        
+        
+sc452cp:MutualCoupling.First_Terminal-valueType
+        a               sh:PropertyShape ;
+        sh:in           (cim:Terminal); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class Terminal or its subclass." ;
+        sh:name         "MutualCoupling.First_Terminal-valueType" ;
+        sh:path         (cim:MutualCoupling.First_Terminal rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        1 ;
+        sh:group        sc452cp:SCcrossProfile ;
+        sh:severity     sh:Violation .
+        
+sc452cp:MutualCoupling.Second_Terminal
+        a               sh:NodeShape ;
+        sh:property     sc452cp:MutualCoupling.Second_Terminal-valueType ;
+        sh:targetClass  cim:MutualCoupling  .        
+        
+sc452cp:MutualCoupling.Second_Terminal-valueType
+        a               sh:PropertyShape ;
+        sh:in           (cim:Terminal); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class Terminal or its subclass." ;
+        sh:name         "MutualCoupling.Second_Terminal-valueType" ;
+        sh:path         (cim:MutualCoupling.Second_Terminal rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        2 ;
+        sh:group        sc452cp:SCcrossProfile ;
+        sh:severity     sh:Violation .
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

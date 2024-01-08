@@ -5,12 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e973f85d-401d-443d-8234-56233ed0b894" name="Changes" comment="Adding readme.">
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/DatatypeMapping/RDFdatatypes.rdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/EQinv.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/OP_452_cp_explicit.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/OPinv.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SC_452_cp.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SV_456_cp_explicit.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/SVinv.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/Other2415/TP_456_cp_explicit.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level2_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level3_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level3_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level4_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level4_IGMdiff.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level5_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level5_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level6_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level7_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level8_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC321/Level8_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level2_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level3_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level3_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level4_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level4_IGMdiff.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level5_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level5_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level6_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_IGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level7_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level8_CGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/QoCDC33/Level8_IGMCGM.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/DiagramLayoutProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/DynamicsProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/EquipmentBoundaryProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/EquipmentProfileCoreOperationShortCircuit.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/FileHeaderProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/GeographicalLocationProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/StateVariablesProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/SteadyStateHypothesisProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/TopologyBoundaryProfile.ttl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CGMES_v2_4_constraints/RDFSbasedConstraints/TopologyProfile.ttl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SHACLvalidator.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/SHACLvalidator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/application/gui.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,25 +86,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.SHACLvalidator.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.main.executor&quot;: &quot;Profiler&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/chiva/PycharmProjects/SHACLvalidator/SHACLvalidator.py&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.SHACLvalidator.executor": "Run",
+    "Python.main.executor": "Profiler",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/chiva/PycharmProjects/SHACLvalidator/SHACLvalidator.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chiva\PycharmProjects\SHACLvalidator\application" />
+      <recent name="C:\Users\chiva\PycharmProjects\SHACLvalidator\gui" />
       <recent name="C:\Users\chiva\PycharmProjects\SHACLvalidator" />
     </key>
   </component>
@@ -64,7 +125,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SHACLvalidator.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\chiva\PycharmProjects\SHACLvalidator\application\SHACLvalidator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -93,7 +154,7 @@
       <workItem from="1703653838805" duration="3648000" />
       <workItem from="1704292997614" duration="1552000" />
       <workItem from="1704483355454" duration="3401000" />
-      <workItem from="1704722614612" duration="1211000" />
+      <workItem from="1704722614612" duration="5888000" />
     </task>
     <task id="LOCAL-00001" summary="Adding readme.">
       <option name="closed" value="true" />
@@ -103,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704723580086</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding readme.">
+      <option name="closed" value="true" />
+      <created>1704725167550</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704725167550</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +184,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SHACLvalidator$main.coverage" NAME="SHACLvalidator Coverage Results" MODIFIED="1703505958186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/SHACLvalidator$SHACLvalidator.coverage" NAME="SHACLvalidator Coverage Results" MODIFIED="1704486478153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/SHACLvalidator$SHACLvalidator.coverage" NAME="SHACLvalidator Coverage Results" MODIFIED="1704737511115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

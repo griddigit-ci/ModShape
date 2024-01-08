@@ -1,0 +1,68 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-IGMCGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l7com: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-IGMCGM#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l7com:Level7-IGMCGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level7-IGMCGM" ;
+        sh:order    0 .
+
+l7com:ACLineSegmentACTielineBV  a  sh:NodeShape ;
+        sh:property     l7com:ACLineSegment-BaseVoltageDiff ;
+        sh:targetClass  cim:ACLineSegment .
+
+l7com:ACLineSegment-BaseVoltageDiff
+        a               sh:PropertyShape ;
+        sh:sparql       l7com:ACLineSegment-BaseVoltageDiffSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For a cim:ControlArea of type interchange all cim:TieFlow branches, which:   -	are not connected to an HVDC boundary point, and    -	have a direct association to cim:BaseVoltage shall have a cim:BaseVoltage.nominalVoltage that deviates no more than 10% from the cim:BaseVoltage.nominalVoltage of the boundary point obtained from the association end cim:TopologicalNode.BaseVoltage. Note: An HVDC Boundary Point has a cim:IdentifiedObject.description attribute equal to 'HVDC'." ;
+        sh:name         "ACTielineBV" ;
+        sh:group        l7com:Level7-IGMCGM ;
+        sh:order        1 ;
+        sh:severity     sh:Violation .
+
+l7com:ACLineSegment-BaseVoltageDiffSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "AC Tie line nominalVoltage deviates from the boundary point base voltage more than 10%. Voltage 1: {?tp1nv}; Voltage 2: {?tp2nv}" ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?tp1nv ?tp2nv
+			WHERE {
+        ?term1 cim:Terminal.ConductingEquipment $this .
+        ?term2 cim:Terminal.ConductingEquipment $this .
+        ?term1 cim:ACDCTerminal.sequenceNumber 1.
+        ?term2 cim:ACDCTerminal.sequenceNumber 2.
+        ?tp1  ^cim:Terminal.TopologicalNode ?term1 .
+        ?tp1 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp1nv .
+        ?tp2  ^cim:Terminal.TopologicalNode ?term2 .
+        ?tp2 cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tp2nv .
+        
+        FILTER ((?tp1nv<?tp2nv && (ABS(?tp1nv-?tp2nv)/?tp1nv)>0.1) || (?tp1nv>?tp2nv && (ABS(?tp1nv-?tp2nv)/?tp2nv)>0.1)) .        
+			}""" .

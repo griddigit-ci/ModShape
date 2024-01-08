@@ -1,0 +1,88 @@
+@base          <http://iec.ch/TC57/ns/CIM/TP-CrossProfileExplicit/constraints/IEC61970-456/2.4> .
+@prefix entsoe:    <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix tp456cpe: <http://iec.ch/TC57/ns/CIM/TP-CrossProfileExplicit/constraints/IEC61970-456/2.4#> .
+
+
+tp456cpe:TPcrossProfileExplicit
+        a           sh:PropertyGroup ;
+        rdfs:label  "TPcrossProfileExplicit" ;
+        sh:order    1 .
+
+tp456cpe:DCTopologicalNode.DCEquipmentContainer
+        a               sh:NodeShape ;
+        sh:property     tp456cpe:DCTopologicalNode.DCEquipmentContainer-valueType ;
+        sh:targetClass  cim:DCTopologicalNode  .        
+        
+tp456cpe:DCTopologicalNode.DCEquipmentContainer-valueType
+        a               sh:PropertyShape ;
+        sh:in           ( cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class DCEquipmentContainer or its subclass." ;
+        sh:name         "DCTopologicalNode.DCEquipmentContainer-valueType" ;
+        sh:path         (cim:DCTopologicalNode.DCEquipmentContainer rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        1 ;
+        sh:group        tp456cpe:TPcrossProfileExplicit ;
+        sh:severity     sh:Violation .
+        
+tp456cpe:TopologicalNode.BaseVoltage
+        a               sh:NodeShape ;
+        sh:property     tp456cpe:TopologicalNode.BaseVoltage-valueType ;
+        sh:targetClass  cim:TopologicalNode  .        
+        
+tp456cpe:TopologicalNode.BaseVoltage-valueType
+        a               sh:PropertyShape ;
+        sh:in           (cim:BaseVoltage) ; 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class BaseVoltage or its subclass." ;
+        sh:name         "TopologicalNode.BaseVoltage-valueType" ;
+        sh:path         (cim:TopologicalNode.BaseVoltage rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        2 ;
+        sh:group        tp456cpe:TPcrossProfileExplicit ;
+        sh:severity     sh:Violation .
+        
+        
+tp456cpe:TopologicalNode.ConnectivityNodeContainer
+        a               sh:NodeShape ;
+        sh:property     tp456cpe:TopologicalNode.ConnectivityNodeContainer-valueType ;
+        sh:targetClass  cim:TopologicalNode  .        
+        
+tp456cpe:TopologicalNode.ConnectivityNodeContainer-valueType
+        a               sh:PropertyShape ;
+        sh:in           ( cim:EquivalentNetwork cim:DCLine cim:DCConverterUnit cim:Bay cim:Line cim:Substation cim:VoltageLevel cim:DCEquipmentContainer); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class ConnectivityNodeContainer or its subclass." ;
+        sh:name         "TopologicalNode.ConnectivityNodeContainer-valueType" ;
+        sh:path         (cim:TopologicalNode.ConnectivityNodeContainer rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        3 ;
+        sh:group        tp456cpe:TPcrossProfileExplicit ;
+        sh:severity     sh:Violation .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

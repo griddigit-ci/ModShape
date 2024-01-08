@@ -1,0 +1,2773 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level3-IGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l3igm: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level3-IGM#> .
+@prefix md:  <http://iec.ch/TC57/61970-552/ModelDescription/1#> .
+@prefix dm:  <http://iec.ch/TC57/61970-552/DifferenceModel/1#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l3igm:Level3-IGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level3-IGM" ;
+        sh:order    0 .
+
+l3igm:CNISOname
+        a               sh:NodeShape ;
+        sh:property     l3igm:ConnectivityNode.fromEndIsoCode-CNFromEndIsoCode, l3igm:ConnectivityNode.toEndIsoCode-CNToEndIsoCode ,  l3igm:ConnectivityNode.fromEndName-CNFromEndNameLength, l3igm:ConnectivityNode.toEndName-CNToEndNameLength, l3igm:ConnectivityNode.fromEndNameTso-CNFromEndNameTsoLength, l3igm:ConnectivityNode.toEndNameTso-CNToEndNameTsoLength;
+        sh:targetClass  cim:ConnectivityNode .
+		
+l3igm:TNISOname
+        a               sh:NodeShape ;
+        sh:property     l3igm:TopologicalNode.fromEndIsoCode-TNFromEndIsoCode, l3igm:TopologicalNode.toEndIsoCode-TNToEndIsoCode,  l3igm:TopologicalNode.fromEndName-TNFromEndNameLength, l3igm:TopologicalNode.toEndName-TNToEndNameLength, l3igm:TopologicalNode.fromEndNameTso-TNFromEndNameTsoLength, l3igm:TopologicalNode.toEndNameTso-TNToEndNameTsoLength;
+        sh:targetClass  cim:TopologicalNode .		
+
+
+l3igm:ConnectivityNode.fromEndIsoCode-CNFromEndIsoCode
+        a               sh:PropertyShape ;
+        sh:description  "In an EQBD document attribute value entsoe:ConnectivityNode.fromEndIsoCode	must be from the country code list – field ‘TsoCodeList’ in the QoCDC Reference Data document which is a subset of https://www.iso.org/iso-3166-country-codes.html." ;
+        sh:message      "Country code used that is not in the reference data." ;
+        sh:name         "CNFromEndIsoCode" ;
+        sh:in           ( "AD" "AL" "AM" "AT" "BA" "BE" "BG" "BY" "HR" "CY" "CZ" "DK" "EE" "FI" "FR" "DE" "GR" "HU" "IS" "IE" "IT" "LV" "LI" "LT" "LU" "MT" "MD" "ME" "NL" "NO" "PL" "PT" "RO" "RS" "SK" "SI" "SM" "ES" "SE" "CH" "TR" "UA" "MK" "GB" "GE" "TN" "MA" "RU" "XK") ;
+        sh:minLength     2 ;
+        sh:maxLength     2 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        1 ;
+        sh:path         entsoe:ConnectivityNode.fromEndIsoCode ;
+        sh:severity     sh:Violation .
+		
+l3igm:ConnectivityNode.toEndIsoCode-CNToEndIsoCode
+        a               sh:PropertyShape ;
+        sh:description  "In an EQBD document attribute value entsoe:ConnectivityNode.toEndIsoCode must be from the country code list – field ‘TsoCodeList’ in the QoCDC Reference Data document which is a subset of https://www.iso.org/iso-3166-country-codes.html." ;
+        sh:message      "Country code used that is not in the reference data." ;
+        sh:name         "CNToEndIsoCode" ;
+        sh:in           ( "AD" "AL" "AM" "AT" "BA" "BE" "BG" "BY" "HR" "CY" "CZ" "DK" "EE" "FI" "FR" "DE" "GR" "HU" "IS" "IE" "IT" "LV" "LI" "LT" "LU" "MT" "MD" "ME" "NL" "NO" "PL" "PT" "RO" "RS" "SK" "SI" "SM" "ES" "SE" "CH" "TR" "UA" "MK" "GB" "GE" "TN" "MA" "RU" "XK") ;
+        sh:minLength     2 ;
+        sh:maxLength     2 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        2 ;
+        sh:path         entsoe:ConnectivityNode.toEndIsoCode ;
+        sh:severity     sh:Violation .
+
+l3igm:TopologicalNode.fromEndIsoCode-TNFromEndIsoCode
+        a               sh:PropertyShape ;
+        sh:description  "In a TPBD document attribute value entsoe:TopologicalNode.fromEndIsoCode must be from the country code list – field ‘TsoCodeList’ in the QoCDC Reference Data document which is a subset of https://www.iso.org/iso-3166-country-codes.html." ;
+        sh:message      "Country code used that is not in the reference data." ;
+        sh:name         "TNFromEndIsoCode" ;
+        sh:in           ( "AD" "AL" "AM" "AT" "BA" "BE" "BG" "BY" "HR" "CY" "CZ" "DK" "EE" "FI" "FR" "DE" "GR" "HU" "IS" "IE" "IT" "LV" "LI" "LT" "LU" "MT" "MD" "ME" "NL" "NO" "PL" "PT" "RO" "RS" "SK" "SI" "SM" "ES" "SE" "CH" "TR" "UA" "MK" "GB" "GE" "TN" "MA" "RU" "XK") ;
+        sh:minLength     2 ;
+        sh:maxLength     2 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        3 ;
+        sh:path         entsoe:TopologicalNode.fromEndIsoCode ;
+        sh:severity     sh:Violation .
+
+l3igm:TopologicalNode.toEndIsoCode-TNToEndIsoCode
+        a               sh:PropertyShape ;
+        sh:description  "In a TPBD document attribute value entsoe:TopologicalNode.toEndIsoCode must be from the country code list – field ‘TsoCodeList’ in the QoCDC Reference Data document which is a subset of https://www.iso.org/iso-3166-country-codes.html." ;
+        sh:message      "Country code used that is not in the reference data." ;
+        sh:name         "TNToEndIsoCode" ;
+        sh:in           ( "AD" "AL" "AM" "AT" "BA" "BE" "BG" "BY" "HR" "CY" "CZ" "DK" "EE" "FI" "FR" "DE" "GR" "HU" "IS" "IE" "IT" "LV" "LI" "LT" "LU" "MT" "MD" "ME" "NL" "NO" "PL" "PT" "RO" "RS" "SK" "SI" "SM" "ES" "SE" "CH" "TR" "UA" "MK" "GB" "GE" "TN" "MA" "RU" "XK") ;
+        sh:minLength     2 ;
+        sh:maxLength     2 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        4 ;
+        sh:path         entsoe:TopologicalNode.toEndIsoCode ;
+        sh:severity     sh:Violation .		
+
+l3igm:ConnectivityNode.fromEndName-CNFromEndNameLength
+        a               sh:PropertyShape ;
+        sh:description  "In every EQBD model instance, the length of all instances of entsoe:ConnectivityNode.fromEndName shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "CNFromEndNameLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        5 ;
+        sh:path         entsoe:ConnectivityNode.fromEndName ;
+        sh:severity     sh:Violation .	
+
+l3igm:TopologicalNode.fromEndName-TNFromEndNameLength
+        a               sh:PropertyShape ;
+        sh:description  "In every TPBD model instance, the length of all instances of entsoe:TopologicalNode.fromEndName shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "TNFromEndNameLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        6 ;
+        sh:path         entsoe:TopologicalNode.fromEndName ;
+        sh:severity     sh:Violation .	
+
+l3igm:ConnectivityNode.toEndName-CNToEndNameLength
+        a               sh:PropertyShape ;
+        sh:description  "In every EQBD model instance, the length of all instances of entsoe:ConnectivityNode.toEndName shall not exceed 32	characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "CNToEndNameLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        7 ;
+        sh:path         entsoe:ConnectivityNode.toEndName ;
+        sh:severity     sh:Violation .
+
+l3igm:TopologicalNode.toEndName-TNToEndNameLength
+        a               sh:PropertyShape ;
+        sh:description  "In every TPBD model instance, the length of all instances of entsoe:TopologicalNode.toEndName shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "TNToEndNameLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        8 ;
+        sh:path         entsoe:TopologicalNode.toEndName ;
+        sh:severity     sh:Violation .
+
+l3igm:ConnectivityNode.fromEndNameTso-CNFromEndNameTsoLength
+        a               sh:PropertyShape ;
+        sh:description  "In every EQBD model instance, the length of all instances of entsoe:ConnectivityNode.fromEndNameTso shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "CNFromEndNameTsoLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        9 ;
+        sh:path         entsoe:ConnectivityNode.fromEndNameTso ;
+        sh:severity     sh:Violation .
+
+l3igm:TopologicalNode.fromEndNameTso-TNFromEndNameTsoLength
+        a               sh:PropertyShape ;
+        sh:description  "In every TPBD model instance, the length of all instances of entsoe:TopologicalNode.fromEndNameTso shall not exceed 32	characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "TNFromEndNameTsoLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        10 ;
+        sh:path         entsoe:TopologicalNode.fromEndNameTso ;
+        sh:severity     sh:Violation .
+
+l3igm:ConnectivityNode.toEndNameTso-CNToEndNameTsoLength
+        a               sh:PropertyShape ;
+        sh:description  "In every EQBD model instance, the length of all instances of entsoe:ConnectivityNode.toEndNameTso shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "CNToEndNameTsoLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        11 ;
+        sh:path         entsoe:ConnectivityNode.toEndNameTso ;
+        sh:severity     sh:Violation .
+
+l3igm:TopologicalNode.toEndNameTso-TNToEndNameTsoLength
+        a               sh:PropertyShape ;
+        sh:description  "In every TPBD model instance, the length of all instances of entsoe:TopologicalNode.toEndNameTso shall not exceed 32 characters." ;
+        sh:message      "Length of name attribute exceeds 32 characters." ;
+        sh:name         "TNToEndNameTsoLength" ;
+        sh:minLength     1 ;
+        sh:maxLength     32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        12 ;
+        sh:path         entsoe:TopologicalNode.toEndNameTso ;
+        sh:severity     sh:Violation .
+
+l3igm:LinearNonLinearShuntCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:ShuntCompensator.voltageSensitivity-ShuntCompensatorSensitivity, l3igm:ShuntCompensator.normalSections-valueRangePair;
+        sh:targetClass  cim:LinearShuntCompensator, cim:NonlinearShuntCompensator .
+
+l3igm:ShuntCompensator.voltageSensitivity-ShuntCompensatorSensitivity
+        a               sh:PropertyShape ;
+        sh:description  "The following attribute value, if provided, shall be greater than zero - cim:ShuntCompensator.voltageSensitivity." ;
+        sh:name         "ShuntCompensatorSensitivity" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        13 ;
+        sh:message       "VoltageSensitivity attribute value shall be greater than zero." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:path          cim:ShuntCompensator.voltageSensitivity ;
+        sh:severity      sh:Violation . 
+
+
+l3igm:SubstationCountShape
+       a sh:NodeShape ;
+       sh:property   l3igm:Substation-count;
+       sh:targetNode  cim:SubstationCount. 
+       
+l3igm:Substation-count
+        a               sh:PropertyShape ;
+        sh:sparql        l3igm:Substation-countSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The following number of cim:Substations in an IGM are considered suspicious - a single cim:Substation which is the min limit.	- one cim:Substation per cim:VoltageLevel which is the max limit. The upper limit for the number of cim:Substations equals the number of cim:VoltageLevels." ;
+        sh:name         "NumberOfSubstations" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        14 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:Substation-countSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The number of cim:Substations does not reflect the design of the power system. Number of Substation-s: {?substations}. Number of VoltageLevel-s: {?voltagelevels}." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?substations ?voltagelevels
+        WHERE {
+        {
+          SELECT $this (COUNT(?ss) AS ?substations)
+          WHERE {
+            ?ss rdf:type cim:Substation .
+          }
+          GROUP BY $this
+        }
+        {
+          SELECT $this (COUNT(?vl) AS ?voltagelevels)
+          WHERE {
+            ?vl rdf:type cim:VoltageLevel .
+          }
+          GROUP BY $this
+        }
+        
+        FILTER (?substations=1 || ?substations=?voltagelevels).
+        }""" .
+
+l3igm:GenContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:Generation-containment ;
+        sh:targetClass  cim:HydroPump, cim:ThermalGeneratingUnit, cim:GeneratingUnit , cim:HydroGeneratingUnit, cim:SolarGeneratingUnit, cim:NuclearGeneratingUnit, cim:WindGeneratingUnit.  
+        
+l3igm:Generation-containment
+        a               sh:PropertyShape ;
+        sh:in           (cim:Substation) ;
+        sh:description  "For every instance of cim:HydroPump and cim:GeneratingUnit (and subclasses	thereof), the cim:Equipment.EquipmentContainer referred to, must be of type cim:Substation. Missing containment is not allowed." ;
+        sh:message      "cim:HydroPump and cim:GeneratingUnit must be contained in a cim:Substation" ;
+        sh:name         "GenerationContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        15 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation . 
+
+l3igm:PowerTransformer
+        a               sh:NodeShape ;
+        sh:property     l3igm:PowerTransformer-containment;
+        sh:targetClass  cim:PowerTransformer .
+
+l3igm:PowerTransformer-containment
+        a               sh:PropertyShape ;
+        sh:in           (  cim:Substation cim:DCConverterUnit  );
+        sh:description  "For every instance of cim:PowerTransformer, the cim:Equipment.EquipmentContainer referred to, must be of type cim:Substation or of type cim:DCConverterUnit. Missing containment is not allowed." ;
+        sh:message      "A cim:PowerTransformer must be contained in a cim:Substation or a cim:DCConverterUnit." ;
+        sh:name         "PTContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type) ;
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        16 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .  
+
+l3igm:SwitchContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:Switch-containment ;
+        sh:targetClass  cim:Disconnector, cim:GroundDisconnector, cim:Switch, cim:Breaker, cim:LoadBreakSwitch .  
+        
+l3igm:Switch-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:Bay cim:VoltageLevel cim:DCConverterUnit);
+        sh:description  "For every instance of cim:Switch (and subclasses thereof), the cim:Equipment.EquipmentContainer referred to, must be of type VoltageLevel, of type Bay or of type DCConverterUnit.	Missing containment is not allowed." ;
+        sh:message      "Switches must be contained in a VoltageLevel, a Bay or a DCConverterUnit." ;
+        sh:name         "SwitchContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        17 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .
+		
+l3igm:SCContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:SeriesCompensator-containment ;
+        sh:targetClass  cim:SeriesCompensator .  
+        
+l3igm:SeriesCompensator-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:Line cim:VoltageLevel cim:DCConverterUnit);
+        sh:description  "For every instance of cim:SeriesCompensator, the cim:Equipment.EquipmentContainer referred to, if provided, must be of type cim:Line, of type cim:VoltageLevel or of type cim:DCConverterUnit." ;
+        sh:message      "A cim:SeriesCompensator can only be contained in a cim:Line, a cim:VoltageLevel or a cim:DCConverterUnit." ;
+        sh:name         "SCContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        18 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .		
+		
+l3igm:InjectionContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:Injection-containment ;
+        sh:targetClass  cim:EnergyConsumer, cim:ConformLoad, cim:NonConformLoad, cim:StationSupply, cim:SynchronousMachine, cim:AsynchronousMachine, cim:LinearShuntCompensator, cim:NonlinearShuntCompensator, cim:EnergySource, cim:EquivalentShunt, cim:ExternalNetworkInjection, cim:StaticVarCompensator.  
+        
+l3igm:Injection-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:VoltageLevel );
+        sh:description  "For every instance of cim:EnergyConsumer subclasses, cim:RotatingMachine subclasses, cim:ShuntCompensator subclasses, cim:EnergySource, cim:EquivalentShunt, cim:ExternalNetworkInjection and cim:StaticVarCompensator, the cim:Equipment.EquipmentContainer referred to, must be of type cim:VoltageLevel. Missing containment is not allowed." ;
+        sh:message      "Injections must be contained in a cim:VoltageLevel." ;
+        sh:name         "InjectionContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        19 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .				
+		
+		
+l3igm:BusbarSectionContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:BusbarSection-containment ;
+        sh:targetClass  cim:BusbarSection.  
+        
+l3igm:BusbarSection-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:VoltageLevel );
+        sh:description  "For every instance of cim:BusbarSection, the cim:Equipment.EquipmentContainer referred to, must be of type cim:VoltageLevel. Missing containment is not allowed." ;
+        sh:message      "A cim:BusbarSection must be contained in a cim:VoltageLevel." ;
+        sh:name         "BusbarSectionContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        20 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .				
+				
+		
+l3igm:EFCContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:EF-containment ;
+        sh:targetClass  cim:GroundingImpedance, cim:PetersenCoil, cim:Ground.  
+        
+l3igm:EF-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:VoltageLevel );
+        sh:description  "For every instance of cim:EarthFaultCompensator, its subclasses and cim:Ground, the cim:Equipment.EquipmentContainer referred to, must be of type cim:VoltageLevel. Missing containment is not allowed." ;
+        sh:message      "A subclass of cim:EarthFaultCompensator or cim:Ground must be contained in a cim:VoltageLevel." ;
+        sh:name         "EFCContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        21 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .			
+		
+l3igm:JunctionContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:Junction-containment ;
+        sh:targetClass  cim:Junction.  
+        
+l3igm:Junction-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:Line );
+        sh:description  "For every instance of cim:Junction (Equipment Boundary file), the cim:Equipment.EquipmentContainer referred to, must be of type cim:Line.	Missing containment is not allowed." ;
+        sh:message      "A cim:Junction must be contained in a cim:Line." ;
+        sh:name         "JunctionContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        22 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .			
+		
+l3igm:ACDCConvContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:ACDCConverter-containment ;
+        sh:targetClass  cim:CsConverter, cim:VsConverter.  
+        
+l3igm:ACDCConverter-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:DCConverterUnit );
+        sh:description  "For every instance of cim:CsConverter and cim:VsConverter, the cim:Equipment.EquipmentContainer referred to, must be of type cim:DCConverterUnit. Missing containment is not allowed." ;
+        sh:message      "A cim:ACDCConverter must be contained in a cim:DCConverterUnit." ;
+        sh:name         "ACDCConvContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        23 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .			
+		
+l3igm:DCEQContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:DCEQ-containment ;
+        sh:targetClass  cim:DCSeriesDevice, cim:DCShunt, cim:DCBusbar, cim:DCGround, cim:DCChopper, cim:DCSwitch, cim:DCBreaker, cim:DCDisconnector.  
+        
+l3igm:DCEQ-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:DCConverterUnit );
+        sh:description  "For every instance of cim:DCSeriesDevice, cim:DCShunt, cim:DCBusbar, cim:DCGround, cim:DCChopper, cim:DCSwitch, cim:DCBreaker and cim:DCDisconnector, the 	cim:Equipment.EquipmentContainer referred to, must be of type cim:DCConverterUnit. Missing containment is not allowed." ;
+        sh:message      "All DC Equipment, except cim:DCLineSegment must be contained in a cim:DCConverterUnit." ;
+        sh:name         "DCEQContainment" ;
+        sh:path         (cim:Equipment.EquipmentContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        24 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .			
+		
+l3igm:CNContainment
+        a               sh:NodeShape ;
+        sh:property     l3igm:ConnectivityNode-containment ;
+        sh:targetClass  cim:ConnectivityNode.  
+        
+l3igm:ConnectivityNode-containment
+        a               sh:PropertyShape ;
+        sh:in           ( cim:VoltageLevel cim:Bay cim:Line );
+        sh:description  "For cim:ConnectivityNodes according to EQ, the cim:ConnectivityNode.ConnectivityNodeContainer referred to, must be of type cim:VoltageLevel, cim:Bay or cim:Line. For cim:ConnectivityNodes according to EQBD, the	cim:ConnectivityNode.ConnectivityNodeContainer referred to, must be of type cim:Line. Missing containment is not allowed." ;
+        sh:message      "cim:ConnectivityNode must be contained in a cim:VoltageLevel, cim:Bay or cim:Line for EQ models and in a cim:Line for Boundary points." ;
+        sh:name         "CNContainment" ;
+        sh:path         (cim:ConnectivityNode.ConnectivityNodeContainer rdf:type);
+        sh:maxCount     1 ;
+        sh:minCount     1 ;
+        sh:order        25 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .			
+				
+		
+l3igm:CNTerminals
+        a               sh:NodeShape ;
+        sh:property     l3igm:ConnectivityNode-CNTerminals , l3igm:ConnectivityNode-CNTerminals1Term;
+        sh:targetClass  cim:ConnectivityNode .
+
+l3igm:ConnectivityNode-CNTerminals
+        a               sh:PropertyShape ;
+        sh:description  "cim:ConnectivityNodes that:- are isolated and do not have any Terminals connecting to Equipment.- have one Terminal that connect to a dead Equipment end." ;
+        sh:message      "Isolated or dead end ConnectivityNodes may indicate a connectivity issue." ;
+        sh:minCount     1;
+        sh:path         [sh:inversePath cim:Terminal.ConnectivityNode] ;
+        sh:name         "CNTerminals" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        26 ;
+        sh:severity     sh:Warning .		
+
+l3igm:ConnectivityNode-CNTerminals1Term
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ConnectivityNode-CNTerminals1TermSparql ;
+        sh:path         rdf:type;
+        sh:description  "cim:ConnectivityNodes that:- are isolated and do not have any Terminals connecting to Equipment.- have one Terminal that connect to a dead Equipment end." ;
+        sh:name         "CNTerminals" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        27 ;
+        sh:severity     sh:Warning .
+        
+
+l3igm:ConnectivityNode-CNTerminals1TermSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Isolated or dead end ConnectivityNodes may indicate a connectivity issue." ;
+		sh:prefixes cim: ;
+    sh:select """
+	      #SELECT $this (COUNT(?terms) as ?count)  (COUNT(?termsce) as ?counttce)
+		  SELECT $this (COUNT(?terms) as ?count) 
+        WHERE {
+          $this ^cim:Terminal.ConnectivityNode ?terms.
+          ?terms rdf:type ?termtype .
+          #?terms cim:Terminal.ConductingEquipment/^cim:Terminal.ConductingEquipment ?termsce.
+          #?termsce rdf:type ?termcetype .
+        }
+        #GROUP BY $this ?termtype ?termcetype
+        #HAVING(?count=1 && ?counttce=1)
+		GROUP BY $this ?termtype
+        HAVING(?count=1 )
+        """ .        
+
+l3igm:GeneratingUnit.nominalP  a  sh:NodeShape ;
+        sh:property     l3igm:GeneratingUnit.nominalP-valueRangePair ;
+        sh:targetClass  cim:GeneratingUnit , cim:WindGeneratingUnit , cim:HydroGeneratingUnit , cim:NuclearGeneratingUnit , cim:SolarGeneratingUnit , cim:ThermalGeneratingUnit .
+              
+l3igm:GeneratingUnit.nominalP-valueRangePair
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:GeneratingUnit.nominalP-valueRangePairSparql ;
+        sh:description  "According to CGMES the value of cim:GeneratingUnit.nominalP should be positive	and less or equal to cim:RotatingMachine.ratedS." ;
+        sh:name         "GeneratingUnitNominalP" ;
+        sh:path         cim:GeneratingUnit.nominalP ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        28 ;
+        sh:severity     sh:Warning .
+		
+l3igm:GeneratingUnit.nominalP-valueRangePairSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:GeneratingUnit.nominalP outside allowed range." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value .
+        BIND(EXISTS{$this $PATH ?v} AS ?hasvalue).
+        #OPTIONAL {$this $PATH ?value }. 
+        $this ^cim:RotatingMachine.GeneratingUnit/cim:RotatingMachine.ratedS ?rateds .
+        BIND(EXISTS{$this ^cim:RotatingMachine.GeneratingUnit/cim:RotatingMachine.ratedS ?r} AS ?hasrateds).
+        #OPTIONAL {$this ^cim:RotatingMachine.GeneratingUnit ?machine }. 
+        #OPTIONAL {?machine cim:RotatingMachine.ratedS ?rateds }. 
+        FILTER (?hasvalue=true && ?hasrateds=true && (?value<=0 || ?value>?rateds) ) .        
+			}""" .         
+		
+l3igm:CEBaseVoltage  a  sh:NodeShape ;
+        sh:property     l3igm:ConductingEquipment-CEBaseVoltage ;
+        sh:targetClass  cim:StationSupply , cim:ShuntCompensator , cim:Junction , cim:Connector , cim:StaticVarCompensator , cim:ProtectedSwitch ,  cim:RotatingMachine , cim:EquivalentEquipment , cim:Switch , cim:Conductor , cim:ExternalNetworkInjection , cim:EnergySource , cim:VsConverter , cim:CsConverter , cim:AsynchronousMachine , cim:BusbarSection , cim:EquivalentShunt , cim:Ground , cim:LoadBreakSwitch , cim:GroundingImpedance , cim:Breaker , cim:RegulatingCondEq , cim:PetersenCoil , cim:LinearShuntCompensator , cim:Disconnector , cim:NonlinearShuntCompensator , cim:NonConformLoad , cim:GroundDisconnector , cim:ConformLoad , cim:EarthFaultCompensator , cim:EquivalentInjection , cim:EnergyConsumer , cim:SynchronousMachine .
+              
+l3igm:ConductingEquipment-CEBaseVoltage
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ConductingEquipment-CEBaseVoltageSparql ;
+        sh:description  "All cim:ConductingEquipment except cim:ACLineSegment, cim:SeriesCompensator, cim:EquivalentBranch, cim:PowerTransformer and cim:ACDCConverter, must either have an association with cim:BaseVoltage or be located within a cim:VoltageLevel or cim:Bay. The exception is because rule BranchBaseVoltage validates similar conditions. If both cim:ConductingEquipment.BaseVoltage and containment in a cim:VoltageLevel or cim:Bay are provided, the association ends cim:ConductingEquipment.BaseVoltage and cim:VoltageLevel.BaseVoltage shall refer to the same cim:BaseVoltage." ;
+        sh:name         "CEBaseVoltage" ;
+        sh:path         cim:ConductingEquipment.BaseVoltage ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        29 ;
+        sh:severity     sh:Violation .
+		
+l3igm:ConductingEquipment-CEBaseVoltageSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:ConductingEquipment that does not have cim:BaseVoltage or refers to different cim:BaseVoltage via different associations." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        OPTIONAL {$this $PATH ?value }. 
+		OPTIONAL {$this cim:Equipment.EquipmentContainer/cim:VoltageLevel.BaseVoltage|cim:Equipment.EquipmentContainer/cim:Bay.VoltageLevel/cim:VoltageLevel.BaseVoltage ?cebv }. 
+        FILTER ((!bound(?value) && !bound(?cebv)) || (bound(?cebv) && bound(?value) && ?value!=?cebv)) .        
+			}""" .    
+
+l3igm:NominalVoltage  a     sh:NodeShape ;
+        sh:property     l3igm:BaseVoltage.nominalVoltage-NominalVoltage ;
+        sh:targetClass  cim:BaseVoltage .
+			
+l3igm:BaseVoltage.nominalVoltage-NominalVoltage
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:BaseVoltage, the cim:BaseVoltage.nominalVoltage	value must be greater than zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Nominal voltage must be greater than zero." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "NominalVoltage" ;
+        sh:order         30 ;
+        sh:path          cim:BaseVoltage.nominalVoltage ;
+        sh:severity      sh:Violation .			
+		
+l3igm:EnergyConsumerCountShape
+       a sh:NodeShape ;
+       sh:property   l3igm:EnergyConsumer-InstancesOfGeneralClass;
+       sh:targetNode cim:EnergyConsumer .
+       
+l3igm:EnergyConsumer-InstancesOfGeneralClass
+           a               sh:PropertyShape ;
+           sh:path 			[ sh:inversePath rdf:type ] ;
+           sh:maxCount      0 ;
+           sh:description  "The most specific and detailed class shall in general be instantiated. Hence more general classes shall not be instantiated. The following classes are specifically noted as not allowed to instantiate	- cim:EnergyConsumer." ;
+           sh:group        l3igm:Level3-IGM ;
+           sh:message      "Instances of type cim:EnergyConsumer are not allowed, the usage of its subclasses is mandatory." ;
+           sh:name         "InstancesOfGeneralClass" ;
+           sh:order        31 ;
+           sh:severity     sh:Violation .		
+		   
+l3igm:ConductingEquipment-oneTerminal
+        a               sh:NodeShape ;
+        sh:description  "Every instance of cim:RegulatingCondEq and its subclasses, cim:EnergyConsumer and its subclasses, cim:EquivalentInjection, cim:EquivalentShunt, subclasses of cim:Connector, cim:EnergySource, cim:Ground, cim:DCBusbar, cim:DCShunt, cim:DCGround shall only be referenced via a single cim:Terminal instance." ;
+        sh:name         "TerminalCount1" ;
+        sh:message      "Single terminal devices must not be referenced by multiple terminals." ;
+        sh:or  (
+        [
+        sh:minCount     1 ;
+        sh:maxCount     1 ;
+        sh:path         [sh:inversePath  cim:Terminal.ConductingEquipment] ;
+        ]
+        [
+        sh:minCount     1 ;
+        sh:maxCount     1 ;
+        sh:path         [sh:inversePath  cim:DCTerminal.DCConductingEquipment] ;
+        ]
+        );
+        sh:order        32 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation ;  
+        sh:targetClass  cim:ExternalNetworkInjection , cim:AsynchronousMachine , cim:SynchronousMachine , cim:StaticVarCompensator , cim:NonlinearShuntCompensator , cim:LinearShuntCompensator , cim:EnergyConsumer, cim:ConformLoad, cim:NonConformLoad, cim:StationSupply, cim:EquivalentInjection, cim:EquivalentShunt , cim:BusbarSection , cim:Junction, cim:EnergySource , cim:DCGround , cim:DCBusbar , cim:DCShunt , cim:Ground.   	
+
+l3igm:ConductingEquipment-twoTerminals
+        a               sh:NodeShape ;
+        sh:description  "Every instance of cim:Conductor and its subclasses, cim:Switch and its subclasses, cim:SeriesCompensator, cim:EquivalentBranch, cim:DCLineSegment, cim:DCSeriesDevice, cim:DCChopper and subclasses of cim:DCSwitch shall only be referenced via exactly two cim:Terminal instances." ;
+        sh:message      "Two terminal devices must be referenced by exactly two terminals." ;
+        sh:name         "TerminalCount2" ;
+        sh:or  (
+        [
+        sh:minCount     2 ;
+        sh:maxCount     2 ;
+        sh:path         [sh:inversePath  cim:Terminal.ConductingEquipment] ;
+        ]
+        [
+        sh:minCount     2 ;
+        sh:maxCount     2 ;
+        sh:path         [sh:inversePath  cim:DCTerminal.DCConductingEquipment] ;
+        ]
+        );
+        sh:order        33 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation ;
+        sh:targetClass  cim:ACLineSegment, cim:Disconnector , cim:LoadBreakSwitch , cim:Breaker , cim:GroundDisconnector, cim:SeriesCompensator, cim:EquivalentBranch, cim:DCLineSegment, cim:DCSeriesDevice, cim:DCChopper, cim:DCSwitch , cim:DCDisconnector , cim:DCBreaker. 
+		
+l3igm:TerminalSeqNum  a  sh:NodeShape ;
+        sh:property     l3igm:Terminal-TerminalSeqNum ;
+        sh:targetClass  cim:EquivalentBranch , cim:ACLineSegment.
+              
+l3igm:Terminal-TerminalSeqNum
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:Terminal-TerminalSeqNumSparql ;
+        sh:description  "Every instance of cim:Terminal must have a cim:Terminal.sequenceNumber	if it belongs to an cim:EquivalentBranch or an cim:ACLineSegment with cim:MutualCoupling." ;
+        sh:name         "TerminalSeqNum" ;
+        sh:path         rdf:type ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        34 ;
+        sh:severity     sh:Violation .	
+
+l3igm:Terminal-TerminalSeqNumSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:Terminals must have a sequence number if they belong to an cim:EquivalentBranch	or a cim:ACLineSegment with cim:MutualCoupling." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?type .
+		BIND(EXISTS{$this ^cim:Terminal.ConductingEquipment/cim:ACDCTerminal.sequenceNumber 1} AS ?t1).
+		BIND(EXISTS{$this ^cim:Terminal.ConductingEquipment/cim:ACDCTerminal.sequenceNumber 2} AS ?t2).
+	
+		#OPTIONAL {$this ^cim:Terminal.ConductingEquipment/cim:ACDCTerminal.sequenceNumber ?termsn }. 
+		OPTIONAL {$this ^cim:Terminal.ConductingEquipment/^cim:MutualCoupling.First_Terminal ?mcterm }. 
+        FILTER ((?type=cim:EquivalentBranch && (?t1=false || ?t2=false)) || (?type=cim:ACLineSegment && bound(?mcterm) && (?t1=false || ?t2=false))).         
+			}""" . 		   
+			
+l3igm:TerminalSeqNumOrder  a  sh:NodeShape ;
+        sh:property     l3igm:ACDCTerminal.sequenceNumber-numbering ;
+        sh:targetClass  cim:CsConverter, cim:VsConverter, cim:Clamp, cim:ACLineSegment, cim:BusbarSection, cim:Junction, cim:GroundingImpedance, cim:PetersenCoil, cim:EnergySource, cim:EnergyConsumer, cim:ConformLoad, cim:NonConformLoad, cim:StationSupply, cim:ExternalNetworkInjection, cim:LinearShuntCompensator, cim:NonlinearShuntCompensator, cim:StaticVarCompensator,  cim:SynchronousMachine, cim:AsynchronousMachine, cim:PowerElectronicsConnection,   cim:EquivalentInjection, cim:EquivalentShunt, cim:EquivalentBranch, cim:Ground, cim:PowerTransformer, cim:SeriesCompensator, cim:Switch, cim:Disconnector, cim:Fuse, cim:GroundDisconnector, cim:Jumper, cim:Breaker, cim:LoadBreakSwitch, cim:DisconnectingCircuitBreaker, cim:Cut, cim:DCBreaker , cim:DCLineSegment , cim:DCBusbar , cim:DCDisconnector , cim:DCSwitch , cim:DCSeriesDevice , cim:DCGround , cim:DCChopper , cim:DCShunt   .
+              
+l3igm:ACDCTerminal.sequenceNumber-numbering
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ACDCTerminal.sequenceNumber-numberingSparql ;
+        sh:path         rdf:type ;
+        sh:description  "In cases where cim:Terminal.sequenceNumber is provided for an instance of cim:ConductingEquipment or cim:DCConductingEquipment,  at least one sequenceNumber shall equal to 1. The cim:Terminal.sequenceNumber of other terminals of same cim:ConductingEquipment or cim:DCConductingEquipment shall follow increasing order." ;
+        sh:name         "TerminalSeqNumOrder" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        35 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:ACDCTerminal.sequenceNumber-numberingSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid sl3igmenceNumber for cim:Terminal." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?sn) AS ?countsn) (COUNT(DISTINCT ?sn) AS ?countdsn) (MIN(?sn) AS ?minsn) (SUM(?sn) AS ?sumsn) (COUNT(?terms) AS ?countterms)
+			WHERE {
+        $this (^cim:Terminal.ConductingEquipment)|(^cim:DCTerminal.DCConductingEquipment) ?terms. 
+        ?terms rdf:type ?type .
+        ?terms cim:ACDCTerminal.sequenceNumber ?sn .
+			}
+      GROUP BY $this ?type
+      HAVING(?countsn!=?countdsn || ?minsn!=1 || (?countterms=1 && ?sumsn!=1) || (?countterms=2 && (?sumsn/2)!=1.5) || (?countterms=3 && (?sumsn/3)!=2))
+      """ .  			
+	  
+l3igm:PowerTransformerEnd
+        a               sh:NodeShape ;
+        sh:property     l3igm:PowerTransformerEnd-terminalConsistency, l3igm:PowerTransformerEnd.ratedU-valueRange , l3igm:PowerTransformerEnd.ratedS-valueRange, l3igm:PowerTransformerEnd.b-valueRange ;
+        sh:targetClass  cim:PowerTransformerEnd  .  
+
+l3igm:PowerTransformerEnd-terminalConsistency
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PowerTransformerEnd-terminalConsistencySparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:PowerTransformerEnd, the cim:Terminal referenced by the cim:TransformerEnd.Terminal association must be associated with the cim:PowerTransformer instance, referenced via the cim:PowerTransformerEnd.PowerTransformer association." ;
+        sh:name         "PTTerminalConsistency" ;
+        sh:order        36 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .                 
+
+   
+l3igm:PowerTransformerEnd-terminalConsistencySparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "Terminals for PowerTransformers must be defined unambiguously." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this   
+			WHERE {      
+        $this cim:TransformerEnd.Terminal/cim:Terminal.ConductingEquipment ?endtermpt .
+        $this cim:PowerTransformerEnd.PowerTransformer ?pendpt .
+        
+        FILTER (?endtermpt!=?pendpt) .
+			}""" .  	  
+			
+l3igm:MCFirstSecond
+        a               sh:NodeShape ;
+        sh:property     l3igm:MutualCoupling-terminalsAssignment ;
+        sh:targetClass  cim:MutualCoupling .
+
+
+l3igm:MutualCoupling-terminalsAssignment
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:MutualCoupling-terminalsAssignmentSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The following shall conform for every instance of cim:MutualCoupling: 1)	Association end cim:MutualCoupling.First_Terminal shall refer to a cim:Terminal of an cim:ACLineSegment. 2)	Association end cim:MutualCoupling.Second_Terminal shall refer to a cim:Terminal of an cim:ACLineSegment. 3)	Association ends cim:MutualCoupling.First_Terminal  and cim:MutualCoupling.Second_Terminal shall refer to cim:Terminal-s of different cim:ACLineSegment-s." ;
+        sh:name         "MCFirstSecond" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        37 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:MutualCoupling-terminalsAssignmentSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "One of the following occurs: 1) cim:MutualCoupling.First_Terminal does not refer to a cim:Terminal of a cim:ACLineSegment, 2) cim:MutualCoupling.Second_Terminal does not refer to a cim:Terminal of a cim:ACLineSegment, 3) cim:MutualCoupling.First_Terminal and cim:MutualCoupling.Second_Terminal do not refer to cim:Terminal-s of different cim:ACLineSegment-s. Type line 1: {?typeline1}. Type line 2: {?typeline2}." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT $this ?typeline1 ?typeline2
+			WHERE {
+        #$this cim:MutualCoupling.First_Terminal ?firstterminal .
+        #$this cim:MutualCoupling.Second_Terminal ?secondterminal .
+        #?firstterminal cim:Terminal.ConductingEquipment ?line1 . 
+        #?secondterminal cim:Terminal.ConductingEquipment ?line2 . 
+        $this cim:MutualCoupling.First_Terminal/cim:Terminal.ConductingEquipment ?line1 .
+        $this cim:MutualCoupling.Second_Terminal/cim:Terminal.ConductingEquipment ?line2 .
+        ?line1 rdf:type ?typeline1 .
+        ?line2 rdf:type ?typeline2 .
+				FILTER (?typeline1!=cim:ACLineSegment || ?typeline2!=cim:ACLineSegment || ?line1=?line2) .
+			}""" .	
+
+l3igm:LRCExponentModel  a  sh:NodeShape ;
+        sh:property     l3igm:LoadResponseCharacteristic.exponentModel-exponentCoefficient ;
+        sh:targetClass  cim:LoadResponseCharacteristic .
+
+l3igm:LoadResponseCharacteristic.exponentModel-exponentCoefficient
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:LoadResponseCharacteristic.exponentModel-exponentCoefficientSparql ;
+        sh:description  "For every instance of cim:LoadResponseCharacteristic where cim:LoadResponseCharacteristic.exponentModel is true,  cim:LoadResponseCharacteristic.pVoltageExponent and cim:LoadResponseCharacteristic.qVoltageExponent must be provided and be greater or equal than zero and less or equal to two.	Note: The attributes pFrequencyExponent and qFrequencyExponent are not used. The attributes that are required for coefficient load model covered by rule LCRCoefficientModel are ignored and not validated when cim:LoadResponseCharacteristic.exponentModel equals true." ;
+        sh:name         "LRCExponentModel" ;
+        sh:path         cim:LoadResponseCharacteristic.exponentModel ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        38 ;
+        sh:severity     sh:Violation .
+        
+l3igm:LoadResponseCharacteristic.exponentModel-exponentCoefficientSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Exponent of per unit voltage effecting real and reactive power must be specified if cim:LoadResponseCharacteristic.exponentModel is true." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value .
+        
+        OPTIONAL {$this cim:LoadResponseCharacteristic.pVoltageExponent ?pve }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.qVoltageExponent ?qve }.
+ 
+        FILTER (?value=true && (!bound(?pve) || !bound(?qve) || ?pve<0 || ?pve>2 || ?qve<0 || ?qve>2)   ) .
+			}""" . 		
+
+l3igm:LCRCoefficientModel  a  sh:NodeShape ;
+        sh:property     l3igm:LoadResponseCharacteristic.exponentModel-coefficientModel ;
+        sh:targetClass  cim:LoadResponseCharacteristic .
+
+l3igm:LoadResponseCharacteristic.exponentModel-coefficientModel
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:LoadResponseCharacteristic.exponentModel-coefficientModelSparql ;
+        sh:description  "For every instance of cim:LoadResponseCharacteristic where cim:LoadResponseCharacteristic.exponentModel is false, cim:LoadResponseCharacteristic.pConstantImpedance and cim:LoadResponseCharacteristic.pConstantCurrent and cim:LoadResponseCharacteristic.pConstantPower and cim:LoadResponseCharacteristic.qConstantImpedance and cim:LoadResponseCharacteristic.qConstantCurrent and cim:LoadResponseCharacteristic.qConstantPower must be provided. Note: The attributes that are required for exponential load model covered by rule LRCExponentModel are ignored and not validated when cim:LoadResponseCharacteristic.exponentModel equals false. For every instance of cim:LoadResponseCharacteristic with cim:LoadResponseCharacteristic.exponentModel is false, the sum of cim:LoadResponseCharacteristic.pConstantImpedance and cim:LoadResponseCharacteristic.pConstantCurrent and	cim:LoadResponseCharacteristic.pConstantPower values must be 1 and	the sum of cim:LoadResponseCharacteristic.qConstantImpedance and cim:LoadResponseCharacteristic.qConstantCurrent and cim:LoadResponseCharacteristic.qConstantPower values must be 1." ;
+        sh:name         "LCRCoefficientModel,LCRCoefficientParameters" ;
+        sh:path         cim:LoadResponseCharacteristic.exponentModel ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        39 ;
+        sh:severity     sh:Violation .
+        
+l3igm:LoadResponseCharacteristic.exponentModel-coefficientModelSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Coefficients for ZIP load model must be specified if cim:LoadResponseCharacteristic.exponentModel is false. OR Invalid coefficient parameters for cim:LoadResponseCharacteristic." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value .
+        
+        OPTIONAL {$this cim:LoadResponseCharacteristic.pConstantCurrent ?pcc }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.pConstantImpedance ?pci }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.pConstantPower ?pcp }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.qConstantCurrent ?qcc }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.qConstantImpedance ?qci }.
+        OPTIONAL {$this cim:LoadResponseCharacteristic.qConstantPower ?qcp }.
+ 
+        FILTER ((?value=false && (!bound(?pcc) || !bound(?pci) || !bound(?pcp) || !bound(?qcc) || !bound(?qci) || !bound(?qcp))) || 
+                (?value=false && bound(?pcc) && bound(?pci) && bound(?pcp) && bound(?qcc) && bound(?qci) && bound(?qcp) && (?pcc+?pci+?pcp!=1 || ?qcc+?qci+?qcp!=1)  )
+        ) .
+			}""" . 			
+			
+l3igm:Measurement.Terminal
+        a               sh:NodeShape ;
+        sh:property     l3igm:Measurement.Terminal-MeasTerminal ;
+        sh:targetClass  cim:Analog , cim:Accumulator , cim:Discrete , cim:StringMeasurement .
+
+
+l3igm:Measurement.Terminal-MeasTerminal
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:Measurement.Terminal-MeasTerminalSparql ;
+        sh:description  "The association end cim:Measurement.Terminal shall reference a cim:Terminal of the cim:Equipment referenced by cim:Measurement.PowerSystemResource except in cases where cim:Measurement.measurementType is either cim:TapPosition or cim:SwitchPosition in which the association is not exchanged." ;
+        sh:name         "MeasTerminal" ;
+        sh:path         cim:Measurement.PowerSystemResource ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        40 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:Measurement.Terminal-MeasTerminalSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:Measurement.Terminal does not refer to a cim:Terminal of a cim:Equipment referenced by cim:Measurement.PowerSystemResource. Details: Associated terminal ID:{?terminal}; Equipment's Terminal 1 ID:{?terminal1}; Equipment's Terminal 2 ID:{?terminal2}; Equipment's Terminal 3 ID:{?terminal3}; Measurement type:{?meastype}." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value ?terminal ?terminal1 ?terminal2 ?terminal3 ?meastype
+			WHERE {
+             $this $PATH ?value .
+             OPTIONAL {$this cim:Measurement.Terminal ?terminal}.
+             $this cim:Measurement.measurementType ?meastype . 
+             ?terminal1 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 1 .
+             OPTIONAL {?terminal2 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 2 .}
+             OPTIONAL {?terminal3 cim:Terminal.ConductingEquipment ?value ;
+                        cim:ACDCTerminal.sequenceNumber 3 .}
+				FILTER ((bound(?terminal) && (?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (!bound(?terminal) && !(?meastype="TapPosition" || ?meastype="SwitchPosition" )) || (bound(?terminal) && ((?terminal!=?terminal1 && !bound(?terminal2) && !bound(?terminal3)) || (bound(?terminal2) && !bound(?terminal3) && ?terminal!=?terminal1 && ?terminal!=?terminal2) || (bound(?terminal2) && bound(?terminal3) && ?terminal!=?terminal1 && ?terminal!=?terminal2 && ?terminal!=?terminal3)))) .
+			}""" .			
+			
+l3igm:MeasTypeMeasUnit
+        a               sh:NodeShape ;
+        sh:property     l3igm:MeasType-Values , l3igm:MeasUnit-UnitValues;
+        sh:targetClass  cim:Analog, cim:Discrete, cim:Accumulator .         
+
+l3igm:MeasType-Values
+        a               sh:PropertyShape ;
+        sh:description  "For every instance of cim:Measurement, the value of cim:Measurement.measurementType is limited to 'ThreePhasePower', 'ThreePhaseActivePower', 'ThreePhaseReactivePower', 'LineCurrent', 'PhaseVoltage', 'LineToLineVoltage', 'Angle', 'TapPosition',  'SwitchPosition'." ;
+        sh:message      "Invalid measurement type." ;
+        sh:name         "MeasType" ;
+        sh:in           ( "ThreePhasePower" "ThreePhaseActivePower" "ThreePhaseReactivePower" "LineCurrent" "PhaseVoltage" "LineToLineVoltage" "Angle" "SwitchPosition" "TapPosition" ) ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        41 ;
+        sh:path         cim:Measurement.measurementType ;
+        sh:severity     sh:Violation .			
+		
+l3igm:MeasUnit-UnitValues
+        a               sh:PropertyShape ;
+        sh:description  "For every instance of cim:Measurement, the value of cim:Measurement.unitSymbol is restricted to 'cim:UnitSymbol.V', 'cim:UnitSymbol.A', 'cim:UnitSymbol.W', 'cim:UnitSymbol.VA', 'cim:UnitSymbol.VAr', 'cim:UnitSymbol.deg', 'cim:UnitSymbol.Hz', 'cim:UnitSymbol.none'." ;
+        sh:message      "Invalid measurement unit symbol." ;
+        sh:name         "MeasUnit" ;
+        sh:in           ( cim:UnitSymbol.W cim:UnitSymbol.deg cim:UnitSymbol.VA cim:UnitSymbol.A cim:UnitSymbol.VAr cim:UnitSymbol.V cim:UnitSymbol.Hz cim:UnitSymbol.none) ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        42 ;
+        sh:path         cim:Measurement.unitSymbol ;
+        sh:severity     sh:Violation . 		
+		
+l3igm:CATieFlow
+        a               sh:NodeShape ;
+        sh:property     l3igm:CATieFlow-requiredTieFlow ;
+        sh:targetClass  cim:ControlArea .
+
+
+l3igm:CATieFlow-requiredTieFlow
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:CATieFlow-requiredTieFlowSparql ;
+        sh:description  "For every instance of cim:ControlArea for which the value of cim:ControlArea.type is cim:ControlAreaTypeKind.Interchange, cim:TieFlow instances must be provided." ;
+        sh:name         "CATieFlow" ;
+        sh:path         cim:ControlArea.type ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        43 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:CATieFlow-requiredTieFlowSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TieFlows must be defined for cim:ControlArea, no cim:TieFlows found." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value ?tieflow
+			WHERE {
+             $this $PATH cim:ControlAreaTypeKind.Interchange.
+			 OPTIONAL {$this ^cim:TieFlow.ControlArea ?tieflow}.
+			           
+				FILTER (!bound(?tieflow)) .
+			}""" .		
+			
+l3igm:RegulatingControl
+        a               sh:NodeShape ;
+        sh:property     l3igm:RegulatingControl.targetDeadband-targetDB , l3igm:RegulatingControl-TargetDeadbandOutOfRange ;
+        sh:targetClass  cim:RegulatingControl , cim:TapChangerControl.
+
+
+l3igm:RegulatingControl.targetDeadband-targetDB
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:RegulatingControl.targetDeadband-targetDBSparql ;
+        sh:description  "For every instance of cim:RegulatingControl (SSH) for which the value of cim:RegulatingControl.discrete is true and cim:RegulatingControl.enabled is true, cim:RegulatingControl.targetDeadband must be provided and must be greater than 0." ;
+        sh:name         "TargetDB" ;
+        sh:path         cim:RegulatingControl.discrete ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        44 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:RegulatingControl.targetDeadband-targetDBSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Target deadband is either not provided if the regulating control is discrete and active or it is not greater than zero." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this 
+			WHERE {
+        $this $PATH true .
+        $this cim:RegulatingControl.enabled true .
+        OPTIONAL {$this cim:RegulatingControl.targetDeadband ?targetdeadband}.
+        FILTER (!bound(?targetdeadband) || ?targetdeadband<=0) .        
+			}""" .      
+      
+      
+l3igm:RegulatingControl-TargetDeadbandOutOfRange
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:RegulatingControl-TargetDeadbandOutOfRangeSparql ;
+        sh:description  "If the cim:RegulatingControl.targetDeadband has a value similar to the	cim:RegulatingControl.targetValue this means that it has no effect and that the cim:RegulatingControl is in practice disabled. Disabling a cim:RegulatingControl this way shouldn't be used, instead use the cim:RegulatingControl.enabled flag. cim:RegulatingControl.targetDeadband/EQ_DB_REASONABILITY_FACTOR should be less than the cim:RegulatingControl.targetValue.	With a value of 2 for the EQ_DB_REASONABILITY_FACTOR this means that if the cim:RegulatingControl.targetDeadband is greater than twice the cim:RegulatingControl.targetValue this means that the target will always stay inside the dead band. The rule is only activated when cim:RegulatingControl.discrete=true, cim:RegulatingControl.enabled=true and cim:RegulatingControl.mode=RegulatingControlModeKind.voltage." ;
+        sh:name         "TargetDeadbandOutOfRange" ;
+        sh:path         cim:RegulatingControl.targetDeadband ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        45 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:RegulatingControl-TargetDeadbandOutOfRangeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:RegulatingControl has been potentially disabled with a large cim:RegulatingControl.targetDeadband." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this cim:RegulatingControl.targetValue ?targetvalue .
+        $this cim:RegulatingControl.discrete true .
+		$this cim:RegulatingControl.enabled true .
+        $this cim:RegulatingControl.mode cim:RegulatingControlModeKind.voltage .
+        OPTIONAL {$this $PATH ?value}.
+        FILTER (bound(?value) && (?value/2)>abs(?targetvalue) ) .        
+			}""" . 
+
+l3igm:OperationalLimitValueVL
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitValue-voltageLimit ;
+        sh:targetClass  cim:VoltageLimit.
+
+l3igm:OperationalLimitValue-voltageLimit
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:VoltageLimit, the value of cim:VoltageLimit.value must be > 0. For every instance of cim:CurrentLimit, the value of cim:CurrentLimit.value must be > 0. For every instance of cim:ActivePowerLimit, the value of cim:ActivePowerLimit.value must be > 0. For every instance of cim:ApparentPowerLimit, the value of cim:ApparentPowerLimit.value must be > 0." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "OperationalLimit values must be positive." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "OperationalLimitValue" ;
+        sh:order         46 ;
+        sh:path          cim:VoltageLimit.value ;
+        sh:severity      sh:Violation .			
+
+l3igm:OperationalLimitValueCL
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitValue-currentLimit ;
+        sh:targetClass  cim:CurrentLimit.
+
+l3igm:OperationalLimitValue-currentLimit
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:VoltageLimit, the value of cim:VoltageLimit.value must be > 0. For every instance of cim:CurrentLimit, the value of cim:CurrentLimit.value must be > 0. For every instance of cim:ActivePowerLimit, the value of cim:ActivePowerLimit.value must be > 0. For every instance of cim:ApparentPowerLimit, the value of cim:ApparentPowerLimit.value must be > 0." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "OperationalLimit values must be positive." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "OperationalLimitValue" ;
+        sh:order         47 ;
+        sh:path          cim:CurrentLimit.value ;
+        sh:severity      sh:Violation .
+		
+l3igm:OperationalLimitValueVAcP
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitValue-activePowerLimit ;
+        sh:targetClass  cim:ActivePowerLimit.
+
+l3igm:OperationalLimitValue-activePowerLimit
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:VoltageLimit, the value of cim:VoltageLimit.value must be > 0. For every instance of cim:CurrentLimit, the value of cim:CurrentLimit.value must be > 0. For every instance of cim:ActivePowerLimit, the value of cim:ActivePowerLimit.value must be > 0. For every instance of cim:ApparentPowerLimit, the value of cim:ApparentPowerLimit.value must be > 0." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "OperationalLimit values must be positive." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "OperationalLimitValue" ;
+        sh:order         48 ;
+        sh:path          cim:ActivePowerLimit.value ;
+        sh:severity      sh:Violation .		
+
+l3igm:OperationalLimitValueAppP
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitValue-apparentPowerLimit ;
+        sh:targetClass  cim:ApparentPowerLimit.
+
+l3igm:OperationalLimitValue-apparentPowerLimit
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:VoltageLimit, the value of cim:VoltageLimit.value must be > 0. For every instance of cim:CurrentLimit, the value of cim:CurrentLimit.value must be > 0. For every instance of cim:ActivePowerLimit, the value of cim:ActivePowerLimit.value must be > 0. For every instance of cim:ApparentPowerLimit, the value of cim:ApparentPowerLimit.value must be > 0." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "OperationalLimit values must be positive." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "OperationalLimitValue" ;
+        sh:order         49 ;
+        sh:path          cim:ApparentPowerLimit.value ;
+        sh:severity      sh:Violation .		
+
+l3igm:OperationalLimitType
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitType.acceptableDuration-usage ;
+        sh:targetClass  cim:OperationalLimitType .
+		
+l3igm:OperationalLimitType.acceptableDuration-usage
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:OperationalLimitType.acceptableDuration-usageSparql ;
+        sh:description  "The usage of the attribute cim:OperationalLimitType.acceptableDuration depends on the value of the entsoe:OperationalLimitType.limitType attribute as follows:	- patl: acceptableDuration is not used;	- patlt: usage of acceptableDuration is restricted, i.e. it is not used as another way to express the severity of the limit; - tatl: acceptableDuration is used to define several TATL limit types	- tc: acceptableDuration is not used as an immediate tripping is expected - tct: acceptableDuration is used as the limit is less than the tc limit and describe how long the violation may sustain before tripping.	If acceptableDuration is not used the attribute can be completely omitted or if included the acceptableDuration value shall be ignored." ;
+        sh:name         "AcceptableDuration" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:path         cim:OperationalLimitType.acceptableDuration ;
+        sh:order        50 ;
+        sh:severity     sh:Violation .
+		
+l3igm:OperationalLimitType.acceptableDuration-usageSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:OperationalLimitType.acceptableDuration is not provided for TATL and TCT limit types." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        OPTIONAL {$this $PATH ?value} .
+		$this entsoe:OperationalLimitType.limitType ?type .
+        #BIND(EXISTS{$this $PATH ?v } AS ?hasvalue). 
+        
+        FILTER (!bound(?value) && ?type IN (entsoe:LimitTypeKind.tatl, entsoe:LimitTypeKind.tct ) ) .        
+			}""" . 	
+
+l3igm:OperationalLimitSetAtTerminal
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitSet-limits;
+        sh:targetClass  cim:OperationalLimitSet .
+
+l3igm:OperationalLimitSet-limits
+        a               sh:PropertyShape ;
+        sh:message    	"The OperationalLimitSet is not linked to a Terminal." ;
+        sh:path         cim:OperationalLimitSet.Terminal ;
+        sh:description  "The association end cim:OperationalLimitSet.Terminal is required. Note the association end cim:OperationalLimitSet.Equipment is neither checked nor reported in this rule." ;  
+		sh:minCount     1;
+        sh:maxCount     1;
+        sh:name         "OperationalLimitSetAtTerminal" ;
+        sh:order        51 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .
+		
+l3igm:OperationalLimitSetACLineSegment
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitSet-PATL4 , l3igm:ACLineSegment-operationalLimitSetPATL ;
+        sh:targetClass  cim:ACLineSegment .
+        
+l3igm:OperationalLimitSetSeriesCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitSet-PATL4 , l3igm:SeriesCompensator-operationalLimitSetPATL;
+        sh:targetClass  cim:SeriesCompensator .        
+        
+l3igm:SeriesCompensator-operationalLimitSetPATL
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SeriesCompensator-operationalLimitSetPATLSparql ;
+        sh:path         rdf:type ;
+        sh:description  "Every instance of cim:ACLineSegment and cim:SeriesCompensator, that is not aggregated, shall have at least one cim:OperationalLimitSet linked to one of its cim:Terminals. A cim:OperationalLimitSet shall have at least one  cim:OperationalLimit of type entsoe:LimitTypeKind.patl. Equipment is aggregated when cim:Equipment.aggregate is present and set to 'true'." ;
+        sh:name         "PATL1" ;
+        sh:group        l3igm:Level3-IGM;
+        sh:order        52 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:SeriesCompensator-operationalLimitSetPATLSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "PATL missing for cim:ACLineSegment or cim:SeriesCompensator." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          OPTIONAL {$this cim:Equipment.aggregate ?aggregate }.
+        
+          FILTER ((bound(?aggregate) && ?aggregate=false) || !bound(?aggregate)).
+          FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConductingEquipment/^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl.
+                          }.
+        }""" .    
+		
+l3igm:ACLineSegment-operationalLimitSetPATL
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ACLineSegment-operationalLimitSetPATLSparql ;
+        sh:path         rdf:type ;
+        sh:description  "Every instance of cim:ACLineSegment and cim:SeriesCompensator, that is not aggregated, shall have at least one cim:OperationalLimitSet linked to one of its cim:Terminals. A cim:OperationalLimitSet shall have at least one  cim:OperationalLimit of type entsoe:LimitTypeKind.patl. Equipment is aggregated when cim:Equipment.aggregate is present and set to 'true'." ;
+        sh:name         "PATL1" ;
+        sh:group        l3igm:Level3-IGM;
+        sh:order        53 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:ACLineSegment-operationalLimitSetPATLSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "PATL missing for cim:ACLineSegment or cim:SeriesCompensator." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          OPTIONAL {$this cim:Equipment.aggregate ?aggregate }.
+        
+          FILTER ((bound(?aggregate) && ?aggregate=false) || !bound(?aggregate)).
+          FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConductingEquipment/^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl.
+                          }.
+        }""" . 
+
+
+l3igm:OperationalLimitSet-PATL4
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:OperationalLimitSet-PATL4Sparql ;
+        sh:path         rdf:type ;
+        sh:description  "For an instance of cim:ACLineSegment or cim:SeriesCompensator the limit values of the same cim:OperationalLimitType.limitType shall not differ more than PATL_LIMIT_VALUE_DIFF between the two sides, e.g. a cim:CurrentLimit of type PATL.";
+        sh:name         "PATL4" ;
+        sh:group        l3igm:Level3-IGM;
+        sh:order        54 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:OperationalLimitSet-PATL4Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Differing limit values on two sides of the Equipment above PATL_LIMIT_VALUE_DIFF. Value terminal 1: {?value1}; Value at terminal 2: {?value2}." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?value1 ?value2 
+        WHERE {
+          ?term1 cim:Terminal.ConductingEquipment $this .
+          ?term2 cim:Terminal.ConductingEquipment $this .
+          ?term1 cim:ACDCTerminal.sequenceNumber  1.
+          ?term2 cim:ACDCTerminal.sequenceNumber  2.
+          BIND (EXISTS {?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl} AS ?t1type) .
+          BIND (EXISTS {?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl} AS ?t2type) .
+          
+          #BIND (EXISTS {?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:CurrentLimit.normalValue ?t1i} AS ?t1ib) .
+          #BIND (EXISTS {?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:ApparentPowerLimit.normalValue ?t1s} AS ?t1sb) .
+          #BIND (EXISTS {?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:ActivePowerLimit.normalValue ?t1p} AS ?t1pb) .
+          
+          #BIND (EXISTS {?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:CurrentLimit.normalValue ?t2i} AS ?t2ib) .
+          #BIND (EXISTS {?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:ApparentPowerLimit.normalValue ?t2s} AS ?t2sb) .
+          #BIND (EXISTS {?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:ActivePowerLimit.normalValue ?t2p} AS ?t2pb) .
+          
+          ?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?limitt1 .
+          ?limitt1 cim:OperationalLimit.OperationalLimitType ?typet1class .
+          #?limitt1 cim:OperationalLimit.OperationalLimitType/eu:OperationalLimitType.kind ?typet1 .
+          ?limitt1 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+          ?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?limitt2 .
+          ?limitt2 cim:OperationalLimit.OperationalLimitType ?typet2class .
+          #?limitt2 cim:OperationalLimit.OperationalLimitType/eu:OperationalLimitType.kind ?typet2 .
+          ?limitt2 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+          
+          #OPTIONAL {?limitt1 cim:CurrentLimit.normalValue ?value1 }.
+          #OPTIONAL {?limitt1 cim:ApparentPowerLimit.normalValue ?value1 }.
+          #OPTIONAL {?limitt1 cim:ActivePowerLimit.normalValue ?value1 }.
+          OPTIONAL {?limitt1 cim:CurrentLimit.value|cim:ApparentPowerLimit.value|cim:ActivePowerLimit.value ?value1 }.
+          
+          #OPTIONAL {?limitt2 cim:CurrentLimit.normalValue ?value2 }.
+          #OPTIONAL {?limitt2 cim:ApparentPowerLimit.normalValue ?value2 }.
+          #OPTIONAL {?limitt2 cim:ActivePowerLimit.normalValue ?value2 }.
+          OPTIONAL {?limitt2 cim:CurrentLimit.value|cim:ApparentPowerLimit.value|cim:ActivePowerLimit.value ?value2 }.
+          
+          #FILTER (?t1type=true && ?t2type=true && ?typet1=entsoe:LimitTypeKind.patl && ?typet2=entsoe:LimitTypeKind.patl && ?typet1class=?typet2class && bound(?value1) && bound(?value2) && #((abs(?value1-?value2)/?value1)>0.1 || (abs(?value1-?value2)/?value2)>0.1)).
+          FILTER (?t1type=true && ?t2type=true && ?typet1class=?typet2class && bound(?value1) && bound(?value2) && ((abs(?value1-?value2)/?value1)>0.1 || (abs(?value1-?value2)/?value2)>0.1)).
+        }""" .         
+		
+		
+l3igm:PowerTransformer
+        a               sh:NodeShape ;
+        sh:property     l3igm:PowerTransformerEnd.x-PowerTransformerEndX , l3igm:PowerTransformerEnd.r-PowerTransformerEndR , l3igm:PowerTransformer-operationalLimitSetPATL;
+        sh:targetClass  cim:PowerTransformer .
+		
+
+l3igm:PowerTransformer-operationalLimitSetPATL
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PowerTransformer-operationalLimitSetPATLSparql ;
+        sh:path         rdf:type ;
+        sh:description  "Every instance of cim:PowerTransformer, that is not aggregated (cim:Equipment.aggregate equals to false or it is missing), shall have at least one cim:OperationalLimitSet with at least one cim:OperationalLimit of type entsoe:LimitTypeKind.patl linked to one of cim:Terminal-s of the cim:PowerTransformer." ;
+        sh:name         "PATL2" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        55 ;
+        sh:severity     sh:Violation .
+        
+l3igm:PowerTransformer-operationalLimitSetPATLSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A non-aggregated cim:PowerTrainsformer which has not a cim:OperationalLimitSet with at least one cim:OperationalLimit of type entsoe:LimitTypeKind.patl associated to any of its cim:Terminal-s." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          OPTIONAL {$this cim:Equipment.aggregate ?aggregate }.
+        
+          FILTER ((bound(?aggregate) && ?aggregate=false) || !bound(?aggregate)).
+          FILTER NOT EXISTS {
+        $this ^cim:Terminal.ConductingEquipment/^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+                          }.
+        }""" .
+				
+l3igm:PowerTransformerEnd.x-PowerTransformerEndX
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PowerTransformerEnd.x-PowerTransformerEndXSparql ;
+        sh:path         rdf:type ;
+        sh:description  "	cim:PowerTransformerEnd.x shall conform to the following rules: -	Be greater than or equal to EQ_BRANCH_X_LIMIT Ohm for the 1st winding (the winding with cim:TransformerEnd.endNumber = 1, i.e. highest voltage end) of a two-winding transformer;-	Be equal to 0 Ohm for the 2nd winding (the winding with cim:TransformerEnd.endNumber = 2, i.e. lower voltage end) of a two-winding transformer;  -	the abs(cim:PowerTransformerEnd.x) be 	greater than or equal to EQ_BRANCH_X_LIMIT Ohm for all windings of a three-winding transformer." ;
+        sh:name         "PowerTransformerEndX" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        56 ;
+        sh:severity     sh:Warning .
+        
+l3igm:PowerTransformerEnd.x-PowerTransformerEndXSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "One of the following occurs: 1) The value of 1st winding (cim:TransformerEnd.endNumber = 1) is not greater than or equal to EQ_BRANCH_X_LIMIT Ohm for a two-winding transformer. 2) The value of 2nd winding (cim:TransformerEnd.endNumber = 2) is not 0 Ohm.  3) The absolute value is not greater than or equal to EQ_BRANCH_X_LIMIT Ohm for each of the windings of a three-winding transformer." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          ?end1 cim:PowerTransformerEnd.PowerTransformer $this .
+          ?end2 cim:PowerTransformerEnd.PowerTransformer $this .
+          ?end3 cim:PowerTransformerEnd.PowerTransformer $this .
+          ?end1 cim:TransformerEnd.endNumber 1.
+          ?end1 cim:PowerTransformerEnd.x ?x1 .
+          ?end2 cim:TransformerEnd.endNumber 2.
+          ?end2 cim:PowerTransformerEnd.x ?x2 .
+          ?end3 cim:TransformerEnd.endNumber 3 .
+          ?end3 cim:PowerTransformerEnd.x ?x3 .
+          BIND(EXISTS{$this ^cim:PowerTransformerEnd.PowerTransformer/cim:TransformerEnd.endNumber 3 } AS ?threewin) .
+          
+          FILTER ((!(?x1>0.01 && ?x2=0) && ?threewin=false )|| (?threewin=true && !(ABS(?x1)>0.01 && ABS(?x2)>0.01 && ABS(?x3)>0.01)) ).
+        } """ . 
+		
+l3igm:LimitKind
+        a               sh:NodeShape ;
+        sh:property     l3igm:LimitKind.patl-numberOfLimitType, l3igm:LimitKind.patl-numberOfLimitTypeActivePowerLimit; 
+        sh:targetClass  cim:OperationalLimitType  . 
+
+l3igm:LimitKind.patl-numberOfLimitType
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:LimitKind.patl-numberOfLimitTypeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "There shall be only one PATL limitType per cim:OperationalLimitSet and type - cim:ActivePowerLimit - cim:CurrentLimit or cim:ApparentPowerLimit. This means that an cim:OperationalLimitSet may have two PATL values, one for cim:CurrentLimit or cim:ApparentPowerLimit and one for cim:ActivePowerLimit." ;
+        sh:name         "PATL3" ;
+        sh:order        57 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .                 
+
+l3igm:LimitKind.patl-numberOfLimitTypeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "Redundant PATL not allowed for OperationalLimitSet." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?ol) AS ?patls) ?value
+			WHERE {      
+#       $this ^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		$this entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+        $this ^cim:OperationalLimit.OperationalLimitType ?ol .
+        ?ol  rdf:type ?typeol .
+        ?ol cim:OperationalLimit.OperationalLimitSet ?value .
+        FILTER (?typeol IN (cim:ApparentPowerLimit , cim:CurrentLimit)) .
+			}
+      GROUP BY $this ?value
+      HAVING (?patls>1)
+      """ .   
+
+l3igm:LimitKind.patl-numberOfLimitTypeActivePowerLimit
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:LimitKind.patl-numberOfLimitTypeActivePowerLimitSparql ;
+        sh:path         rdf:type ;
+        sh:description  "There shall be only one PATL limitType per cim:OperationalLimitSet and type - cim:ActivePowerLimit - cim:CurrentLimit or cim:ApparentPowerLimit. This means that an cim:OperationalLimitSet may have two PATL values, one for cim:CurrentLimit or cim:ApparentPowerLimit and one for cim:ActivePowerLimit." ;
+        sh:name         "PATL3" ;
+        sh:order        114 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .                 
+
+l3igm:LimitKind.patl-numberOfLimitTypeActivePowerLimitSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "Redundant PATL not allowed for OperationalLimitSet." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this (COUNT(?ol) AS ?patls) ?value
+			WHERE {      
+#       $this ^cim:OperationalLimit.OperationalLimitSet/cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		$this entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+        $this ^cim:OperationalLimit.OperationalLimitType ?ol .
+        ?ol  rdf:type ?typeol .
+        ?ol cim:OperationalLimit.OperationalLimitSet ?value .
+        FILTER (?typeol IN (cim:ActivePowerLimit)) .
+			}
+      GROUP BY $this ?value
+      HAVING (?patls>1)
+      """ . 
+
+	  
+	  
+l3igm:VoltageLimit
+        a               sh:NodeShape ;
+        sh:property     l3igm:LimitKind.patl-allowedType ;
+        sh:targetClass  cim:VoltageLimit .  
+
+l3igm:LimitKind.patl-allowedType
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:LimitKind.patl-allowedTypeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "PATL type on voltage limits shall be ignored." ;
+        sh:name         "PATL5" ;
+        sh:order        58 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Warning .                 
+
+   
+l3igm:LimitKind.patl-allowedTypeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "PATL voltage limit is ignored." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {      
+        $this cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType ?value.
+        #?type entsoe:OperationalLimitType.kind ?value .
+
+        FILTER (?value=entsoe:LimitTypeKind.patl) .
+			}""" .    
+			
+l3igm:Terminal
+        a               sh:NodeShape ;
+        sh:property     l3igm:Terminal-EXCH8ConnectivityNode ;
+        sh:targetClass  cim:Terminal .
+
+
+l3igm:Terminal-EXCH8ConnectivityNode
+        a               sh:PropertyShape ;
+		sh:sparql       l3igm:Terminal-EXCH8ConnectivityNodeSparql ;
+        sh:description  "The association end cim:Terminal.ConnectivityNode is required in cases where EQ Operation profile is specified in the header. The different kinds of models are described in IEC TS 61970-600-1:2017 PROF4." ;
+        sh:name         "CNRequiredInEQOperations" ;
+        sh:path         cim:Terminal.ConnectivityNode ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        59 ;
+        sh:severity     sh:Violation .
+		
+l3igm:Terminal-EXCH8ConnectivityNodeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message      "The association end cim:Terminal.ConnectivityNode is not provided for a  model that contains EQ Operation profile." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {      
+        BIND (EXISTS {$this md:Model.profile "http://entsoe.eu/CIM/EquipmentOperation/3/1"^^xsd:anyURI} AS ?opmodel) .
+		OPTIONAL {$this $PATH ?value} .
+        
+        FILTER (!bound(?value)) .
+			}""" . 		
+        			
+l3igm:EnergySource-EnergySourcePQ
+        a                 sh:NodeShape ;
+        sh:description   "For cim:EnergySource the attributes voltageMagnitude and voltageAngle	are optional to include in EQ. The attributes are intended for the case when a strong network is providing power to a weak distribution network. Hence it is wrong to use these attributes in transmission studies and they shall not at all be used." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "The use case for cim:EnergySource attributes voltageMagnitude and voltageAngle is not allowed for transmission." ;
+        sh:and (
+        [
+         sh:path          cim:EnergySource.voltageMagnitude ;
+         sh:maxCount      0;
+         sh:minCount      0;
+        ]
+        [
+         sh:path          cim:EnergySource.voltageAngle ;
+         sh:maxCount      0;
+         sh:minCount      0;
+        ]
+        ) ;
+        sh:name          "EnergySourceVoltage" ;
+        sh:order         60 ;
+        sh:severity      sh:Violation ;
+        sh:targetClass  cim:EnergySource .  					
+
+l3igm:PhaseTapChangerTabular
+        a               sh:NodeShape ;
+        sh:property     l3igm:PhaseTapChanger-controlModeP;
+        sh:targetClass  cim:PhaseTapChangerTabular .
+		
+l3igm:PhaseTapChangerSymmetrical
+        a               sh:NodeShape ;
+        sh:property     l3igm:PhaseTapChanger-controlModeP;
+        sh:targetClass  cim:PhaseTapChangerSymmetrical .
+
+l3igm:PhaseTapChangerAsymmetrical
+        a               sh:NodeShape ;
+        sh:property     l3igm:PhaseTapChanger-controlModeP, l3igm:PhaseTapChangerAsymmetrical.windingConnectionAngle-valueRange;
+        sh:targetClass  cim:PhaseTapChangerAsymmetrical .
+
+l3igm:LinearShuntCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:ShuntCompensator-controlMode, l3igm:LinearShuntCompensator.gPerSection-valueRange ;
+        sh:targetClass  cim:LinearShuntCompensator .
+		
+l3igm:StaticVarCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:StaticVarCompensator-controlMode , l3igm:StaticVarCompensator.capacitiveRating-valueRange , l3igm:StaticVarCompensator.inductiveRating-valueRange , l3igm:StaticVarCompensator.slope-valueRange;
+        sh:targetClass  cim:StaticVarCompensator .
+
+l3igm:NonlinearShuntCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:ShuntCompensator-controlMode ;
+        sh:targetClass  cim:NonlinearShuntCompensator .
+
+l3igm:SynchronousMachine
+        a               sh:NodeShape ;
+        sh:property     l3igm:SynchronousMachine-controlMode , l3igm:SynchronousMachine.type-condenser , l3igm:SynchronousMachine.minQ-valueRangePair , l3igm:SynchronousMachine-reactiveLimits , l3igm:SynchronousMachine-SMQLimits3 , l3igm:GeneratingUnit-typeDependency , l3igm:CurveData.xvalue-value, l3igm:SMRatedSunrealistic;
+        sh:targetClass  cim:SynchronousMachine .
+
+l3igm:RatioTapChanger
+        a               sh:NodeShape ;
+        sh:property     l3igm:RatioTapChanger-controlMode;
+        sh:targetClass  cim:RatioTapChanger .
+
+l3igm:PhaseTapChangerLinear
+        a               sh:NodeShape ;
+        sh:property     l3igm:PhaseTapChanger-controlModeP;
+        sh:targetClass  cim:PhaseTapChangerLinear .		
+		
+l3igm:BusbarSection
+        a               sh:NodeShape ;
+        sh:property     l3igm:BusbarSection-controlMode;
+        sh:targetClass  cim:BusbarSection .		
+		
+l3igm:PhaseTapChanger-controlModeP
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PhaseTapChanger-controlModePSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        61 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:PhaseTapChanger-controlModePSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        #?rcontrol ^cim:TapChanger.TapChangerControl $this  .
+        #?rcontrol cim:RegulatingControl.mode ?value  .
+        $this cim:TapChanger.TapChangerControl/cim:RegulatingControl.mode ?value  .
+        #FILTER (?value!=cim:RegulatingControlModeKind.activePower && ?value!=cim:RegulatingControlModeKind.voltage).
+		FILTER (?value!=cim:RegulatingControlModeKind.activePower).
+        }""" .  		
+		
+l3igm:RatioTapChanger-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:RatioTapChanger-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        62 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:RatioTapChanger-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        #?rcontrol ^cim:TapChanger.TapChangerControl $this  .
+        #?rcontrol cim:RegulatingControl.mode ?value  .
+        $this cim:TapChanger.TapChangerControl/cim:RegulatingControl.mode ?value  .
+        FILTER (?value!=cim:RegulatingControlModeKind.reactivePower && ?value!=cim:RegulatingControlModeKind.voltage && ?value!=cim:RegulatingControlModeKind.powerFactor).
+        }""" . 
+
+l3igm:ShuntCompensator-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ShuntCompensator-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        63 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:ShuntCompensator-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        #?rcontrol ^cim:RegulatingCondEq.RegulatingControl $this  .
+        #?rcontrol cim:RegulatingControl.mode ?value  .
+        $this cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.mode ?value  .
+        FILTER (?value!=cim:RegulatingControlModeKind.reactivePower && ?value!=cim:RegulatingControlModeKind.voltage && ?value!=cim:RegulatingControlModeKind.powerFactor).
+        }""" . 
+
+l3igm:SynchronousMachine-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SynchronousMachine-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        64 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:SynchronousMachine-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        #?rcontrol ^cim:RegulatingCondEq.RegulatingControl $this  .
+        #?rcontrol cim:RegulatingControl.mode ?value  .
+        $this cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.mode ?value  .
+        FILTER (?value!=cim:RegulatingControlModeKind.reactivePower && ?value!=cim:RegulatingControlModeKind.voltage && ?value!=cim:RegulatingControlModeKind.powerFactor).
+        }""" . 
+
+
+l3igm:StaticVarCompensator-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:StaticVarCompensator-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        65 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:StaticVarCompensator-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        #?rcontrol ^cim:RegulatingCondEq.RegulatingControl $this  .
+        #?rcontrol cim:RegulatingControl.mode ?value  .
+        $this cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.mode ?value .
+        #BIND(EXISTS{$this cim:StaticVarCompensator.sVCControlMode ?a} AS ?hassvcmode).
+        #BIND(EXISTS{$this cim:StaticVarCompensator.voltageSetPoint ?b} AS ?hasvsetpoint).
+        #OPTIONAL {$this cim:StaticVarCompensator.sVCControlMode ?svcmode }.
+        #OPTIONAL {$this cim:StaticVarCompensator.voltageSetPoint ?vsetpoint }.
+        #FILTER ((?value!=cim:RegulatingControlModeKind.reactivePower && ?value!=cim:RegulatingControlModeKind.voltage) || ?hassvcmode=true || ?hasvsetpoint=true).
+		FILTER ((?value!=cim:RegulatingControlModeKind.reactivePower && ?value!=cim:RegulatingControlModeKind.voltage) ).
+        }""" . 	
+
+l3igm:BusbarSection-controlMode
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:BusbarSection-controlModeSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The cim:TapChangerControl or cim:RegulatingControl can only control a cim:Terminal	at a cim:ConductingEquipment compatible with its type,- A phase shift tap changer can only do the cim:RegulatingControl.mode	- active power control - A ratio tap changer can only do the cim:RegulatingControl.mode-s- voltage - reactivePower - powerFactor - A cim:SynchronousMachine or cim:ShuntCompensator instance can only do the cim:RegulatingControl.mode-s - voltage	- reactivePower	- powerFactor - A cim:StativeVarCompensator can only do the cim:RegulatingControl.mode-s	- voltage	- reactivePower   - A cim:BusbarSection instance can only be controlled by a cim:RegulatingControl in mode (cim:RegulatingControl.mode):	- voltage	The following cim:RegulatingControl.modes are not at all allowed - currentFlow 	 - admittance	- timeScheduled	- temperature." ;
+        sh:name         "ControlModeCompatibility" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        66 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:BusbarSection-controlModeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:TapChangerControl or cim:RegulatingControl with invalid cim:RegulatingControl.mode." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        $this cim:RegulatingCondEq.RegulatingControl/cim:RegulatingControl.mode ?value .
+        
+        FILTER (?value!=cim:RegulatingControlModeKind.voltage).
+        }""" . 		
+
+l3igm:ACLineSegment  a  sh:NodeShape ;
+        sh:property     l3igm:ACLineSegment.x-valueRange , l3igm:ACLineSegment.r-valueRange ;
+        sh:targetClass  cim:ACLineSegment .
+
+l3igm:ACLineSegment.r-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:ACLineSegment the value of cim:ACLineSegment.r must be greater than or equal to zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Negative resistance not allowed for ACLineSegment." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "ACLineSegmentR" ;
+        sh:order         67 ;
+        sh:path          cim:ACLineSegment.r ;
+        sh:severity      sh:Violation .		
+		
+l3igm:ACLineSegment.x-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:ACLineSegment the value of cim:ACLineSegment.x should be greater than or equal to 0.01 Ohm." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Reactance value should be greater than or equal to 0.01." ;
+        sh:minExclusive  "0.01"^^xsd:float ;
+        sh:name          "ACLineSegmentX" ;
+        sh:order         68 ;
+        sh:path          cim:ACLineSegment.x ;
+        sh:severity      sh:Warning .	
+
+l3igm:SeriesCompensator
+        a               sh:NodeShape ;
+        sh:property     l3igm:SeriesCompensator.x-SeriesCompensatorX ;
+        sh:targetClass  cim:SeriesCompensator .
+
+l3igm:SeriesCompensator.x-SeriesCompensatorX
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SeriesCompensator.x-SeriesCompensatorXSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:SeriesCompensator the value of abs(cim:SeriesCompensator.x) should be greater than or equal to 0.01 Ohm." ;
+        sh:name         "SeriesCompensatorX" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        69 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:SeriesCompensator.x-SeriesCompensatorXSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Reactance value should be greater than or equal to 0.01." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          $this cim:SeriesCompensator.x ?x .
+          FILTER (ABS(?x)<0.01).
+        }
+        """ . 		
+
+l3igm:EquivalentBranch
+        a               sh:NodeShape ;
+        sh:property     l3igm:EquivalentBranch-EquivalentBranchX, l3igm:EquivalentBranch.r-AsymmetricalEquivalent , l3igm:EquivalentBranch.x-AsymmetricalEquivalent ;
+        sh:targetClass  cim:EquivalentBranch .
+
+l3igm:EquivalentBranch-EquivalentBranchX
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:EquivalentBranch-EquivalentBranchXSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of EquivalentBranch (EB) the total impedance should be greater than or equal to 0.01 Ohm. The total impedance is computed by sqrt(EB.x * EB.x + EB.x21 * EB.x21). In cases where EB.x21 is not provided, it is equal to zero in the equation for calculation of the total impedance." ;
+        sh:name         "EquivalentBranchX" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        70 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:EquivalentBranch-EquivalentBranchXSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Total impedance should be greater than or equal to 0.01 Ohm." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          $this cim:EquivalentBranch.x ?x .
+          OPTIONAL {$this cim:EquivalentBranch.x21 ?x21} .
+          FILTER ((bound(?x21) && (?x*?x+?x21*?x21)<0.0001) || (!bound(?x21) && (?x*?x)<0.0001)).
+        }
+        """ . 		
+
+l3igm:DCLineSegment  a  sh:NodeShape ;
+        sh:property     l3igm:DCLineSegment.resistance-valueRange, l3igm:PerLengthDCLineParameter.resistance-valueRange ;
+        sh:targetClass  cim:DCLineSegment , cim:PerLengthDCLineParameter.
+
+l3igm:DCLineSegment.resistance-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:DCLineSegment the value of cim:DCLineSegment.resistance and the value of the associated  cim:PerLengthDCLineParameter.resistance must be greater than zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Negative resistance not allowed for cim:DCLineSegment." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "DCLineSegmentR" ;
+        sh:order         71 ;
+        sh:path          cim:DCLineSegment.resistance ;
+        sh:severity      sh:Violation .		
+
+l3igm:PerLengthDCLineParameter.resistance-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:DCLineSegment the value of cim:DCLineSegment.resistance and the value of the associated  cim:PerLengthDCLineParameter.resistance must be greater than zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Negative resistance not allowed for cim:DCLineSegment." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "DCLineSegmentR" ;
+        sh:order         72 ;
+        sh:path          cim:PerLengthDCLineParameter.resistance  ;
+        sh:severity      sh:Violation .		
+
+l3igm:PowerTransformerEnd.r-PowerTransformerEndR
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PowerTransformerEnd.r-PowerTransformerEndRSparql ;
+        sh:path         rdf:type ;
+        sh:description  "cim:PowerTransformerEnd.r shall conform to the following rules:  -	Be equal to 0 Ohm for the 2nd winding (the winding with cim:TransformerEnd.endNumber = 2, i.e. lower voltage end) of a two-winding transformer;   -	Be greater than or equal to EQ_BRANCH_X_LIMIT Ohm for the 1st winding (the winding with cim:TransformerEnd.endNumber = 1, i.e. highest voltage end) of a two-winding transformer;  -	Be 	greater than or equal to EQ_BRANCH_X_LIMIT Ohm for all windings of a three-winding transformer." ;
+        sh:name         "PowerTransformerEndR" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        73 ;
+        sh:severity     sh:Warning .
+        
+l3igm:PowerTransformerEnd.r-PowerTransformerEndRSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "PowerTransformerEnd.r is either: 1) different than 0 Ohm for 2nd winding of a two-winding transformer or 2) not greater than or equal to EQ_BRANCH_X_LIMIT Ohm for all windings of a three-winding transformer or 3) not greater than or equal to EQ_BRANCH_X_LIMIT Ohm for 1st winding of a two-winding transformer." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          ?end1 cim:PowerTransformerEnd.PowerTransformer $this .
+          ?end2 cim:PowerTransformerEnd.PowerTransformer $this .
+          OPTIONAL {?end3 cim:PowerTransformerEnd.PowerTransformer $this .
+		  ?end3 cim:TransformerEnd.endNumber 3 .
+          ?end3 cim:PowerTransformerEnd.r ?r3 .
+		  }.
+		  
+          ?end1 cim:TransformerEnd.endNumber 1.
+          ?end1 cim:PowerTransformerEnd.r ?r1 .
+          ?end2 cim:TransformerEnd.endNumber 2.
+          ?end2 cim:PowerTransformerEnd.r ?r2 .
+          
+          BIND(EXISTS{$this ^cim:PowerTransformerEnd.PowerTransformer/cim:TransformerEnd.endNumber 3 } AS ?threewin) .
+          
+          FILTER (((?r1<0.01 || ?r2!=0) && ?threewin=false )|| (?threewin=true && (ABS(?r1)<0.01 || ABS(?r2)<0.01 || ABS(?r3)<0.01)) ).
+        } """ . 		
+		
+l3igm:PowerTransformerEnd.ratedU-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "The cim:PowerTransformerEnd.ratedU attribute must be greater than zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "cim:PowerTransformerEnd.ratedU should be greater than zero." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "PowerTransformerEndRatedU" ;
+        sh:order         74 ;
+        sh:path          cim:PowerTransformerEnd.ratedU ;
+        sh:severity      sh:Violation .		
+		
+l3igm:LinearShuntCompensator.gPerSection-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:LinearShuntCompensator the value of cim:LinearShuntCompensator.gPerSection must be greater than or equal to zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "cim:LinearShuntCompensator.gPerSection must be non-negative." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "LinearShuntCompensatorG" ;
+        sh:order         75 ;
+        sh:path          cim:LinearShuntCompensator.gPerSection ;
+        sh:severity      sh:Violation .		
+		
+l3igm:ShuntCompensator.normalSections-valueRangePair
+        a                    sh:PropertyShape ;
+        sh:description       "For every instance of cim:ShuntCompensator the value of cim:ShuntCompensator.normalSections must be greater than or equal to zero	and less or equal to cim:ShuntCompensator.maximumSections." ;
+        sh:group             l3igm:Level3-IGM  ;
+        sh:lessThanOrEquals  cim:ShuntCompensator.maximumSections ;
+        sh:message           "cim:ShuntCompensator.normalSections outside allowed range." ;
+        sh:minInclusive      "0.0"^^xsd:float ;
+        sh:name              "ShuntCompensatorSections" ;
+        sh:order             76 ;
+        sh:path              cim:ShuntCompensator.normalSections ;
+        sh:severity          sh:Violation .	
+
+l3igm:ACDCConverter  a     sh:NodeShape ;
+        sh:property     l3igm:ACDCConverter.idleLoss-valueRange ;
+        sh:targetClass  cim:CsConverter , cim:VsConverter.
+
+l3igm:ACDCConverter.idleLoss-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:CsConverter and cim:VsConverter, the value of cim:ACDCConverter.idleLoss, cim:ACDCConverter.switchingLoss and cim:ACDCConverter.resistiveLoss, if provided, must be greater than or equal to zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Negative losses are not allowed for Converter, losses must be greater than or equal to zero." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "ConverterLosses" ;
+        sh:order         77 ;
+        sh:path          cim:ACDCConverter.idleLoss ;
+        sh:severity      sh:Violation .	
+
+l3igm:StaticVarCompensator.capacitiveRating-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:StaticVarCompensator, the value of cim:StaticVarCompensator.capacitiveRating must be positive. The value of cim:StaticVarCompensator.inductiveRating must be negative. Zero values are not allowed." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Capacitive rating should be greater than zero, inductive rating should be lower than zero for SVC." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "SVCRatings" ;
+        sh:order         78 ;
+        sh:path          cim:StaticVarCompensator.capacitiveRating ;
+        sh:severity      sh:Warning .		
+		
+l3igm:StaticVarCompensator.inductiveRating-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "For every instance of cim:StaticVarCompensator, the value of cim:StaticVarCompensator.capacitiveRating must be positive. The value of cim:StaticVarCompensator.inductiveRating must be negative. Zero values are not allowed." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "Capacitive rating should be greater than zero, inductive rating should be lower than zero for SVC." ;
+        sh:maxExclusive  "0.0"^^xsd:float ;
+        sh:name          "SVCRatings" ;
+        sh:order         79 ;
+        sh:path          cim:StaticVarCompensator.inductiveRating ;
+        sh:severity      sh:Warning .	
+
+l3igm:StaticVarCompensator.slope-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "The cim:StaticVarCompensator.slope must be positive or zero." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:message       "cim:StaticVarCompensator.slope must be positive or zero." ;
+        sh:minInclusive  "0.0"^^xsd:float ;
+        sh:name          "SVCSlope" ;
+        sh:order         80 ;
+        sh:path          cim:StaticVarCompensator.slope ;
+        sh:severity      sh:Violation .		
+
+l3igm:GeneratingUnit  a     sh:NodeShape ;
+        sh:property     l3igm:GeneratingUnit-GeneratingUnitMaxPGen ;
+        sh:targetClass  cim:GeneratingUnit , cim:HydroGeneratingUnit, cim:NuclearGeneratingUnit, cim:SolarGeneratingUnit, cim:ThermalGeneratingUnit , cim:WindGeneratingUnit .
+		
+l3igm:GeneratingUnit-GeneratingUnitMaxPGen
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:GeneratingUnit-GeneratingUnitMaxPGenSparql ;
+        sh:path         cim:GeneratingUnit.maxOperatingP ;
+        sh:description  "For every instance of cim:GeneratingUnit, cim:HydroGeneratingUnit, cim:NuclearGeneratingUnit, cim:SolarGeneratingUnit, cim:ThermalGeneratingUnit and cim:WindGeneratingUnit, with cim:SynchronousMachine.type equal to generator (cim:SynchronousMachineKind.generator), the value  of cim:GeneratingUnit.maxOperatingP must be greater than zero.	Note that the limits follow generation sign convention." ;
+        sh:name         "GeneratingUnitMaxPGen" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        81 ;
+        sh:severity     sh:Violation .
+        
+l3igm:GeneratingUnit-GeneratingUnitMaxPGenSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid operating limit, cim:GeneratingUnit.maxOperatingP must be greater than zero." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?value
+        WHERE {
+          $this $PATH ?value .
+		  $this ^cim:RotatingMachine.GeneratingUnit/cim:SynchronousMachine.type cim:SynchronousMachineKind.generator .
+          
+          FILTER (?value<=0 ).
+        } """ . 	
+
+
+l3igm:SynchronousMachine.type-condenser
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SynchronousMachine.type-condenserSparql ;
+        sh:description  "A synchronous condenser (cim:SynchronousMachine.type equal to SynchronousMachineKind.condenser) has no capability for active power output. Therefore, such cim:SynchronousMachine shall not be associated with a cim:GeneratingUnit." ;
+        sh:name         "SynchronousCondenser" ;
+        sh:path         cim:SynchronousMachine.type ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        82 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:SynchronousMachine.type-condenserSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A synchronous condenser is associated with cim:GeneratingUnit." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        $this $PATH ?value .
+        $this $PATH cim:SynchronousMachineKind.condenser  .
+        OPTIONAL {$this cim:RotatingMachine.GeneratingUnit ?genunit } .
+        #BIND(EXISTS{$this cim:RotatingMachine.GeneratingUnit ?genunit} AS ?opt).
+        #FILTER (?opt=true && ?value=cim:SynchronousMachineKind.condenser ).
+        FILTER (bound(?genunit) ).
+        }""" . 		
+		
+l3igm:SynchronousMachine.minQ-valueRangePair
+        a                    sh:PropertyShape ;
+        sh:description       "For a cim:SynchronousMachine, the value of cim:SynchronousMachine.maxQ should be greater than or equal to the value of cim:SynchronousMachine.minQ, if provided. Note that the limits follow generation sign convention." ;
+        sh:group             l3igm:Level3-IGM ;
+        sh:lessThanOrEquals  cim:SynchronousMachine.maxQ ;
+        sh:message           "Invalid operating limits for Synchronous Machine." ;
+        sh:name              "SMQLimits1" ;
+        sh:order             83 ;
+        sh:path              cim:SynchronousMachine.minQ ;
+        sh:severity          sh:Violation .		
+		
+l3igm:SynchronousMachine-reactiveLimits
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SynchronousMachine-reactiveLimitsSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For a cim:SynchronousMachine, either cim:SynchronousMachine.minQ and cim:SynchronousMachine.maxQ must be provided, or an association to a cim:ReactiveCapabilityCurve must exist. If cim:ReactiveCapabilityCurve exists cim:SynchronousMachine.minQ and cim:SynchronousMachine.maxQ shall be ignored." ;
+        sh:name         "SMQLimits2" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        84 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:SynchronousMachine-reactiveLimitsSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Missing operating limits for Synchronous Machine." ;
+		sh:prefixes cim: ;
+		sh:select """
+        SELECT $this 
+      WHERE {
+        OPTIONAL {$this cim:SynchronousMachine.minQ ?minq } .
+        OPTIONAL {$this cim:SynchronousMachine.maxQ ?maxq } .
+        #OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .
+        BIND(EXISTS{$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcca} AS ?hasrcc).
+        
+        #{
+        #SELECT $this (MAX(?y2value) AS ?my2value)  (MIN(?y1value) AS ?my1value)
+        #  WHERE {
+        #    #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .
+        #    #?rcc1 ^cim:CurveData.Curve ?curvedata .
+        #    $this cim:SynchronousMachine.InitialReactiveCapabilityCurve/^cim:CurveData.Curve ?curvedata .
+        #    #BIND(EXISTS{$this cim:SynchronousMachine.InitialReactiveCapabilityCurve/^cim:CurveData.Curve ?curvedataa} AS ?hascurvedata).
+        #    ?curvedata rdf:type ?cdtype .
+        #    ?curvedata cim:CurveData.y1value ?y1value .
+        #    ?curvedata cim:CurveData.y2value ?y2value .
+        #    #FILTER (?hascurvedata=true && ?cdtype=cim:CurveData ) .
+        #    FILTER (?cdtype=cim:CurveData ) .
+        #  }
+        #  GROUP BY $this ?cdtype
+        #}
+		#
+        #FILTER ((?hasrcc=false && !(bound(?minq) && bound(?maxq))) || (?hasrcc=true && bound(?minq) && bound(?maxq) && !(?maxq=?my2value && ?minq=?my1value))) .
+		FILTER ((?hasrcc=false && !(bound(?minq) && bound(?maxq))) ) .
+        } """ .		
+		
+l3igm:RotatingMachine
+        a               sh:NodeShape ;
+        sh:property     l3igm:RotatingMachine.ratedS-required ;
+        sh:targetClass  cim:SynchronousMachine , cim:AsynchronousMachine .
+
+l3igm:RotatingMachine.ratedS-required
+        a               sh:PropertyShape ;
+        sh:description  "cim:RotatingMachine.ratedS is required and shall be greater than zero.	cim:PowerTransfomerEnd.ratedS is required and shall be greater than zero." ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:minCount     1 ;
+        sh:maxCount     1 ;
+		sh:minExclusive  "0.0"^^xsd:float ;
+        sh:message      "cim:RotatingMachine.ratedS or cim:PowerTransfomerEnd.ratedS is either not provided or it is zero." ;
+        sh:name         "RatedS" ;
+        sh:order        85 ;
+        sh:path         cim:RotatingMachine.ratedS ;
+        sh:severity     sh:Violation .		
+
+l3igm:PowerTransformerEnd.ratedS-valueRange
+        a                sh:PropertyShape ;
+        sh:description   "cim:RotatingMachine.ratedS is required and shall be greater than zero.	cim:PowerTransfomerEnd.ratedS is required and shall be greater than zero." ;
+        sh:group         l3igm:Level3-IGM ;
+		sh:minCount     1 ;
+        sh:maxCount     1 ;
+        sh:message       "cim:RotatingMachine.ratedS or cim:PowerTransfomerEnd.ratedS is either not provided or it is zero." ;
+        sh:minExclusive  "0.0"^^xsd:float ;
+        sh:name          "RatedS" ;
+        sh:order         86 ;
+        sh:path          cim:PowerTransformerEnd.ratedS ;
+        sh:severity      sh:Violation .		
+
+l3igm:SynchronousMachine-SMQLimits3
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SynchronousMachine-SMQLimits3Sparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:SynchronousMachine with exactly one cim:GeneratingUnit the following rules applies - abs(maxP) Less or Equal ratedS 	- abs(minP) Less or Equal ratedS - abs(maxQ) Less or Equal ratedS - abs(minQ) Less or Equal ratedS	where - maxP is cim:GeneratingUnit.maxOperatingP- maxQ is cim:SynchronousMachine.maxQ	- minP is cim:GeneratingUnit.minOperatingP	- minQ is cim:SynchronousMachine.minQ - ratedS is cim:RotatingMachine.ratedS." ;
+        sh:name         "SMQLimits3" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        87 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:SynchronousMachine-SMQLimits3Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Inconsistent cim:SynchronousMachine and cim:GeneratingUnit limits." ;
+		sh:prefixes cim: ;
+		sh:select """
+        SELECT $this ?value
+      WHERE {
+        $this cim:RotatingMachine.GeneratingUnit ?genunit .
+		$this cim:RotatingMachine.ratedS ?value .
+		OPTIONAL {$this cim:SynchronousMachine.minQ ?minq } .
+        OPTIONAL {$this cim:SynchronousMachine.maxQ ?maxq } .
+		OPTIONAL {?genunit cim:GeneratingUnit.minOperatingP ?minp } .
+        OPTIONAL {?genunit cim:GeneratingUnit.maxOperatingP ?maxp } .
+		
+        
+		FILTER ( ?value<ABS(?maxp) || ?value<ABS(?minp) || ?value<ABS(?minq) || ?value<ABS(?maxq)) .
+        } """ .		
+
+l3igm:GeneratingUnit-typeDependency
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:GeneratingUnit-typeDependencySparql ;
+        sh:description  "For a cim:SynchronousMachine associated with a cim:GeneratingUnit or its subclasses, the active power limits should relate to cim:SynchronousMachine.type as follows:	- generator or generatorOrCondenser, cim:GeneratingUnit.minOperatingP greater than or equal to 0,   cim:GeneratingUnit.maxOperatingP greater than 0, cim:GeneratingUnit.maxOperatingP greater than or equal to cim:GeneratingUnit.minOperatingP.- motor or motorOrCondenser, cim:GeneratingUnit.minOperatingP less than 0,  cim:GeneratingUnit.maxOperatingP less than or equal to 0,	cim:GeneratingUnit.maxOperatingP greater than or equal to cim:GeneratingUnit.minOperatingP.	- generatorOrMotor or generatorOrCondenserOrMotor,	cim:GeneratingUnit.minOperatingP less than 0 and cim:GeneratingUnit.maxOperatingP greater than 0. Note:    1)	As there is no cim:GeneratingUnit associated with cim:SynchronousMachine in cases of condenser only type, the condenser cannot be included in this rule.   2)	Depending on sign conventions of applications applied to motor operating mode, the meaning operating active power limits defined by cim:GeneratingUnit.maxOperatingP and cim:GeneratingUnit.minOperatingP maybe affected. For instance, if maxOperatingP=-5 and minOperatingP=-100 the instance data will pass the validation in case it is a motor. However, for an application which has positive limits (e.g. Pmax and Pmin) for motor mode, the mapping would be Pmax = minOperatingP and Pmin = maxOperatingP." ;
+        sh:name         "SMPLimits" ;
+        sh:path         cim:SynchronousMachine.type ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        88 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:GeneratingUnit-typeDependencySparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The active power limit values do not match the cim:SynchronousMachine.type." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this ?value 
+        WHERE {
+        $this $PATH ?value .
+        $this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.maxOperatingP ?maxp .
+        $this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.minOperatingP ?minp .
+
+         FILTER (
+        ((?value=cim:SynchronousMachineKind.generator || ?value=cim:SynchronousMachineKind.generatorOrCondenser) && (?maxp<=0 || ?minp<0 || ?maxp<?minp)) ||
+        ((?value=cim:SynchronousMachineKind.motor || ?value=cim:SynchronousMachineKind.motorOrCondenser) && (?maxp>0 || ?minp>=0 || ?maxp<?minp)) ||
+        ((?value=cim:SynchronousMachineKind.generatorOrMotor || ?value=cim:SynchronousMachineKind.generatorOrCondenserOrMotor) && (?maxp<=0 || ?minp>=0))
+        ).
+        }""" . 	
+
+l3igm:CurveStyle
+        a               sh:NodeShape ;
+        sh:property     l3igm:Curve-CurveStyle ;
+        sh:targetClass  cim:ReactiveCapabilityCurve, cim:VsCapabilityCurve.
+                
+l3igm:Curve-CurveStyle
+        a               sh:PropertyShape ;
+        sh:description  "The cim:Curve.curveStyle enumerated value cim:CurveStyle.constantYValue is not allowed." ;
+        sh:name         "CurveStyle" ;
+        sh:message      "The cim:CurveStyle.constantYValue enumeration is not allowed." ;
+        sh:in           (cim:CurveStyle.straightLineYValues );
+        sh:path         cim:Curve.curveStyle;
+        sh:order        89 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation .  	
+
+l3igm:CurveData
+        a               sh:NodeShape ;
+        sh:property     l3igm:CurveData-reactive ;
+        sh:targetClass  cim:CurveData .
+
+l3igm:CurveData-reactive
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:CurveData-reactiveSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:CurveData, for which the cim:CurveData.Curve refers to a cim:ReactiveCapabilityCurve, the cim:CurveData.y2value must be greater or equal than cim:CurveData.y1value	If cim:CurveData.y2value and cim:CurveData.y1value are equal for all curve points this is considered an error." ;
+        sh:name         "RCCYValues" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        90 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:CurveData-reactiveSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid reactive capability curve data."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?value ?countcd ?sumy1v ?sumy2v
+      WHERE {
+        {
+        SELECT $this (COUNT(?curvedtype) AS ?countcd) (SUM(?y1v) AS ?sumy1v) (SUM(?y2v) AS ?sumy2v)
+        WHERE {
+        $this cim:CurveData.Curve/rdf:type cim:ReactiveCapabilityCurve .
+        $this cim:CurveData.Curve/^cim:CurveData.Curve ?curved .
+        #$this cim:CurveData.Curve ?rcc .
+        #?rcc rdf:type ?curvetype .
+        #?rcc ^cim:CurveData.Curve ?curved .
+        ?curved rdf:type ?curvedtype .
+        ?curved cim:CurveData.y1value ?y1v.
+        ?curved cim:CurveData.y2value ?y2v.
+        #OPTIONAL {?curved cim:CurveData.y2value ?y2v }.
+        #FILTER(bound(?y2v)).
+        }
+        GROUP BY $this ?curvedtype
+        }
+        
+        $this cim:CurveData.Curve ?value .
+        #?value rdf:type ?curvetype .
+        ?value rdf:type cim:ReactiveCapabilityCurve .
+        $this cim:CurveData.y1value ?y1value  .
+        $this cim:CurveData.y2value ?y2value.
+        #OPTIONAL {$this cim:CurveData.y2value ?y2value }.
+        #FILTER (?curvetype=cim:ReactiveCapabilityCurve && bound(?y2value) && (?y2value<?y1value || (?y2value=?sumy1v/?countcd && ?y1value=?sumy2v/?countcd ))) .
+        FILTER ((?y2value<?y1value || (?y2value=?sumy1v/?countcd && ?y1value=?sumy2v/?countcd ))) .
+        } """ . 	
+
+l3igm:ReactiveCapabilityCurve
+        a               sh:NodeShape ;
+        sh:property     l3igm:ReactiveCapabilityCurve-xvalue , l3igm:ReactiveCapabilityCurve-reactiveCountP;
+        sh:targetClass  cim:ReactiveCapabilityCurve .
+
+l3igm:ReactiveCapabilityCurve-xvalue
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ReactiveCapabilityCurve-xvalueSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:CurveData, for which the cim:CurveData.Curve refers to a cim:ReactiveCapabilityCurve, the cim:CurveData.xvalue shall be different, e.g. in the case of two cim:CurveData called CD1 and CD2 the following shall give a warning when	CD1.xvalue = CD2.xvalue." ;
+        sh:name         "CurveXValues" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        91 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:ReactiveCapabilityCurve-xvalueSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Some points in the reactive capability curve have the same x value." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          {
+          SELECT $this (COUNT(?xvalue1) AS ?c1)
+          WHERE {
+              $this ^cim:CurveData.Curve/cim:CurveData.xvalue ?xvalue1.
+            }
+            GROUP BY $this ?xvalue1
+          }
+          
+          {
+          SELECT  $this (COUNT(DISTINCT ?xvalue2) AS ?c2)
+          WHERE {
+              $this ^cim:CurveData.Curve/cim:CurveData.xvalue ?xvalue2.
+            }
+            GROUP BY $this ?xvalue2
+          }
+
+          FILTER (?c1!=?c2).
+        }
+        LIMIT 1
+        """ . 	
+
+l3igm:ReactiveCapabilityCurve-reactiveCountP
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:ReactiveCapabilityCurve-reactiveCountPSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For a cim:SynchronousMachine with a cim:ReactiveCapabilityCurve the number of cim:CurveData instances depends on the attribute cim:SynchronousMachine.type as follows	- condenser, one cim:CurveData instance with cim:CurveData.xvalue = 0.	- generator or generatorOrCondenser, at least two cim:CurveData instances with cim:CurveData.xvalue greater or equal 0.	- motor or motorOrCondenser, at least two cim:CurveData instances with  cim:CurveData.xvalue less or equal 0.- generatorOrMotor or generatorOrCondenserOrMotor, at least three cim:CurveData  instances with at least one having cim:CurveData.xvalue greater or equal 0 and one having cim:CurveData.xvalue less or equal 0." ;
+        sh:name         "RCCXValues2" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        92 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:ReactiveCapabilityCurve-reactiveCountPSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid number of curve points in reactive capability curve data."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?curvedatas  ?value
+      WHERE {
+        {
+        SELECT $this (COUNT(?typecd) AS ?curvedatas) (MAX(?xvalue) AS ?maxxvalue) (MIN(?xvalue) AS ?minxvalue)
+        WHERE {
+        $this  ^cim:CurveData.Curve/rdf:type ?typecd .
+        $this  ^cim:CurveData.Curve/cim:CurveData.xvalue ?xvalue .
+        #?curvedata cim:CurveData.Curve $this .
+        #?curvedata rdf:type ?typecd .
+        #?curvedata cim:CurveData.xvalue ?xvalue .
+        }
+        GROUP BY $this ?typecd 
+        }
+        
+        $this ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:SynchronousMachine.type ?type .
+        #BIND(EXISTS{$this ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:SynchronousMachine.type ?a} AS ?hasrcc).
+        
+        #OPTIONAL {?sm cim:SynchronousMachine.InitialReactiveCapabilityCurve $this }.
+        #OPTIONAL {?sm cim:SynchronousMachine.type ?type }.
+        #OPTIONAL {$this ^cim:SynchronousMachine.InitialReactiveCapabilityCurve ?mach }.
+        $this ^cim:CurveData.Curve/cim:CurveData.xvalue ?xvalue1 .
+        #?curvedata1 cim:CurveData.Curve $this .
+        #?curvedata1 cim:CurveData.xvalue ?xvalue1 .
+        BIND("" as ?value).
+
+
+        #FILTER (?hasrcc=true && ((?type=cim:SynchronousMachineKind.condenser ) ||
+        #((?type=cim:SynchronousMachineKind.generator || ?type=cim:SynchronousMachineKind.generatorOrCondenser) && (?curvedatas<2 || ?xvalue1<0)) ||
+        #((?type=cim:SynchronousMachineKind.motor || ?type=cim:SynchronousMachineKind.motorOrCondenser) && (?curvedatas<2 || ?xvalue1>0)) ||
+        #((?type=cim:SynchronousMachineKind.generatorOrMotor || ?type=cim:SynchronousMachineKind.generatorOrCondenserOrMotor) && (?curvedatas<3 || !(?maxxvalue>=0 && ?minxvalue<=0))))
+        #) .
+        FILTER (((?type=cim:SynchronousMachineKind.condenser ) ||
+        ((?type=cim:SynchronousMachineKind.generator || ?type=cim:SynchronousMachineKind.generatorOrCondenser) && (?curvedatas<2 || ?xvalue1<0)) ||
+        ((?type=cim:SynchronousMachineKind.motor || ?type=cim:SynchronousMachineKind.motorOrCondenser) && (?curvedatas<2 || ?xvalue1>0)) ||
+        ((?type=cim:SynchronousMachineKind.generatorOrMotor || ?type=cim:SynchronousMachineKind.generatorOrCondenserOrMotor) && (?curvedatas<3 || !(?maxxvalue>=0 && ?minxvalue<=0))))
+        ) .
+        
+        } """ . 
+
+l3igm:CurveData.xvalue-value
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:CurveData.xvalue-valueSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For each instance of cim:ReactiveCapabilityCurve, all instances of cim:CurveData shall have cim:CurveData.xvalue that is 1)	greater than or equal to the cim:GeneratingUnit.minOperatingP, and 2)	less than or equal to the cim:GeneratingUnit.maxOperatingP . cim:GeneratingUnit.minOperatingP and cim:GeneratingUnit.maxOperatingP are attributes of the cim:GeneratingUnit associated with	the cim:SynchronousMachine to which the cim:ReactiveCapabilityCurve applies." ;
+        sh:name         "RCCXValues3" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        93 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:CurveData.xvalue-valueSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid reactive capability curve data for cim:SynchronousMachine."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?value
+      WHERE {      
+        $this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.minOperatingP ?minp.
+        $this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.maxOperatingP ?maxp.
+        #OPTIONAL {$this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.minOperatingP ?minp } .
+        #OPTIONAL {$this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.maxOperatingP ?maxp } .
+        #OPTIONAL {$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcc } .
+        BIND(EXISTS{$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcca} AS ?hasrcc).
+        
+        {
+        SELECT $this (MAX(?xvalue) AS ?maxxvalue)  (MIN(?xvalue) AS ?minxvalue)
+          WHERE {
+            #OPTIONAL {?rcc1 ^cim:SynchronousMachine.InitialReactiveCapabilityCurve $this } .
+            #?rcc1 ^cim:CurveData.Curve ?curvedata .
+            $this cim:SynchronousMachine.InitialReactiveCapabilityCurve/^cim:CurveData.Curve ?curvedata .
+            #BIND(EXISTS{$this cim:SynchronousMachine.InitialReactiveCapabilityCurve/^cim:CurveData.Curve ?curvedataa} AS ?hascurvedata).
+            ?curvedata rdf:type ?cdtype .
+            ?curvedata cim:CurveData.xvalue ?xvalue .
+            #FILTER (?hascurvedata=true && ?cdtype=cim:CurveData ) .
+            FILTER (?cdtype=cim:CurveData ) .
+          }
+          GROUP BY $this ?cdtype
+        }
+
+        #FILTER ((?hasrcc=true && bound(?minp) && bound(?maxp) && ?maxp!=?maxxvalue && ?minp!=?minxvalue)) .
+        FILTER (?hasrcc=true && !(?maxp>=?maxxvalue && ?minp<=?minxvalue)) .
+        } """ .		
+		
+l3igm:CurveData
+        a               sh:NodeShape ;
+        sh:property     l3igm:CurveData-equationY2 , l3igm:CurveData-equationY1 ;
+        sh:targetClass  cim:CurveData .
+        
+l3igm:CurveData-equationY2
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:CurveData-equationY2Sparql ;
+        sh:description  "For every instance of cim:ReactiveCapabilityCurve, each cim:CurveData instance	must satisfy the following relation	- x*x+y1*y1 LE ratedS*ratedS and x*x+y2*y2 LE ratedS*ratedS	where- LE = less or equal- x  = cim:CurveData.xvalue- y1 = cim:CurveData.y1value		- y2 = cim:CurveData.y2value		- ratedS = cim:RotatingMachine.ratedS * (1 + 0.0005)" ;
+        sh:name         "RCCXValues4" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:path         cim:CurveData.Curve ;
+        sh:order        94 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:CurveData-equationY2Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid reactive capability curve data for cim:SynchronousMachine."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?value 
+      WHERE {
+        $this $PATH ?value .
+        ?value rdf:type cim:ReactiveCapabilityCurve .
+        $this cim:CurveData.xvalue ?xvalue .
+        $this cim:CurveData.y2value ?y2value.
+        #OPTIONAL {$this cim:CurveData.y2value ?y2value } .
+        #BIND (EXISTS{?value ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:RotatingMachine.ratedS ?rateds} AS ?smrateds).
+        ?value ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:RotatingMachine.ratedS ?rateds .
+        #FILTER (?smrateds=true && bound(?y2value) && (?xvalue*?xvalue+?y2value*?y2value)>?rateds*?rateds) .
+        FILTER ((?xvalue*?xvalue+?y2value*?y2value)>?rateds*1.0005*?rateds*1.0005) .
+        } """ . 
+
+l3igm:CurveData-equationY1
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:CurveData-equationY1Sparql ;
+        sh:description  "For every instance of cim:ReactiveCapabilityCurve, each cim:CurveData instance	must satisfy the following relation	- x*x+y1*y1 LE ratedS*ratedS and x*x+y2*y2 LE ratedS*ratedS	where- LE = less or equal- x  = cim:CurveData.xvalue- y1 = cim:CurveData.y1value		- y2 = cim:CurveData.y2value		- ratedS = cim:RotatingMachine.ratedS * (1 + 0.0005)" ;
+		sh:name         "RCCXValues4" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:path         cim:CurveData.Curve ;
+        sh:order        95 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:CurveData-equationY1Sparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid reactive capability curve data for cim:SynchronousMachine."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?value 
+      WHERE {
+        $this $PATH ?value .
+        ?value rdf:type cim:ReactiveCapabilityCurve .
+        $this cim:CurveData.xvalue ?xvalue .
+        $this cim:CurveData.y1value ?y1value  .
+        #BIND (EXISTS{?value ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:RotatingMachine.ratedS ?rateds} AS ?smrateds).
+        ?value ^cim:SynchronousMachine.InitialReactiveCapabilityCurve/cim:RotatingMachine.ratedS ?rateds .
+        #FILTER ( ?smrateds=true && (?xvalue*?xvalue+?y1value*?y1value)>?rateds*?rateds) .
+        FILTER ( (?xvalue*?xvalue+?y1value*?y1value)>?rateds*1.0005*?rateds*1.0005) .
+        } """ . 	
+
+l3igm:VsCapabilityCurve
+        a               sh:NodeShape ;
+        sh:property     l3igm:VsCapabilityCurve-yvalues , l3igm:VsCapabilityCurve-VsCapabilityCurveCount;
+        sh:targetClass  cim:VsCapabilityCurve .
+
+l3igm:VsCapabilityCurve-yvalues
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:VsCapabilityCurve-yvaluesSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:CurveData, for which the cim:CurveData.Curve refers to a cim:VsCapabilityCurve, the cim:CurveData.y2value must be greater than cim:CurveData.y1value." ;
+        sh:name         "VSCYValues" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        96 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:VsCapabilityCurve-yvaluesSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid cim:VsCapabilityCurve data." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this 
+        WHERE {
+        ?curvedata cim:CurveData.Curve $this .
+        ?curvedata cim:CurveData.y1value ?y1value .
+        ?curvedata cim:CurveData.y2value ?y2value .
+        FILTER (?y2value<=?y1value).
+        }""" .  
+
+l3igm:VsCapabilityCurve-VsCapabilityCurveCount
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:VsCapabilityCurve-VsCapabilityCurveCountSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For every instance of cim:CurveData, for which the cim:CurveData.Curve refers to a cim:VSCapabilityCurve, at least two instances of the  cim:CurveData are associated." ;
+        sh:name         "VSCXValues" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        97 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:VsCapabilityCurve-VsCapabilityCurveCountSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Invalid cim:VSCapabilityCurve data." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this (COUNT(?typecd) AS ?curvedatas)
+        WHERE {
+        ?curvedata cim:CurveData.Curve $this .
+        ?curvedata rdf:type ?typecd .
+        }
+        GROUP BY $this ?typecd
+        HAVING(?curvedatas<2)
+      """ . 		
+	  
+l3igm:TerminalPhaseCodeGround
+        a               sh:NodeShape ;
+        sh:property     l3igm:Terminal.phases-phaseCodeN ;
+        sh:targetClass  cim:GroundingImpedance, cim:PetersenCoil , cim:GroundDisconnector , cim:Ground.
+                
+l3igm:Terminal.phases-phaseCodeN
+        a               sh:PropertyShape ;
+        sh:description  "Multiple cim:ConductingEquipment-s are typically connected to the same cim:TopologicalNode via their cim:Terminal-s. The phase codes of the cim:Terminal-s of the following grounding equipment shall be N:- cim:PetersenCoil	- cim:Ground	- cim:GroundingImpedance Note that cim:GroundDisconnector will have phase code N at the two sides." ;
+        sh:name         "PhaseCodeGround" ;
+        sh:message      "Grounding equipment shall have phase code N only." ;
+        sh:in           (cim:PhaseCode.N );
+        sh:path         ([sh:inversePath  cim:Terminal.ConductingEquipment] cim:Terminal.phases);
+        sh:order        98 ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:severity     sh:Violation . 	
+
+l3igm:ControlAreaCount
+        a               sh:NodeShape ;
+        sh:property     l3igm:ControlArea-ControlAreaInstanceCount ;
+        sh:targetNode  cim:ControlArea .
+        
+l3igm:ControlArea-ControlAreaInstanceCount
+           a               sh:PropertyShape ;
+           sh:path [ sh:inversePath rdf:type ] ;
+           sh:minCount      1 ;
+           sh:maxCount      1 ;
+           sh:description  "Exactly one cim:ControlArea instance per IGM with following attributes must be defined:	- cim:ControlArea.type is cim:ControlAreaTypeKind.Interchange	- an entsoe:IdentifiedObject.energyIdentCodeEic shall be one of the codes defined in the QoCDC Reference Data document in the column RegionEic." ;
+           sh:group        l3igm:Level3-IGM ;
+           sh:message      "cim:ControlArea instance of type cim:ControlAreaTypeKind.Interchange is missing or does not have correct entsoe:IdentifiedObject.energyIdentCodeEic." ;
+           sh:name         "ControlAreaInstance" ;
+           sh:order        99 ;
+           sh:severity     sh:Violation .        
+        
+l3igm:ControlArea
+        a               sh:NodeShape ;
+        sh:property     l3igm:ControlArea-ControlAreaInstance ;
+        sh:targetClass  cim:ControlArea .
+
+l3igm:ControlArea-ControlAreaInstance
+        a               sh:PropertyShape ;
+        sh:message "cim:ControlArea instance of type cim:ControlAreaTypeKind.Interchange is missing or does not have correct entsoe:IdentifiedObject.energyIdentCodeEic." ;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic ;
+        sh:description  "Exactly one cim:ControlArea instance per IGM with following attributes must be defined:	- cim:ControlArea.type is cim:ControlAreaTypeKind.Interchange	- an entsoe:IdentifiedObject.energyIdentCodeEic shall be one of the codes defined in the QoCDC Reference Data document in the column RegionEic." ;
+		sh:in           ( "10Y1001C--00037Z" "10YDK-1--------W" "10YDK-2--------M" "10Y1001A1001A016" "10Y1001A1001A39I" "10Y1001A1001A49F" "10Y1001A1001A50U" "10Y1001A1001A51S" "10Y1001A1001A65H" "10Y1001C--00100H" "10YAL-KESH-----5" "10YAT-APG------L" "10YBA-JPCC-----D" "10YBE----------2" "10YCA-BULGARIA-R" "10YCH-SWISSGRIDZ" "10YCS-CG-TSO---S" "10YCS-SERBIATSOV" "10YCZ-CEPS-----N" "10YDE-ENBW-----N" "10YDE-EON------1" "10YDE-RWENET---I" "10YDE-VE-------2" "10YES-REE------0" "10YFI-1--------U" "10YFR-RTE------C" "10YGB----------A" "10YGR-HTSO-----Y" "10YHR-HEP------M" "10YHU-MAVIR----U" "10YIE-1001A00010" "10YIT-GRTN-----B" "10YLT-1001A0008Q" "10YLU-CEGEDEL-NQ" "10YLV-1001A00074" "10YMK-MEPSO----8" "10YNL----------L" "10YNO-0--------C" "10YPL-AREA-----S" "10YPT-REN------W" "10YRO-TEL------P" "10YSE-1--------K" "10YSI-ELES-----O" "10YSK-SEPS-----K" "10YTR-TEIAS----W" "10YUA-WEPS-----0" "10YMA-ONE------O" "10Y1001A1001A59C" "10Y1001A1001A91G" "10Y1001A1001A92E" "10Y1001A1001A94A" "10YEU-CONT-SYNC0") ;
+        sh:name         "ControlAreaInstance" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        100 ;
+        sh:severity     sh:Violation .
+		
+l3igm:DCLineDCConverterUnit
+        a               sh:NodeShape ;
+        sh:property     l3igm:DCLine-DCEquipmentContainerMapping ;
+        sh:targetClass  cim:DCLine, cim:DCConverterUnit .
+
+l3igm:DCLine-DCEquipmentContainerMapping
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:DCLine-DCEquipmentContainerMappingSparql ;
+        sh:path         rdf:type ;
+        sh:description  "For each cim:DCConverterUnit and cim:DCLine instance the attribute entsoe:IdentifiedObject.energyIdentCodeEic is required. The third character of the EIC code shall be 'T'." ;
+        sh:name         "C:QoCDC:EQ:DCLine:DCEquipmentContainerMapping" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        101 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:DCLine-DCEquipmentContainerMappingSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "EIC code for cim:DCConverterUnit or cim:DCLine is either not provided or it is not a 'T' code." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          OPTIONAL {$this entsoe:IdentifiedObject.energyIdentCodeEic ?eic} .
+          FILTER (!bound(?eic) && SUBSTR(?eic,3,1)!="T").
+        }
+        """ . 	
+
+
+l3igm:RegulatingControl-RCandTCCcontrollingObjects
+        a               sh:NodeShape ;
+        sh:property     l3igm:RegulatingControl-RegulatingEquipment ;
+        sh:targetClass  cim:RegulatingControl .
+		
+l3igm:RegulatingControl-RegulatingEquipment
+        a               sh:PropertyShape ;
+        sh:description  "A cim:RegulatingControl or cim:TapChangerControl shall have at least one controlling object. The cardinality 	- cim:RegulatingControl[0..1]-[0..*]cim:RegulatingCondEq - cim:TapChangerControl[0..1]-[0..*]cim:TapChanger	are currently allowing no controlling objects." ;
+        sh:message      "cim:RegulatingControl or cim:TapChangerControl without controlling objects."  ;
+        sh:name         "RCandTCCcontrollingObjects" ;
+        sh:path         [sh:inversePath  cim:RegulatingCondEq.RegulatingControl] ;
+        sh:minCount     1;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        102 ;
+        sh:severity     sh:Warning .  	
+		
+l3igm:TapChangerControl-RCandTCCcontrollingObjects
+        a               sh:NodeShape ;
+        sh:property     l3igm:TapChangerControl-RegulatingEquipment ;
+        sh:targetClass  cim:TapChangerControl.		
+
+l3igm:TapChangerControl-RegulatingEquipment
+        a               sh:PropertyShape ;
+        sh:description  "A cim:RegulatingControl or cim:TapChangerControl shall have at least one controlling object. The cardinality 	- cim:RegulatingControl[0..1]-[0..*]cim:RegulatingCondEq - cim:TapChangerControl[0..1]-[0..*]cim:TapChanger	are currently allowing no controlling objects." ;
+        sh:message      "cim:RegulatingControl or cim:TapChangerControl without controlling objects."  ;
+        sh:name         "RCandTCCcontrollingObjects" ;
+        sh:path         [sh:inversePath  cim:TapChanger.TapChangerControl] ;
+        sh:minCount     1;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        102 ;
+        sh:severity     sh:Warning . 		
+        
+    
+l3igm:SMRatedSunrealistic
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:SMRatedSunrealisticSparql ;
+        sh:path         cim:RotatingMachine.ratedS ;
+        sh:description  "If a cim:SynchronousMachine has a rated power way beyond the specified active and reactive limit values or way outside the reactive capability curve the rated power value is not realistic. A EQ_RATEDS_REASONABILITY_FACTOR (RSRF) is used to determine if a rated power	is reasonable.	To be realistic and reasonable the cim:RotatingMachine.ratedS shall if an active or reactive power limit is present be less than - max(abs(cim:SynchronousMachine.minQ), abs(cim:SynchronousMachine.maxQ),	abs(cim:GeneratingUnit.minOperatingP, 	abs(cim:GeneratingUnit.maxOperatingP))*RSRF	- max(abs(CurveData.xvalue), abs(CurveData.y1value), abs(CurveData.y2value))*RSRF  for all x, y1 and y2 values." ;
+        sh:name         "SMRatedSunrealistic" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        103 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:SMRatedSunrealisticSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Unrealistic cim:RotatingMachine.ratedS specified."  ;
+		sh:prefixes cim: ;
+		sh:select """
+	    SELECT $this ?value
+      WHERE {      
+        $this $PATH ?rateds.
+		$this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.minOperatingP ?minp.
+        $this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.maxOperatingP ?maxp.
+		$this cim:SynchronousMachine.minQ ?minq.
+        $this cim:SynchronousMachine.maxQ ?maxq.
+		
+        BIND(EXISTS{$this cim:SynchronousMachine.InitialReactiveCapabilityCurve ?rcca} AS ?hasrcc).
+        
+        {
+        SELECT $this (MAX(ABS(?xvalue)) AS ?maxxvalue)  (MAX(ABS(?y1value)) AS ?maxy1value) (MAX(ABS(?y2value)) AS ?maxy2value) 
+          WHERE {
+            $this cim:SynchronousMachine.InitialReactiveCapabilityCurve/^cim:CurveData.Curve ?curvedata .
+            ?curvedata rdf:type ?cdtype .
+            ?curvedata cim:CurveData.xvalue ?xvalue .
+			?curvedata cim:CurveData.y1value ?y1value .
+			?curvedata cim:CurveData.y2value ?y2value .
+            FILTER (?cdtype=cim:CurveData ) .
+          }
+          GROUP BY $this ?cdtype
+        }
+		
+		{
+        SELECT $this (MAX(ABS(?pq)) AS ?maxpq)  
+          WHERE {
+            
+			$this cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.minOperatingP|cim:RotatingMachine.GeneratingUnit/cim:GeneratingUnit.maxOperatingP|cim:SynchronousMachine.minQ|cim:SynchronousMachine.maxQ ?pq.
+			
+			$this rdf:type ?type .
+            FILTER (?type=cim:SynchronousMachine ) .
+          }
+          GROUP BY $this ?type
+        }
+
+
+        FILTER ((?hasrcc=true && ((?rateds>=?maxxvalue*10 && ?maxxvalue!=0) || (?rateds>=?maxy1value*10 && ?maxy1value!=0) || (?rateds>=?maxy2value*10 && ?maxy2value!=0))) || (?hasrcc=false && (?rateds>?maxpg*10 && ?maxpg!=0))) .
+        } """ .	
+
+l3igm:PhaseTapChangerAsymmetrical.windingConnectionAngle-valueRange
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:PhaseTapChangerAsymmetrical.windingConnectionAngle-valueRangeSparql ;
+        sh:description  "The cim:PhaseTapChangerAsymmetrical.windingConnectionAngle attribute in real grids can only have the following values:	- +/-150;	- +/-120; 	- +/-90;	- +/-60;	- +/-30.   Values can be expressed as integer or float. Non-zero decimals are not allowed in case the value is expressed as float." ;
+        sh:name         "WindingConnectionAngle" ;
+        sh:path         cim:PhaseTapChangerAsymmetrical.windingConnectionAngle ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        104 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:PhaseTapChangerAsymmetrical.windingConnectionAngle-valueRangeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:PhaseTapChangerAsymmetrical.windingConnectionAngle value is not one of the defined values." ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?value
+			WHERE {
+        $this $PATH ?value . 
+        FILTER ((?value!=-150 && ?value!=-120 && ?value!=-90 && ?value!=-60 && ?value!=-30 && ?value!=150 && ?value!=120 && ?value!=90 && ?value!=60 && ?value!=30)) .        
+			}""" .    
+
+l3igm:OperationalLimitType-VoltageLimit
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitType.direction-VoltageLimitDirection;
+        sh:targetClass  cim:VoltageLimit .
+
+l3igm:OperationalLimitType.direction-VoltageLimitDirection
+        a               sh:PropertyShape ;
+        sh:description  "A cim:VoltageLimit should be specified with a direction high or low, i.e. the	cim:OperationalLimitType.direction value should be one of	-cim:OperationalLimitDirectionKind.high	- cim:OperationalLimitDirectionKind.low." ;
+        sh:name         "VoltageLimitDirection" ;
+        sh:path         (cim:OperationalLimit.OperationalLimitType cim:OperationalLimitType.direction) ;
+		sh:minCount		1;
+		sh:maxCount		1;
+        sh:message      "cim:OperationalLimitType.direction is either 1) not provided or 2) it is not set to cim:OperationalLimitDirectionKind.high or cim:OperationalLimitDirectionKind.low." ;
+        sh:in           ( cim:OperationalLimitDirectionKind.low  cim:OperationalLimitDirectionKind.high) ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        105 ;
+        sh:severity     sh:Warning .	
+
+l3igm:VoltageLimit-VoltageLimitsConsistency
+        a               sh:NodeShape ;
+        sh:property     l3igm:VoltageLimit.value-VoltageLimitsConsistency ;
+        sh:targetClass  cim:OperationalLimitSet .
+
+l3igm:VoltageLimit.value-VoltageLimitsConsistency
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:VoltageLimit.value-VoltageLimitsConsistencySparql ;
+        sh:path         rdf:type ;
+        sh:description  "cim:VoltageLimit within a given cim:OperationalLimitSet with direction cim:OperationalLimitDirectionKind.high should be greater than cim:VoltageLimit with direction cim:OperationalLimitDirectionKind.low." ;
+        sh:name         "VoltageLimitsConsistency" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        106 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:VoltageLimit.value-VoltageLimitsConsistencySparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:VoltageLimit values are not consistent with the specified directions. Value at direction high: {?valuehigh}. Value at direction low: {?valuelow}." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?valuehigh ?valuelow 
+        WHERE {
+          ?vlhigh cim:OperationalLimit.OperationalLimitSet $this .
+          ?vlhigh rdf:type cim:VoltageLimit .
+          ?vlhigh cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction  cim:OperationalLimitDirectionKind.high .
+          ?vlhigh cim:VoltageLimit.value ?valuehigh .
+          
+          ?vllow cim:OperationalLimit.OperationalLimitSet $this .
+          ?vllow rdf:type cim:VoltageLimit .
+          ?vllow cim:OperationalLimit.OperationalLimitType/cim:OperationalLimitType.direction  cim:OperationalLimitDirectionKind.low .
+          ?vllow cim:VoltageLimit.value ?valuelow .
+
+          FILTER (?valuehigh<=?valuelow).
+        }""" . 		
+		
+l3igm:OperationalLimitType
+        a               sh:NodeShape ;
+        sh:property     l3igm:OperationalLimitType.direction-FlowLimitsDirectionConsistency;
+        sh:targetClass  cim:CurrentLimit , cim:ApparentPowerLimit , cim:ActivePowerLimit.
+
+l3igm:OperationalLimitType.direction-FlowLimitsDirectionConsistency
+        a               sh:PropertyShape ;
+        sh:description  "Branch flow limits cim:CurrentLimit, cim:ApparentPowerLimit and cim:ActivePowerLimit should have a cim:OperationalLimitType.direction with value cim:OperationalLimitDirectionKind.absoluteValue." ;
+        sh:name         "FlowLimitsDirectionConsistency" ;
+        sh:path         (cim:OperationalLimit.OperationalLimitType cim:OperationalLimitType.direction) ;
+        sh:message      "Branch flow limits with other direction than absoluteValue." ;
+        sh:in           ( cim:OperationalLimitDirectionKind.absoluteValue ) ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        107 ;
+        sh:severity     sh:Warning .
+		
+l3igm:EquivalentBranch.r-AsymmetricalEquivalent
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:EquivalentBranch.r-AsymmetricalEquivalentSparql ;
+        sh:path         rdf:type ;
+        sh:description  "cim:EquivalentBranch with EquivalentBranch.r not equal to EquivalentBranch.r21 or  EquivalentBranch.x not equal to EquivalentBranch.x21 shouldn't be used." ;
+        sh:name         "AsymmetricalEquivalent" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        108 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:EquivalentBranch.r-AsymmetricalEquivalentSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:EquivalentBranch with asymmetrical impedances." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          $this cim:EquivalentBranch.r ?r .
+          OPTIONAL {$this cim:EquivalentBranch.r21 ?r21} .
+          FILTER (bound(?r21) && ?r21!=?r).
+        }
+        """ .   
+
+l3igm:EquivalentBranch.x-AsymmetricalEquivalent
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:EquivalentBranch.x-AsymmetricalEquivalentSparql ;
+        sh:path         rdf:type ;
+        sh:description  "cim:EquivalentBranch with EquivalentBranch.r not equal to EquivalentBranch.r21 or  EquivalentBranch.x not equal to EquivalentBranch.x21 shouldn't be used." ;
+        sh:name         "AsymmetricalEquivalent" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        109 ;
+        sh:severity     sh:Warning .
+        
+    
+l3igm:EquivalentBranch.x-AsymmetricalEquivalentSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:EquivalentBranch with asymmetrical impedances." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          $this cim:EquivalentBranch.x ?x .
+          OPTIONAL {$this cim:EquivalentBranch.x21 ?x21} .
+          FILTER (bound(?x21) && ?x21!=?x).
+        }
+        """ .  
+
+	
+l3igm:PowerTransformerEnd.b-valueRange
+        a                sh:PropertyShape ;
+		sh:sparql       l3igm:PowerTransformerEnd.b-valueRangeSparql ;
+        sh:description   "Two-winding transformer with positive shunt (cim:PowerTransformerEnd.b > 0) that are not equivalenced (cim:Equipment.aggregate = false) shouldn't have positive PowerTransformerEnd.b." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:name          "PositiveTransformerB" ;
+        sh:order         110 ;
+        sh:path          cim:PowerTransformerEnd.b ;
+        sh:severity      sh:Warning .	
+
+l3igm:PowerTransformerEnd.b-valueRangeSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Two winding transformer with positive shunt." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+		  OPTIONAL {$this cim:PowerTransformerEnd.PowerTransformer/cim:Equipment.aggregate ?aggr } .
+		  $this cim:PowerTransformerEnd.b ?b .
+          BIND(EXISTS{$this cim:PowerTransformerEnd.PowerTransformer/^cim:PowerTransformerEnd.PowerTransformer/cim:TransformerEnd.endNumber 3 } AS ?threewin) .
+          
+          FILTER ( ?threewin=false &&  (!bound(?aggr) || (bound(?aggr) && ?aggr=false)) && ?b>0).
+        } """ .		
+		
+
+l3igm:SubLoadAreaMissing
+        a               sh:NodeShape ;
+        sh:property     l3igm:SubLoadArea-SubLoadAreaMissing;
+        sh:targetClass  cim:NonConformLoadGroup , cim:ConformLoadGroup.
+
+		
+l3igm:SubLoadArea-SubLoadAreaMissing
+        a                sh:PropertyShape ;
+		sh:sparql       l3igm:SubLoadArea-SubLoadAreaMissingSparql ;
+        sh:description   "The reference cim:LoadGroup->cim:SubLoadArea is required. The class cim:LoadGroup	in in EQ core while cim:SubLoadArea is in operation. Hence a BB model using classes cim:ConformLoad and cim:NonConformLoad will get an error if cim:SubLoadArea	instances are missing. As a CGM may contain both NB and BB models the cardinality for the BB models need to be 0..1 but for the NB models 1. This is solved by making the reference cim:LoadGroup->cim:SubLoadArea optional and have this rule checking that NB models do have the references." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:name          "SubLoadAreaMissing" ;
+        sh:order         111 ;
+        sh:path          rdf:type ;
+        sh:severity      sh:Violation .	
+
+l3igm:SubLoadArea-SubLoadAreaMissingSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The reference cim:LoadGroup->cim:SubLoadArea is missing." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          BIND(EXISTS{$this cim:LoadGroup.SubLoadArea ?group } AS ?sagr) .
+		  BIND(EXISTS{?s md:Model.profile "http://entsoe.eu/CIM/EquipmentOperation/3/1"^^xsd:anyURI } AS ?opprof) .
+          
+          FILTER ( ?sagr=false &&  ?opprof=true).
+        } """ .		
+
+l3igm:EnergyAreaMissing
+        a               sh:NodeShape ;
+        sh:property     l3igm:ControlArea-EnergyAreaMissing;
+        sh:targetClass  cim:ControlArea.
+
+		
+l3igm:ControlArea-EnergyAreaMissing
+        a                sh:PropertyShape ;
+		sh:sparql       l3igm:ControlArea-EnergyAreaMissingSparql ;
+        sh:description   "The reference cim:ControlArea->cim:EnergyArea is required for NB models but not for BB models." ;
+        sh:group         l3igm:Level3-IGM ;
+        sh:name          "EnergyAreaMissing" ;
+        sh:order         112 ;
+        sh:path          rdf:type ;
+        sh:severity      sh:Violation .	
+
+l3igm:ControlArea-EnergyAreaMissingSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "The reference cim:ControlArea->cim:EnergyArea is missing." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  
+        WHERE {
+          BIND(EXISTS{$this cim:ControlArea.EnergyArea ?group } AS ?sagr) .
+		  BIND(EXISTS{?s md:Model.profile "http://entsoe.eu/CIM/EquipmentOperation/3/1"^^xsd:anyURI } AS ?opprof) .
+          
+          FILTER ( ?sagr=false &&  ?opprof=true).
+        } """ .		
+
+l3igm:GeneratingUnit
+        a               sh:NodeShape ;
+        sh:property     l3igm:GeneratingUnit-GeneratingUnitSM ;
+        sh:targetClass  cim:GeneratingUnit , cim:HydroGeneratingUnit , cim:NuclearGeneratingUnit , cim:SolarGeneratingUnit , cim:ThermalGeneratingUnit , cim:WindGeneratingUnit.
+
+l3igm:GeneratingUnit-GeneratingUnitSM
+        a               sh:PropertyShape ;
+        sh:sparql       l3igm:GeneratingUnit-GeneratingUnitSMSparql ;
+        sh:path         rdf:type ;
+        sh:description  "A cim:GeneratingUnit or any of its subclasses is not allowed to have more than one cim:RotatingMachine." ;
+        sh:name         "GeneratingUnitSM" ;
+        sh:group        l3igm:Level3-IGM ;
+        sh:order        113 ;
+        sh:severity     sh:Violation .
+        
+    
+l3igm:GeneratingUnit-GeneratingUnitSMSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A cim:GeneratingUnit is not allowed to have more than one cim:RotatingMachine." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this   
+        WHERE {
+          $this ^cim:RotatingMachine.GeneratingUnit ?sm .
+          ?sm rdf:type ?smtype .
+        }
+        GROUP BY $this ?smtype
+        HAVING(COUNT(?smtype)>1)
+        """ .		

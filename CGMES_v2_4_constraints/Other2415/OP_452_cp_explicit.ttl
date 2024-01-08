@@ -1,0 +1,92 @@
+@base          <http://iec.ch/TC57/ns/CIM/OP-CrossProfileExplicit/constraints/IEC61970-452/2.4> .
+@prefix entsoe:    <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix op452cpe: <http://iec.ch/TC57/ns/CIM/OP-CrossProfileExplicit/constraints/IEC61970-452/2.4#> .
+
+
+op452cpe:OPcrossProfileExplicit
+        a           sh:PropertyGroup ;
+        rdfs:label  "OPcrossProfileExplicit" ;
+        sh:order    1 .
+
+op452cpe:Control.PowerSystemResource
+        a               sh:NodeShape ;
+        sh:property     op452cpe:Control.PowerSystemResource-valueType ;
+        sh:targetClass  cim:AccumulatorReset , cim:Command , cim:SetPoint , cim:RaiseLowerCommand  .   
+     
+        
+op452cpe:Control.PowerSystemResource-valueType
+        a               sh:PropertyShape ;
+        sh:in           (cim:SynchronousMachine  cim:NonConformLoad  cim:DCEquipmentContainer  cim:NuclearGeneratingUnit  cim:PhaseTapChangerSymmetrical  cim:StaticVarCompensator  cim:PhaseTapChangerLinear  cim:HydroPowerPlant  cim:VsConverter  cim:RatioTapChanger  cim:DCConverterUnit  cim:HydroPump  cim:DCSwitch  cim:AsynchronousMachine  cim:GroundingImpedance  cim:EquivalentInjection  cim:DCShunt  cim:EnergyConsumer  cim:NonlinearShuntCompensator  cim:DCGround  cim:ConformLoad  cim:HydroGeneratingUnit  cim:DCLineSegment  cim:Switch  cim:DCDisconnector  cim:VoltageLevel  cim:LinearShuntCompensator  cim:ThermalGeneratingUnit  cim:DCSeriesDevice  cim:TapChangerControl  cim:EquivalentNetwork  cim:EnergySource  cim:WindGeneratingUnit  cim:Ground  cim:RegulatingControl  cim:Bay  cim:DCBreaker  cim:Line  cim:Disconnector  cim:Breaker  cim:PhaseTapChangerTabular  cim:PowerTransformer  cim:EquivalentBranch  cim:GeneratingUnit  cim:CsConverter  cim:EquivalentShunt  cim:DCLine  cim:SeriesCompensator  cim:PetersenCoil  cim:StationSupply  cim:ACLineSegment  cim:DCBusbar  cim:Junction  cim:BusbarSection  cim:ExternalNetworkInjection  cim:LoadBreakSwitch  cim:PhaseTapChangerAsymmetrical  cim:Substation  cim:ControlArea  cim:GroundDisconnector  cim:DCChopper  cim:SolarGeneratingUnit); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class PowerSystemResource or its subclass." ;
+        sh:name         "Control.PowerSystemResource-valueType" ;
+        sh:path         (cim:Control.PowerSystemResource rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        1 ;
+        sh:group        op452cpe:OPcrossProfileExplicit ;
+        sh:severity     sh:Violation .
+        
+
+op452cpe:Measurement.PowerSystemResource
+        a               sh:NodeShape ;
+        sh:property     op452cpe:Measurement.PowerSystemResource-valueType ;
+        sh:targetClass  cim:Analog , cim:Discrete , cim:StringMeasurement , cim:Accumulator  .        
+        
+op452cpe:Measurement.PowerSystemResource-valueType
+        a               sh:PropertyShape ;
+        sh:in           ( cim:SynchronousMachine  cim:NonConformLoad  cim:DCEquipmentContainer  cim:NuclearGeneratingUnit  cim:PhaseTapChangerSymmetrical  cim:StaticVarCompensator  cim:PhaseTapChangerLinear  cim:HydroPowerPlant  cim:VsConverter  cim:RatioTapChanger  cim:DCConverterUnit  cim:HydroPump  cim:DCSwitch  cim:AsynchronousMachine  cim:GroundingImpedance  cim:EquivalentInjection  cim:DCShunt  cim:EnergyConsumer  cim:NonlinearShuntCompensator  cim:DCGround  cim:ConformLoad  cim:HydroGeneratingUnit  cim:DCLineSegment  cim:Switch  cim:DCDisconnector  cim:VoltageLevel  cim:LinearShuntCompensator  cim:ThermalGeneratingUnit  cim:DCSeriesDevice  cim:TapChangerControl  cim:EquivalentNetwork  cim:EnergySource  cim:WindGeneratingUnit  cim:Ground  cim:RegulatingControl  cim:Bay  cim:DCBreaker  cim:Line  cim:Disconnector  cim:Breaker  cim:PhaseTapChangerTabular  cim:PowerTransformer  cim:EquivalentBranch  cim:GeneratingUnit  cim:CsConverter  cim:EquivalentShunt  cim:DCLine  cim:SeriesCompensator  cim:PetersenCoil  cim:StationSupply  cim:ACLineSegment  cim:DCBusbar  cim:Junction  cim:BusbarSection  cim:ExternalNetworkInjection  cim:LoadBreakSwitch  cim:PhaseTapChangerAsymmetrical  cim:Substation  cim:ControlArea  cim:GroundDisconnector  cim:DCChopper  cim:SolarGeneratingUnit); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class PowerSystemResource or its subclass." ;
+        sh:name         "Measurement.PowerSystemResource-valueType" ;
+        sh:path         (cim:Measurement.PowerSystemResource rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        2 ;
+        sh:group        op452cpe:OPcrossProfileExplicit ;
+        sh:severity     sh:Violation .    
+        
+op452cpe:Measurement.ACDCTerminal
+        a               sh:NodeShape ;
+        sh:property     op452cpe:Measurement.ACDCTerminal-valueType ;
+        sh:targetClass  cim:Analog , cim:Discrete , cim:StringMeasurement , cim:Accumulator  .        
+        
+op452cpe:Measurement.ACDCTerminal-valueType
+        a               sh:PropertyShape ;
+        sh:in           ( cim:ACDCConverterDCTerminal cim:DCTerminal cim:Terminal ); 
+        sh:description  "This constraint validates the value type of the association at the used direction." ;
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type is not an instance of the class ACDCTerminal or its subclass." ;
+        sh:name         "Measurement.ACDCTerminal-valueType" ;
+        sh:path         (cim:Measurement.ACDCTerminal rdf:type) ;
+        sh:nodeKind     sh:IRI ;
+        sh:order        3 ;
+        sh:group        op452cpe:OPcrossProfileExplicit ;
+        sh:severity     sh:Violation .          
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

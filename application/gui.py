@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui.ui'
+# Form implementation generated from reading CGMES_v2_4_constraints file 'CGMES_v2_4_constraints.CGMES_v2_4_constraints'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #

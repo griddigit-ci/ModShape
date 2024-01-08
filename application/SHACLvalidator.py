@@ -1,13 +1,15 @@
-# GUI
-from typing import Generator
+# Licensed under the Mozilla Public License 2.0.
+# Copyright(c) 2023, gridDigIt Kft. All rights reserved.
+# author: Chavdar Ivanov
 
 import rdflib.term
 from PyQt5.QtWidgets import *
-import gui
 import sys
 import os
 from rdflib import Graph, Dataset, RDFS, RDF
 from pyshacl import validate
+
+from application import gui
 
 
 class SHACLvalidator(QDialog, gui.Ui_Dialog):

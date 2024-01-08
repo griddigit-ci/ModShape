@@ -1,0 +1,64 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-IGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l7igm: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-IGM#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l7igm:Level7-IGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level7-IGM" ;
+        sh:order    0 .
+
+l7igm:InconsistentTnBaseVoltage  a  sh:NodeShape ;
+        sh:property     l7igm:ConductingEquipment-InconsistentTnBaseVoltage ;
+        sh:targetClass  cim:TopologicalNode .
+
+l7igm:ConductingEquipment-InconsistentTnBaseVoltage
+        a               sh:PropertyShape ;
+        sh:sparql       l7igm:ConductingEquipment-InconsistentTnBaseVoltageSparql ;
+        sh:path         rdf:type ;
+        sh:description  "All equipment with a direct association to cim:BaseVoltage connected to a cim:TopologicalNode shall have a cim:BaseVoltage.nominalVoltage that deviates no more than 10%	from the cim:BaseVoltage.nominalVoltage of the cim:BaseVoltage referenced by the association end cim:TopologicalNode.BaseVoltage." ;
+        sh:name         "ACTielineBV" ;
+        sh:group        l7igm:Level7-IGM ;
+        sh:order        1 ;
+        sh:severity     sh:Warning .
+
+l7igm:ConductingEquipment-InconsistentTnBaseVoltageSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "cim:BaseVoltages.nominalVoltage at a cim:TopologicalNode differs more than 10% from the cim:BaseVoltage.nominalVoltage of the connected equipment. Voltage 1: {?cebvnv}; Voltage 2: {?tnbvnv}" ;
+		sh:prefixes cim: ;
+		sh:select """
+			SELECT  $this ?cebvnv ?tnbvnv
+			WHERE {
+				$this ^cim:Terminal.TopologicalNode/cim:Terminal.ConductingEquipment ?ce .
+				?ce cim:ConductingEquipment.BaseVoltage ?cebv .
+				?cebv cim:BaseVoltage.nominalVoltage ?cebvnv .
+				$this cim:TopologicalNode.BaseVoltage/cim:BaseVoltage.nominalVoltage ?tnbvnv .
+        
+        FILTER ((?cebvnv<?tnbvnv && (ABS(?cebvnv-?tnbvnv)/?cebvnv)>0.1) || (?cebvnv>?tnbvnv && (ABS(?cebvnv-?tnbvnv)/?tnbvnv)>0.1)) .        
+			}""" .

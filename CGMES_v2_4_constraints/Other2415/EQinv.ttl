@@ -1,0 +1,268 @@
+@base          <http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/inverseAssociations/2.4> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix eqi: <http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/inverseAssociations/2.4#> .
+
+eqi:InverseAssociationsCardinality
+        a           sh:PropertyGroup ;
+        rdfs:label  "InverseAssociationsCardinality" ;
+        sh:order    0 .
+
+eqi:GeneratingUnit  a     sh:NodeShape ;
+        sh:property     eqi:GeneratingUnit.RotatingMachine-cardinality ;
+        sh:targetClass  cim:GeneratingUnit , cim:HydroGeneratingUnit , cim:NuclearGeneratingUnit , cim:SolarGeneratingUnit , cim:ThermalGeneratingUnit , cim:WindGeneratingUnit.
+
+eqi:GeneratingUnit.RotatingMachine-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "GeneratingUnit.RotatingMachine-cardinality" ;
+        sh:order        2 ;
+        sh:path         [sh:inversePath  cim:RotatingMachine.GeneratingUnit] ;
+        sh:severity     sh:Violation .
+        
+eqi:RotatingMachine  a     sh:NodeShape ;
+        sh:property     eqi:RotatingMachine.HydroPump-cardinality ;
+        sh:targetClass  cim:SynchronousMachine , cim:AsynchronousMachine .
+
+eqi:RotatingMachine.HydroPump-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "RotatingMachine.HydroPump-cardinality" ;
+        sh:order        3 ;
+        sh:path         [sh:inversePath  cim:HydroPump.RotatingMachine] ;
+        sh:severity     sh:Violation .        
+        
+eqi:NonConformLoadGroup  a     sh:NodeShape ;
+        sh:property     eqi:NonConformLoadGroup.EnergyConsumers-cardinality ;
+        sh:targetClass  cim:NonConformLoadGroup .
+
+eqi:NonConformLoadGroup.EnergyConsumers-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "NonConformLoadGroup.EnergyConsumers-cardinality" ;
+        sh:order        4 ;
+        sh:path         [sh:inversePath  cim:NonConformLoad.LoadGroup] ;
+        sh:severity     sh:Violation .         
+        
+eqi:ConformLoadGroup  a     sh:NodeShape ;
+        sh:property     eqi:ConformLoadGroup.EnergyConsumers-cardinality ;
+        sh:targetClass  cim:ConformLoadGroup .
+
+eqi:ConformLoadGroup.EnergyConsumers-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "ConformLoadGroup.EnergyConsumers-cardinality" ;
+        sh:order        5 ;
+        sh:path         [sh:inversePath  cim:ConformLoad.LoadGroup] ;
+        sh:severity     sh:Violation .      
+
+eqi:LoadArea  a     sh:NodeShape ;
+        sh:property     eqi:LoadArea.SubLoadAreas-cardinality ;
+        sh:targetClass  cim:LoadArea .
+
+eqi:LoadArea.SubLoadAreas-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "LoadArea.SubLoadAreas-cardinality" ;
+        sh:order        7 ;
+        sh:path         [sh:inversePath  cim:SubLoadArea.LoadArea] ;
+        sh:severity     sh:Violation . 
+
+eqi:EnergyArea  a     sh:NodeShape ;
+        sh:property     eqi:EnergyArea.ControlArea-cardinality ;
+        sh:targetClass  cim:SubLoadArea , cim:LoadArea .
+
+eqi:EnergyArea.ControlArea-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "EnergyArea.ControlArea-cardinality" ;
+        sh:order        8 ;
+        sh:path         [sh:inversePath  cim:ControlArea.EnergyArea] ;
+        sh:severity     sh:Violation . 
+
+
+eqi:RatioTapChangerTable  a     sh:NodeShape ;
+        sh:property     eqi:RatioTapChangerTable.RatioTapChangerTablePoint-cardinality ;
+        sh:targetClass  cim:RatioTapChangerTable  .
+
+eqi:RatioTapChangerTable.RatioTapChangerTablePoint-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "RatioTapChangerTable.RatioTapChangerTablePoint-cardinality" ;
+        sh:order        9 ;
+        sh:path         [sh:inversePath  cim:RatioTapChangerTablePoint.RatioTapChangerTable] ;
+        sh:severity     sh:Violation . 
+
+
+eqi:ReactiveCapabilityCurve  a     sh:NodeShape ;
+        sh:property     eqi:ReactiveCapabilityCurve.InitiallyUsedBySynchronousMachines-cardinality ;
+        sh:targetClass  cim:ReactiveCapabilityCurve .
+
+eqi:ReactiveCapabilityCurve.InitiallyUsedBySynchronousMachines-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "ReactiveCapabilityCurve.InitiallyUsedBySynchronousMachines-cardinality" ;
+        sh:order        12 ;
+        sh:path         [sh:inversePath  cim:SynchronousMachine.InitialReactiveCapabilityCurve] ;
+        sh:severity     sh:Violation .
+
+
+eqi:PhaseTapChangerTable  a     sh:NodeShape ;
+        sh:property     eqi:PhaseTapChangerTable.PhaseTapChangerTablePoint-cardinality ;
+        sh:targetClass  cim:PhaseTapChangerTable .
+
+eqi:PhaseTapChangerTable.PhaseTapChangerTablePoint-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "PhaseTapChangerTable.PhaseTapChangerTablePoint-cardinality" ;
+        sh:order        13 ;
+        sh:path         [sh:inversePath  cim:PhaseTapChangerTablePoint.PhaseTapChangerTable] ;
+        sh:severity     sh:Violation .
+        
+eqi:TransformerEnd  a     sh:NodeShape ;
+        sh:property     eqi:TransformerEnd.PhaseTapChanger-cardinality , eqi:TransformerEnd.RatioTapChanger-cardinality;
+        sh:targetClass  cim:PowerTransformerEnd .
+
+eqi:TransformerEnd.PhaseTapChanger-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "TransformerEnd.PhaseTapChanger-cardinality" ;
+        sh:order        14 ;
+        sh:path         [sh:inversePath  cim:PhaseTapChanger.TransformerEnd] ;
+        sh:severity     sh:Violation .        
+        
+eqi:TransformerEnd.RatioTapChanger-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "TransformerEnd.RatioTapChanger-cardinality" ;
+        sh:order        15 ;
+        sh:path         [sh:inversePath  cim:RatioTapChanger.TransformerEnd] ;
+        sh:severity     sh:Violation .         
+        
+eqi:NonlinearShuntCompensator  a     sh:NodeShape ;
+        sh:property     eqi:NonlinearShuntCompensator.NonlinearShuntCompensatorPoints-cardinality ;
+        sh:targetClass  cim:NonlinearShuntCompensator .
+
+eqi:NonlinearShuntCompensator.NonlinearShuntCompensatorPoints-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "NonlinearShuntCompensator.NonlinearShuntCompensatorPoints-cardinality" ;
+        sh:order        16 ;
+        sh:path         [sh:inversePath  cim:NonlinearShuntCompensatorPoint.NonlinearShuntCompensator] ;
+        sh:severity     sh:Violation .         
+        
+eqi:Terminal  a     sh:NodeShape ;
+        sh:property     eqi:Terminal.TieFlow-cardinality , eqi:Terminal.RegulatingControl-cardinality;
+        sh:targetClass  cim:Terminal .
+
+eqi:Terminal.TieFlow-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     2 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "Terminal.TieFlow-cardinality" ;
+        sh:order        17 ;
+        sh:path         [sh:inversePath  cim:TieFlow.Terminal] ;
+        sh:severity     sh:Violation .         
+            
+        
+eqi:BusNameMarker  a     sh:NodeShape ;
+        sh:property     eqi:BusNameMarker.Terminal-cardinality ;
+        sh:targetClass  cim:BusNameMarker .
+
+eqi:BusNameMarker.Terminal-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "BusNameMarker.Terminal-cardinality" ;
+        sh:order        19 ;
+        sh:path         [sh:inversePath  cim:ACDCTerminal.BusNameMarker] ;
+        sh:severity     sh:Violation .           
+                
+eqi:SubLoadArea  a     sh:NodeShape ;
+        sh:property     eqi:SubLoadArea.LoadGroups-cardinality ;
+        sh:targetClass  cim:SubLoadArea .
+
+eqi:SubLoadArea.LoadGroups-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "SubLoadArea.LoadGroups-cardinality" ;
+        sh:order        20 ;
+        sh:path         [sh:inversePath  cim:LoadGroup.SubLoadArea] ;
+        sh:severity     sh:Violation .         
+
+eqi:RegularIntervalSchedule  a     sh:NodeShape ;
+        sh:property     eqi:RegularIntervalSchedule.TimePoints-cardinality ;
+        sh:targetClass  cim:ConformLoadSchedule , cim:NonConformLoadSchedule , cim:RegulationSchedule , cim:SwitchSchedule , cim:TapSchedule.
+
+eqi:RegularIntervalSchedule.TimePoints-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:minCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "RegularIntervalSchedule.TimePoints-cardinality" ;
+        sh:order        21 ;
+        sh:path         [sh:inversePath  cim:RegularTimePoint.IntervalSchedule] ;
+        sh:severity     sh:Violation .          
+
+
+eqi:Terminal.RegulatingControl-cardinality
+        a               sh:PropertyShape ;
+        sh:description  "This constraint validates the cardinality of the association at the inverse direction." ;
+        sh:group        eqi:InverseAssociationsCardinality ;
+        sh:maxCount     1 ;
+        sh:message      "Wrong number of associated instances." ;
+        sh:name         "Terminal.RegulatingControl-cardinality" ;
+        sh:order        22 ;
+        sh:path         [sh:inversePath  cim:RegulatingControl.Terminal] ;
+        sh:severity     sh:Violation .         

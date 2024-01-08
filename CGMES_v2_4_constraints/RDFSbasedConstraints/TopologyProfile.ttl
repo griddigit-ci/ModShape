@@ -1,0 +1,374 @@
+@base   <http://entsoe.eu/CIM/Topology/4/1/Constraints> .
+@prefix cim:    <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix cims:   <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix dash:   <http://datashapes.org/dash#> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix ido:    <http://iec.ch/TC57/ns/CIM/IdentifiedObject/constraints/3.0#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix tp:     <http://entsoe.eu/CIM/Topology/4/1/Constraints#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+tp:DCNode.DCTopologicalNode-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:DCTopologicalNode );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:DCTopologicalNode";
+        sh:name         "DCNode.DCTopologicalNode-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:DCNode.DCTopologicalNode rdf:type );
+        sh:severity     sh:Violation .
+
+tp:TopologicalNode.ReportingGroup-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "TopologicalNode.ReportingGroup-cardinality";
+        sh:order        1;
+        sh:path         cim:TopologicalNode.ReportingGroup;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.mRID-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.mRID-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+tp:DCTopologicalNode.DCEquipmentContainer-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "DCTopologicalNode.DCEquipmentContainer-cardinality";
+        sh:order        0;
+        sh:path         cim:DCTopologicalNode.DCEquipmentContainer;
+        sh:severity     sh:Violation .
+
+tp:ACDCConverterDCTerminal
+        rdf:type        sh:NodeShape;
+        sh:property     ido:IdentifiedObject.energyIdentCodeEic-cardinality , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.name-datatype , tp:DCBaseTerminal.DCTopologicalNode-cardinality , ido:IdentifiedObject.name-cardinality , tp:DCBaseTerminal.DCTopologicalNode-valueType , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype;
+        sh:targetClass  cim:ACDCConverterDCTerminal .
+
+ido:IdentifiedObject.shortName-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.shortName-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+tp:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Cardinality";
+        sh:order    0 .
+
+tp:TopologicalNode.ConnectivityNodeContainer-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:EquivalentNetwork cim:Line cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer cim:Substation cim:VoltageLevel cim:Bay );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "TopologicalNode.ConnectivityNodeContainer-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        4;
+        sh:path         ( cim:TopologicalNode.ConnectivityNodeContainer rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.energyIdentCodeEic-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+tp:DCTopologicalNode  rdf:type  sh:NodeShape;
+        sh:property     ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , tp:DCTopologicalNode.DCEquipmentContainer-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype;
+        sh:targetClass  cim:DCTopologicalNode .
+
+ido:IdentifiedObject.mRID-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.mRID-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.mRID;
+        sh:severity     sh:Violation .
+
+tp:TopologicalNode.BaseVoltage-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:BaseVoltage );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:BaseVoltage";
+        sh:name         "TopologicalNode.BaseVoltage-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:TopologicalNode.BaseVoltage rdf:type );
+        sh:severity     sh:Violation .
+
+tp:DCBaseTerminal.DCTopologicalNode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "DCBaseTerminal.DCTopologicalNode-cardinality";
+        sh:order        0;
+        sh:path         cim:DCBaseTerminal.DCTopologicalNode;
+        sh:severity     sh:Violation .
+
+tp:Terminal  rdf:type   sh:NodeShape;
+        sh:property     tp:Terminal.TopologicalNode-cardinality , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.energyIdentCodeEic-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality , tp:Terminal.TopologicalNode-valueType;
+        sh:targetClass  cim:Terminal .
+
+tp:ConnectivityNode  rdf:type  sh:NodeShape;
+        sh:property     tp:ConnectivityNode.TopologicalNode-valueType , tp:ConnectivityNode.TopologicalNode-cardinality;
+        sh:targetClass  cim:ConnectivityNode .
+
+tp:Terminal.TopologicalNode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "Terminal.TopologicalNode-cardinality";
+        sh:order        0;
+        sh:path         cim:Terminal.TopologicalNode;
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.energyIdentCodeEic-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.energyIdentCodeEic-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.energyIdentCodeEic;
+        sh:severity     sh:Violation .
+
+tp:DCTerminal  rdf:type  sh:NodeShape;
+        sh:property     ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype , tp:DCBaseTerminal.DCTopologicalNode-valueType , ido:IdentifiedObject.shortName-cardinality , tp:DCBaseTerminal.DCTopologicalNode-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.energyIdentCodeEic-cardinality;
+        sh:targetClass  cim:DCTerminal .
+
+tp:TopologicalNode.ConnectivityNodeContainer-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.ConnectivityNodeContainer-cardinality";
+        sh:order        4;
+        sh:path         cim:TopologicalNode.ConnectivityNodeContainer;
+        sh:severity     sh:Violation .
+
+ido:CardinalityGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "CardinalityIO";
+        sh:order    0 .
+
+ido:IdentifiedObject.shortName-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.shortName-cardinality";
+        sh:order        0.1;
+        sh:path         entsoe:IdentifiedObject.shortName;
+        sh:severity     sh:Violation .
+
+tp:ConnectivityNode.TopologicalNode-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:TopologicalNode );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:TopologicalNode";
+        sh:name         "ConnectivityNode.TopologicalNode-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:ConnectivityNode.TopologicalNode rdf:type );
+        sh:severity     sh:Violation .
+
+tp:DCBaseTerminal.DCTopologicalNode-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:DCTopologicalNode );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:DCTopologicalNode";
+        sh:name         "DCBaseTerminal.DCTopologicalNode-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:DCBaseTerminal.DCTopologicalNode rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.name-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.name-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+tp:TopologicalNode.ReportingGroup-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:ReportingGroup );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:ReportingGroup";
+        sh:name         "TopologicalNode.ReportingGroup-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        1;
+        sh:path         ( cim:TopologicalNode.ReportingGroup rdf:type );
+        sh:severity     sh:Violation .
+
+tp:DCNode.DCTopologicalNode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "DCNode.DCTopologicalNode-cardinality";
+        sh:order        0;
+        sh:path         cim:DCNode.DCTopologicalNode;
+        sh:severity     sh:Violation .
+
+tp:DCTopologicalNode.DCEquipmentContainer-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     tp:DCTopologicalNode.DCEquipmentContainer-valueType;
+        sh:targetClass  cim:DCTopologicalNode .
+
+tp:ConnectivityNode.TopologicalNode-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "ConnectivityNode.TopologicalNode-cardinality";
+        sh:order        0;
+        sh:path         cim:ConnectivityNode.TopologicalNode;
+        sh:severity     sh:Violation .
+
+tp:DatatypesGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Datatypes";
+        sh:order    1 .
+
+ido:IdentifiedObject.description-datatype
+        rdf:type        sh:PropertyShape;
+        sh:datatype     xsd:string;
+        sh:description  "This constraint validates the datatype of the property (attribute).";
+        sh:group        ido:DatatypesGroupIO;
+        sh:message      "The datatype is not literal or it violates the xsd datatype.";
+        sh:name         "IdentifiedObject.description-datatype";
+        sh:nodeKind     sh:Literal;
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+tp:DCTopologicalNode.DCEquipmentContainer-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:DCLine cim:DCConverterUnit cim:DCEquipmentContainer );
+        sh:message      "One of the following occurs: 1) The value type is not IRI; 2) The value type is not the right class.";
+        sh:name         "DCTopologicalNode.DCEquipmentContainer-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:DCTopologicalNode.DCEquipmentContainer rdf:type );
+        sh:severity     sh:Violation .
+
+ido:IdentifiedObject.name-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.name-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.name;
+        sh:severity     sh:Violation .
+
+tp:TopologicalNode.ConnectivityNodeContainer-valueTypeNodeShape
+        rdf:type        sh:NodeShape;
+        sh:property     tp:TopologicalNode.ConnectivityNodeContainer-valueType;
+        sh:targetClass  cim:TopologicalNode .
+
+tp:TopologicalNode  rdf:type  sh:NodeShape;
+        sh:property     tp:TopologicalNode.BaseVoltage-cardinality , tp:TopologicalNode.ReportingGroup-valueType , tp:TopologicalNode.ReportingGroup-cardinality , ido:IdentifiedObject.energyIdentCodeEic-datatype , tp:TopologicalNode.ConnectivityNodeContainer-cardinality , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.mRID-datatype , ido:IdentifiedObject.name-cardinality , tp:TopologicalNode.BaseVoltage-valueType , ido:IdentifiedObject.mRID-cardinality , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.energyIdentCodeEic-cardinality;
+        sh:targetClass  cim:TopologicalNode .
+
+ido:IdentifiedObject.description-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the property (attribute).";
+        sh:group        ido:CardinalityIO;
+        sh:maxCount     1;
+        sh:message      "Cardinality violation. Upper bound shall be 1";
+        sh:name         "IdentifiedObject.description-cardinality";
+        sh:order        0.1;
+        sh:path         cim:IdentifiedObject.description;
+        sh:severity     sh:Violation .
+
+ido:DatatypesGroupIO  rdf:type  sh:PropertyGroup;
+        rdfs:label  "DatatypesIO";
+        sh:order    1 .
+
+tp:TopologicalNode.BaseVoltage-cardinality
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the cardinality of the association at the used direction.";
+        sh:group        tp:CardinalityGroup;
+        sh:maxCount     1;
+        sh:message      "Association with cardinality violation at the used direction.";
+        sh:minCount     1;
+        sh:name         "TopologicalNode.BaseVoltage-cardinality";
+        sh:order        0;
+        sh:path         cim:TopologicalNode.BaseVoltage;
+        sh:severity     sh:Violation .
+
+tp:Terminal.TopologicalNode-valueType
+        rdf:type        sh:PropertyShape;
+        sh:description  "This constraint validates the value type of the association at the used direction.";
+        sh:group        tp:AssociationsGroup;
+        sh:in           ( cim:TopologicalNode );
+        sh:message      "One of the following does not conform: 1) The value type shall be IRI; 2) The value type shall be an instance of the class: cim:TopologicalNode";
+        sh:name         "Terminal.TopologicalNode-valueType";
+        sh:nodeKind     sh:IRI;
+        sh:order        0;
+        sh:path         ( cim:Terminal.TopologicalNode rdf:type );
+        sh:severity     sh:Violation .
+
+tp:AssociationsGroup  rdf:type  sh:PropertyGroup;
+        rdfs:label  "Associations";
+        sh:order    2 .
+
+tp:DCNode  rdf:type     sh:NodeShape;
+        sh:property     tp:DCNode.DCTopologicalNode-cardinality , ido:IdentifiedObject.shortName-datatype , ido:IdentifiedObject.description-datatype , ido:IdentifiedObject.shortName-cardinality , ido:IdentifiedObject.energyIdentCodeEic-cardinality , tp:DCNode.DCTopologicalNode-valueType , ido:IdentifiedObject.description-cardinality , ido:IdentifiedObject.name-cardinality , ido:IdentifiedObject.name-datatype , ido:IdentifiedObject.energyIdentCodeEic-datatype;
+        sh:targetClass  cim:DCNode .

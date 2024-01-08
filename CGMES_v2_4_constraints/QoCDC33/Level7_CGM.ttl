@@ -1,0 +1,198 @@
+@base          <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-CGM> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix l7cgm: <http://iec.ch/TC57/ns/CIM/constraints/QoCDC/Level7-CGM#> .
+
+cim:    
+    a           owl:Ontology ;
+    owl:imports sh: ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://iec.ch/TC57/2013/CIM-schema-cim16#"^^xsd:anyURI ;
+        sh:prefix "cim" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+        sh:prefix "rdf" ;
+    ] ;
+    sh:declare [
+        a sh:PrefixDeclaration ;
+        sh:namespace "http://entsoe.eu/CIM/SchemaExtension/3/1#"^^xsd:anyURI ;
+        sh:prefix "entsoe" ;
+    ] .
+
+l7cgm:Level7-CGM
+        a           sh:PropertyGroup ;
+        rdfs:label  "Level7-CGM" ;
+        sh:order    0 .
+
+
+l7cgm:InconsistentCurrentLimitsAndUnpairedTieFlow
+        a               sh:NodeShape ;
+        sh:property     l7cgm:CurrentLimit.value-InconsistentCurrentLimits, l7cgm:TopologicalNode-UnpairedTieFlow ;
+        #sh:targetClass  cim:TopologicalNode .
+		 sh:target  
+        [
+              a sh:SPARQLTarget ;
+              sh:prefixes cim: ;
+              sh:select """
+                SELECT DISTINCT ?this
+                WHERE {
+                  ?this rdf:type cim:TopologicalNode   .
+				  ?this entsoe:TopologicalNode.boundaryPoint true .
+                }
+                """ ;
+        ] . 
+
+l7cgm:CurrentLimit.value-InconsistentCurrentLimits
+        a               sh:PropertyShape ;
+        sh:sparql       l7cgm:CurrentLimit.value-InconsistentCurrentLimitsSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The value of cim:CurrentLimit.value is expected to be the same for a tie line on both sides of the boundary point. The rule applies only for cim:CurrentLimit which has association end cim:OperatingLimit.OperatingLimitType referencing a cim:OperatingLimitType with entsoe:OperatingLimitType.limitType equal to entsoe:LimitTypeKind.patl.	The lowest limit shall be used in studies. To allow for a small deviation the limit values standard rounding to integer is applied before comparing and provided for the reporting." ;
+        sh:name         "InconsistentCurrentLimits" ;
+        sh:group        l7cgm:Level7-CGM ;
+        sh:order        1 ;
+        sh:severity     sh:Warning .
+        
+    
+l7cgm:CurrentLimit.value-InconsistentCurrentLimitsSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "Current limits of type PATL are inconsistent at a tie line. Limit 1: {?value1}; Limit 2: {?value2}." ;
+		sh:prefixes cim: ;
+		sh:select """
+	      SELECT $this  ?value1  ?value2 
+        WHERE {
+
+			{
+			SELECT $this (COUNT(?term1) AS ?countterm) ?term1 ?term2
+			WHERE {
+				#?term1 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+				#?term1 cim:Terminal.TopologicalNode $this.
+				$this ^cim:Terminal.TopologicalNode ?term1.
+				?term1 rdf:type ?termtype .
+				#?term2 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+				$this ^cim:Terminal.TopologicalNode ?term2.
+				#?term2 cim:Terminal.TopologicalNode $this.
+			}
+			GROUP BY $this ?termtype ?term1 ?term2
+			HAVING(?countterm>3)
+			}
+          
+		  ?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?cl1 .
+		  ?cl1 rdf:type 	cim:CurrentLimit.
+		  ?cl1 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		  ?cl1 cim:CurrentLimit.value ?value1 .
+		  ?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?cl2 .
+		  ?cl2 rdf:type 	cim:CurrentLimit.
+		  ?cl2 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		  ?cl2 cim:CurrentLimit.value ?value2 .
+		  
+		  #?term1 cim:Terminal.TopologicalNode $this.
+		  #?term1 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+		  #?term1 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?cl1 .
+		  #?cl1 rdf:type 	cim:CurrentLimit.
+		  #?cl1 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		  #?cl1 cim:CurrentLimit.value ?value1 .
+		  #
+		  #?term2 cim:Terminal.TopologicalNode $this.
+		  #?term2 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+		  #?term2 ^cim:OperationalLimitSet.Terminal/^cim:OperationalLimit.OperationalLimitSet ?cl2 .
+		  #?cl2 rdf:type 	cim:CurrentLimit.
+		  #?cl2 cim:OperationalLimit.OperationalLimitType/entsoe:OperationalLimitType.limitType entsoe:LimitTypeKind.patl .
+		  #
+          ##?term1 cim:Terminal.ConductingEquipment/rdf:type cim:ACLineSegment .
+          ##?term2 cim:Terminal.ConductingEquipment/rdf:type cim:ACLineSegment .
+		  #?cl2 cim:CurrentLimit.value ?value2 .
+
+		   FILTER (?term1!=?term2 && ?cl1!=?cl2 && ?value1!=?value2).
+		   }
+		   ORDER BY $this
+		   LIMIT 1
+        """ .   
+		
+
+#l7cgm:UnpairedTieFlow
+#        a               sh:NodeShape ;
+#        sh:property     l7cgm:TopologicalNode-UnpairedTieFlow ;
+#        sh:targetClass  cim:TopologicalNode  .
+
+l7cgm:TopologicalNode-UnpairedTieFlow
+        a               sh:PropertyShape ;
+        sh:sparql       l7cgm:TopologicalNode-UnpairedTieFlowSparql ;
+        sh:path         rdf:type ;
+        sh:description  "The rule is checking updated SSH values only. An AC boundary cim:TopologicalNode which has two branches and two cim:EquivalentInjections linking two IGMs is a paired boundary cim:TopologicalNode. In this case the cim:EquivalentInjection-s shall have the sum of p and the sum of q values	equal to zero (no transfer of power). Note: An HVDC Boundary Point has a cim:IdentifiedObject.description attribute with leading characters equal to 'HVDC'." ;
+        sh:name         "UnpairedTieFlow" ;
+        sh:group        l7cgm:Level7-CGM ;
+        sh:order        2 ;
+        sh:severity     sh:Warning .
+        
+    
+l7cgm:TopologicalNode-UnpairedTieFlowSparql
+		a         sh:SPARQLConstraint ;  
+		sh:message "A paired AC boundary point has cim:EquivalentInjection-s that are not aligned. {?pt1}; {?pt2}; {?qt1}; {?qt2}" ;
+		sh:prefixes cim: ;
+		sh:select """
+	      #SELECT $this  (COUNT(DISTINCT ?value) as ?count)  (COUNT(DISTINCT ?q) as ?countq)
+		  SELECT $this  ?pt1 ?pt2 ?qt1 ?qt2
+        WHERE {
+		
+			{
+			SELECT $this (COUNT(?term1) AS ?countterm) ?term1 ?term2
+			WHERE {
+				#?term1 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+				#?term1 cim:Terminal.TopologicalNode $this.
+				$this ^cim:Terminal.TopologicalNode ?term1.
+				?term1 rdf:type ?termtype .
+				#?term2 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+				$this ^cim:Terminal.TopologicalNode ?term2.
+				#?term2 cim:Terminal.TopologicalNode $this.
+			}
+			GROUP BY $this ?termtype ?term1 ?term2
+			HAVING(?countterm>3)
+			}
+          #?term1 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+		  #?term1 cim:Terminal.TopologicalNode $this.
+		  ?term1 cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentInjection .
+		  ?term1 cim:Terminal.ConductingEquipment/cim:EquivalentInjection.p ?pt1 .
+		  ?term1 cim:Terminal.ConductingEquipment/cim:EquivalentInjection.q ?qt1 .
+		  
+		  OPTIONAL {
+		  #?term2 cim:Terminal.TopologicalNode/entsoe:TopologicalNode.boundaryPoint true .
+		  #?term2 cim:Terminal.TopologicalNode $this.
+		  ?term2 cim:Terminal.ConductingEquipment/rdf:type cim:EquivalentInjection .
+		  ?term2 cim:Terminal.ConductingEquipment/cim:EquivalentInjection.p ?pt2 .
+		  ?term2 cim:Terminal.ConductingEquipment/cim:EquivalentInjection.q ?qt2 .
+		  } .
+		  
+		  
+		  #$this entsoe:TopologicalNode.boundaryPoint true .
+		  #$this ^cim:Terminal.TopologicalNode ?terms .
+		  #?terms cim:Terminal.ConductingEquipment ?ce .
+		  #?ce rdf:type cim:EquivalentInjection .
+		  #?ce cim:EquivalentInjection.p ?value .
+		  #?ce cim:EquivalentInjection.q ?q .
+
+		 FILTER ((bound(?term2) && ?term1!=?term2 && (?pt1!=0 || ?pt2!=0 || ?qt1!=0 || ?qt2!=0)) ).
+		 #FILTER (bound(?term2) || !bound(?term2)).
+		   }
+		   #ORDER BY $this
+		   #LIMIT 1
+        """ .
+        #}
+        #GROUP BY $this ?value ?q
+        #HAVING (?count>1 || ?countq>1)
+        #""" . 
+		
+		
+		
+	
+
+		
