@@ -1,3 +1,5 @@
-rdflib
-PyQt5
-pyshacl
+rdflib~=7.0.0
+PyQt5~=5.15.10
+pyshacl~=0.25.0
+
+requests~=2.31.0

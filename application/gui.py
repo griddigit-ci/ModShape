@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading CGMES_v2_4_constraints file 'CGMES_v2_4_constraints.CGMES_v2_4_constraints'
+# Form implementation generated from reading ui file 'gui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.10
 #
@@ -23,12 +23,12 @@ class Ui_Dialog(object):
         self.splitter.setOrientation(QtCore.Qt.Vertical)
         self.splitter.setHandleWidth(8)
         self.splitter.setObjectName("splitter")
-        self.pbDatatype = QtWidgets.QPushButton(self.splitter)
-        self.pbDatatype.setObjectName("pbDatatype")
-        self.readInstanceData = QtWidgets.QPushButton(self.splitter)
-        self.readInstanceData.setObjectName("readInstanceData")
-        self.readSHACLConstraints = QtWidgets.QPushButton(self.splitter)
-        self.readSHACLConstraints.setObjectName("readSHACLConstraints")
+        self.RDFDatatypes = QtWidgets.QPushButton(self.splitter)
+        self.RDFDatatypes.setObjectName("RDFDatatypes")
+        self.InstanceData = QtWidgets.QPushButton(self.splitter)
+        self.InstanceData.setObjectName("InstanceData")
+        self.SHACLConstraints = QtWidgets.QPushButton(self.splitter)
+        self.SHACLConstraints.setObjectName("SHACLConstraints")
         self.splitter_2 = QtWidgets.QSplitter(Dialog)
         self.splitter_2.setGeometry(QtCore.QRect(20, 40, 751, 111))
         self.splitter_2.setOrientation(QtCore.Qt.Vertical)
@@ -54,9 +54,9 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.buttonOK.setText(_translate("Dialog", "Validate"))
-        self.pbDatatype.setText(_translate("Dialog", "Select Datatype mapping"))
-        self.readInstanceData.setText(_translate("Dialog", "Select data to validate"))
-        self.readSHACLConstraints.setText(_translate("Dialog", "Select SHACL Constraints"))
+        self.RDFDatatypes.setText(_translate("Dialog", "Select Datatype mapping"))
+        self.InstanceData.setText(_translate("Dialog", "Select data to validate"))
+        self.SHACLConstraints.setText(_translate("Dialog", "Select SHACL Constraints"))
 
 
 if __name__ == "__main__":

@@ -41,17 +41,17 @@
    <property name="handleWidth">
     <number>8</number>
    </property>
-   <widget class="QPushButton" name="pbDatatype">
+   <widget class="QPushButton" name="RDFDatatypes">
     <property name="text">
      <string>Select Datatype mapping</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="readInstanceData">
+   <widget class="QPushButton" name="InstanceData">
     <property name="text">
      <string>Select data to validate</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="readSHACLConstraints">
+   <widget class="QPushButton" name="SHACLConstraints">
     <property name="text">
      <string>Select SHACL Constraints</string>
     </property>
