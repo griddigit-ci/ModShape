@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SHACLvalidator.iml" filepath="$PROJECT_DIR$/.idea/SHACLvalidator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ModShape.iml" filepath="$PROJECT_DIR$/.idea/ModShape.iml" />
     </modules>
   </component>
 </project>
