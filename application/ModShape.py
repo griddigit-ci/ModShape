@@ -22,9 +22,20 @@ from joblib import Parallel, delayed
 from concurrent.futures import ThreadPoolExecutor
 from itertools import zip_longest
 from toolz import pipe, map
+import lightrdf
+from itertools import islice
+import re
+import concurrent.futures
+import openpyxl
+from openpyxl import Workbook
+from application.CimGraph import CimGraph
+from collections import OrderedDict
+from openpyxl.styles import Alignment
 
 
 class ModShape(QDialog, gui.Ui_Dialog):
+    datatypes_mapping = pl.DataFrame()
+
     def __init__(self, parent=None):
         super(ModShape, self).__init__(parent)
         self.setupUi(self)
@@ -49,7 +60,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
         self.merged_instance_graph = Graph()
         self.merged_shacl_graph = Graph()
         # self.merged_datatype_graph = Graph()
-        self.datatypes_mapping = pl.DataFrame()
+        # self.datatypes_mapping = pl.DataFrame()
 
     def connect_button(self, button, action, file_filter, label):
         button.clicked.connect(lambda: self.select_file(action, project_path, file_filter, label))
@@ -80,7 +91,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
         return extension.lower() in supported_archive_extensions
 
     def process_iterator(self, pyoxigraph_iterator):
-        #local_graph_data = []
+        # local_graph_data = []
         local_graph_data = Graph()
 
         for s, p, o in pyoxigraph_iterator:
@@ -103,13 +114,12 @@ class ModShape(QDialog, gui.Ui_Dialog):
             # local_graph_data.append((rdflib.IdentifiedNode(graph_subject), rdflib.IdentifiedNode(graph_predicate),
             #                          rdflib.IdentifiedNode(graph_object), rdflib.IdentifiedNode('http://hello.eu/modshape/test')))
 
-            local_graph_data.add((graph_subject,graph_predicate,graph_object))
+            local_graph_data.add((graph_subject, graph_predicate, graph_object))
 
         return local_graph_data
 
     def process_shacl_iterator(self, pyoxigraph_shacl_iterator, local_shacl_graph_data):
-        #local_shacl_graph_data = []
-
+        # local_shacl_graph_data = []
 
         for s, p, o in pyoxigraph_shacl_iterator:
             if p.value == OWL.imports.__str__():
@@ -117,13 +127,13 @@ class ModShape(QDialog, gui.Ui_Dialog):
                 with open(file_path, 'rb') as file:
                     content = file.read()
                     sub_iterator = pyoxigraph.parse(input=content, mime_type="text/turtle")
-                    local_shacl_graph_data = self.process_shacl_iterator(sub_iterator,local_shacl_graph_data)
+                    local_shacl_graph_data = self.process_shacl_iterator(sub_iterator, local_shacl_graph_data)
                     local_shacl_graph_data = local_shacl_graph_data + local_shacl_graph_data
             else:
                 graph_subject = rdflib.URIRef(s.value)
                 graph_predicate = rdflib.URIRef(p.value)
                 if hasattr(o, 'datatype'):  # do literal
-                    #graph_object = rdflib.Literal(o.value, datatype=rdflib.URIRef(o.datatype.value), lang=o.language)
+                    # graph_object = rdflib.Literal(o.value, datatype=rdflib.URIRef(o.datatype.value), lang=o.language)
                     graph_object = rdflib.Literal(o.value, datatype=rdflib.URIRef(o.datatype.value))
                 else:
                     graph_object = rdflib.URIRef(o.value)
@@ -184,28 +194,152 @@ class ModShape(QDialog, gui.Ui_Dialog):
                 #                       base_iri="http://iec.ch/TC57/2013/CIM-schema-cim16#",
                 #                       to_graph=pyoxigraph.NamedNode("http://example.eu/g"))
 
-                # start Variant C
-                pyoxigraph_iterator = pyoxigraph.parse(input=content, mime_type="application/rdf+xml",
-                                                       base_iri="http://iec.ch/TC57/2013/CIM-schema-cim16#")
+                # new experiments
 
-                # pyoxigraph_iterator_list = list(pyoxigraph_iterator)
-                # data_frame = pl.DataFrame(pyoxigraph_iterator,
-                #                           schema=['triple'])  # this is possible but it is hard to split the triples
+                # start_time_newparsing_l = time.time()  # end time parsing
+                # # Modified Parser
+                # #parser = lightrdf.Parser()
+                # start_time_newparsing_lb = time.time()  # end time parsing
+                # # local_graph_data = Graph()
+                # # doc = lightrdf.RDFDocument(io.BytesIO(content), parser=lightrdf.xml.PatternParser,base_iri="http://iec.ch/TC57/CIM100")
+                # # triples_iter = doc.search_triples(None, None, None)
+                # # end_time_newparsing_lb = time.time()  # end time parsing
+                # # elapsed_time_newparsing_lb = end_time_newparsing_lb - start_time_newparsing_lb
+                # # print(f"before for loop: {elapsed_time_newparsing_lb} seconds")
+                # # batch_size = 1000
+                #
+                # angle_bracket_pattern = re.compile(r'^<(.+)>$')
+                #
+                # local_graph_data = Graph()
+                # doc = lightrdf.RDFDocument(io.BytesIO(content), parser=lightrdf.xml.PatternParser,
+                #                            base_iri="http://iec.ch/TC57/CIM100")
+                # triples_iter = doc.search_triples(None, None, None)
+                # end_time_newparsing_lb = time.time()  # end time parsing
+                # elapsed_time_newparsing_lb = end_time_newparsing_lb - start_time_newparsing_lb
+                # print(f"before for loop: {elapsed_time_newparsing_lb} seconds")
+                # batch_size = 10000
+                #
+                # angle_bracket_pattern = re.compile(r'^<(.+)>$')
+                #
+                # with concurrent.futures.ThreadPoolExecutor() as executor:
+                #     futures = []
+                #
+                #     for batch in iter(lambda: list(islice(triples_iter, batch_size)), []):
+                #         batch_futures = [executor.submit(self.process_triple, triple, angle_bracket_pattern) for triple
+                #                          in batch]
+                #         futures.extend(batch_futures)
+                #
+                #     for future in concurrent.futures.as_completed(futures):
+                #         result = future.result()
+                #         #local_graph_data.add(result)
+                #
 
-                data_for_graph = self.process_iterator(pyoxigraph_iterator)
-                # end Variant C
+                # ens new experiments
 
-                end_time_parsing = time.time()  # end time parsing
-                elapsed_time_parsing = end_time_parsing - start_time_parsing
+                # for batch in iter(lambda: list(islice(triples_iter, batch_size)), []):
+                #     for triple in batch:
+                #         s, p, o = triple
+                #         match = angle_bracket_pattern.match(o)
+                #         match_p = angle_bracket_pattern.match(p).group(1)
+                #         if match:
+                #             graph_object = rdflib.URIRef(match.group(1))
+                #         else:
+                #             #o_mod = o[1:-1]
+                #             filtered_df = self.datatypes_mapping.filter(self.datatypes_mapping['Property'] == match_p)
+                #             #datatype_from_map = self.datatypes_mapping.filter(pl.col("Property") == p)
+                #             if not filtered_df.is_empty():
+                #                 datatype_from_map = filtered_df[0]['Datatype']
+                #             else:
+                #                 datatype_from_map = None
+                #
+                #             if datatype_from_map is not None:
+                #                 graph_object = rdflib.Literal(o, datatype=rdflib.XSD.string)
+                #             else:
+                #                 graph_object = rdflib.Literal(o,
+                #                                               datatype=rdflib.URIRef(str(datatype_from_map[0, 1])))
+                #
+                #         local_graph_data.add((rdflib.URIRef(angle_bracket_pattern.match(s).group(1)), rdflib.URIRef(match_p), graph_object))
 
-                print(f"Parsing time: {elapsed_time_parsing} seconds")
-                start_time_create_graph = time.time()  # start time create graph
-                #local_graph = Graph()
-                #local_graph.addN(data_for_graph)
-                self.merged_instance_graph = self.merged_instance_graph + data_for_graph
-                end_time_create_graph = time.time()  # end time create graph
-                elapsed_time_cr_graph = end_time_create_graph - start_time_create_graph
-                print(f"Creating graph time: {elapsed_time_cr_graph} seconds")
+                # for triple in doc.search_triples(None,None,None):
+                #     #start_time_newparsing_lbloop = time.time()  # end time parsing
+                #     s = triple[0]
+                #     p = triple[1]
+                #     o = triple[2]
+                #     if o.startswith('<'):
+                #         graph_object = rdflib.URIRef(o[1:-1])
+                #     else:
+                #         o_mod = o[1:-1]
+                #         datatype_from_map = self.datatypes_mapping.filter(pl.col("Property") == p)
+                #         if datatype_from_map.is_empty():
+                #             graph_object = rdflib.Literal(o_mod, datatype=rdflib.XSD.string)
+                #         else:
+                #             graph_object = rdflib.Literal(o_mod,datatype=rdflib.URIRef(datatype_from_map[0, 1].__str__()))
+
+                #     end_time_newparsing_lbloop = time.time()  # end time parsing
+                #  local_graph_data.add((rdflib.URIRef(s[1:-1]), rdflib.URIRef(p[1:-1]), graph_object))
+                #     end_time_newparsing_lbloopbg = time.time()  # end time parsing
+                #     elapsed_time_newparsing_lbloopbg = end_time_newparsing_lbloop - start_time_newparsing_lbloop
+                #     print(f"for loop iter: {elapsed_time_newparsing_lbloopbg} seconds")
+                #     elapsed_time_newparsing_lbG = end_time_newparsing_lbloopbg - start_time_newparsing_lbloop
+                #     print(f"loop with adding to graph: {elapsed_time_newparsing_lbG} seconds")
+
+                # end_time_newparsing_l = time.time()  # end time parsing
+                # elapsed_time_newparsing_l = end_time_newparsing_l - start_time_newparsing_l
+                # print(f"New parsing time Light: {elapsed_time_newparsing_l} seconds")
+                # sys.exit()
+
+                # start_time_newparsing = time.time()  # start time parsing
+                # Modified Parser RDFLIB
+                instance_data_graph_local = CimGraph()
+                instance_data_graph_local.parse(data=content, format="cimxml", datatype_mapping=self.datatypes_mapping)
+                self.merged_instance_graph = self.merged_instance_graph + instance_data_graph_local
+                # end_time_newparsing = time.time()  # end time parsing
+                # elapsed_time_newparsing = end_time_newparsing - start_time_newparsing
+                # print(f"New parsing time: {elapsed_time_newparsing} seconds")
+
+                # # start Variant C
+                # pyoxigraph_iterator = pyoxigraph.parse(input=content, mime_type="application/rdf+xml",
+                #                                        base_iri="http://iec.ch/TC57/2013/CIM-schema-cim16#")
+                #
+                # # pyoxigraph_iterator_list = list(pyoxigraph_iterator)
+                # # data_frame = pl.DataFrame(pyoxigraph_iterator,
+                # #                           schema=['triple'])  # this is possible but it is hard to split the triples
+                #
+                # data_for_graph = self.process_iterator(pyoxigraph_iterator)
+                # # end Variant C
+                #
+                # end_time_parsing = time.time()  # end time parsing
+                # elapsed_time_parsing = end_time_parsing - start_time_parsing
+                #
+                # print(f"Parsing time: {elapsed_time_parsing} seconds")
+                # start_time_create_graph = time.time()  # start time create graph
+                # # local_graph = Graph()
+                # # local_graph.addN(data_for_graph)
+                # self.merged_instance_graph = self.merged_instance_graph + data_for_graph
+                # end_time_create_graph = time.time()  # end time create graph
+                # elapsed_time_cr_graph = end_time_create_graph - start_time_create_graph
+                # print(f"Creating graph time: {elapsed_time_cr_graph} seconds")
+
+    def process_triple(self, triple, angle_bracket_pattern):
+        s, p, o = triple
+        match = angle_bracket_pattern.match(o)
+        match_p = angle_bracket_pattern.match(p).group(1)
+
+        if match:
+            graph_object = rdflib.URIRef(match.group(1))
+        else:
+            filtered_df = self.datatypes_mapping.filter(self.datatypes_mapping['Property'] == match_p)
+            if not filtered_df.is_empty():
+                datatype_from_map = filtered_df[0]['Datatype']
+            else:
+                datatype_from_map = None
+
+            if datatype_from_map is not None:
+                graph_object = rdflib.Literal(o, datatype=rdflib.XSD.string)
+            else:
+                graph_object = rdflib.Literal(o, datatype=rdflib.URIRef(str(datatype_from_map[0, 1])))
+
+        return rdflib.URIRef(angle_bracket_pattern.match(s).group(1)), rdflib.URIRef(match_p), graph_object
 
     def process_instance_data_contents(self, file_paths):
         for file_path in file_paths:
@@ -215,7 +349,6 @@ class ModShape(QDialog, gui.Ui_Dialog):
 
     def push_button_ok(self):  # button "OK"
 
-        start_time_preparation = time.time()  # start time to prepare
         datatype_mapping = []
         instance_data_files = []
         shacl_file = []
@@ -235,9 +368,13 @@ class ModShape(QDialog, gui.Ui_Dialog):
 
         # import from xlsx if the datatypes map is in xlsx
         for file in datatype_mapping:
-            self.datatypes_mapping = pl.read_excel(source=file, sheet_name="RDFS Datatypes")
+            ModShape.datatypes_mapping = pl.read_excel(source=file, sheet_name="RDFS Datatypes")
 
+        start_time_preparation = time.time()  # start time to prepare
         self.process_instance_data_contents(instance_data_files)
+        end_time_preparation = time.time()  # end time to prepare
+        elapsed_time_preparation = end_time_preparation - start_time_preparation
+        print(f"Instance data parsing time: {elapsed_time_preparation} seconds")
 
         # load SHACL
         local_shacl_graph_data = Graph()
@@ -245,7 +382,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
             with open(shacl_file, 'rb') as file:
                 content = file.read()
                 sub_iterator = pyoxigraph.parse(input=content, mime_type="text/turtle")
-                local_shacl_graph_data = self.process_shacl_iterator(sub_iterator,local_shacl_graph_data)
+                local_shacl_graph_data = self.process_shacl_iterator(sub_iterator, local_shacl_graph_data)
                 self.merged_shacl_graph = self.merged_shacl_graph + local_shacl_graph_data
 
         # load SHACL variant 2
@@ -290,10 +427,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
         #                                                                      datatype=o_d.__str__())))  # this triggers a warning that can be ignorred
         #             self.merged_instance_graph.remove((s_i, p_i, o_i))
         # end adding datatypes - version 1
-        end_time_preparation = time.time()  # end time to prepare
-        elapsed_time_preparation = end_time_preparation - start_time_preparation
 
-        print(f"Time taken for the preparation: {elapsed_time_preparation} seconds")
         start_time_validation = time.time()  # start time validation
         # this is validation without inference
         r = validate(self.merged_instance_graph,
@@ -316,18 +450,76 @@ class ModShape(QDialog, gui.Ui_Dialog):
         # Calculate the elapsed time
         elapsed_time_validation = end_time_validation - start_time_validation
 
-        print(f"Time taken for the validation: {elapsed_time_validation} seconds")
+        print(f"Validation time: {elapsed_time_validation} seconds")
 
-        file_name = os.path.normpath(QFileDialog.getSaveFileName(self, "xxx", "C:", "*.jsonld")[0])
+        file_name = os.path.normpath(QFileDialog.getSaveFileName(self, "xxx", "C:", "*.xlsx")[0])
 
-        results_graph.serialize(destination=file_name, format='json-ld')
+        # file_name = os.path.normpath(QFileDialog.getSaveFileName(self, "xxx", "C:", "*.jsonld")[0])
+        # results_graph.serialize(destination=file_name, format='json-ld')
+        wb = Workbook()
+        ws = wb.active
+        headers = ['Severity', 'Focus node', 'Path', 'Value', 'Message', 'Source shape']
+        ws.append(headers)
+
+        for s in results_graph.subjects(RDF.type, rdflib.term.URIRef("http://www.w3.org/ns/shacl#ValidationResult")):
+            row = OrderedDict()
+            for p in results_graph.predicates(s, None):
+                if p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#resultSeverity"):
+                    row['Severity'] = results_graph.objects(s, p).__next__().__str__()
+                elif p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#focusNode"):
+                    row['Focus node'] = results_graph.objects(s, p).__next__().__str__()
+                elif p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#resultPath"):
+                    row['Path'] = results_graph.objects(s, p).__next__().__str__()
+                elif p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#value"):
+                    row['Value'] = results_graph.objects(s, p).__next__().__str__()
+                elif p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#resultMessage"):
+                    row['Message'] = results_graph.objects(s, p).__next__().__str__()
+                elif p == rdflib.term.URIRef("http://www.w3.org/ns/shacl#sourceShape"):
+                    row['Source shape'] = results_graph.objects(s, p).__next__().__str__()
+            ws.append([row.get(header, '') for header in headers])
+
+        # Format the worksheet
+        for column_idx, column in enumerate(ws.columns, start=1):
+            max_length = 0
+            for cell in column:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(cell.value)
+                except:
+                    pass
+            adjusted_width = (max_length + 2)
+            ws.column_dimensions[self.get_column_letter(column_idx)].width = adjusted_width
+
+        # Wrap text in a specific column (e.g., 'result_message')
+        result_message_col = headers.index('Message') + 1
+        for row in ws.iter_rows(min_col=result_message_col, max_col=result_message_col):
+            for cell in row:
+                cell.alignment = Alignment(wrap_text=True)
+
+        # Add filter to the worksheet
+        ws.auto_filter.ref = ws.dimensions
+
+        # Freeze the first row
+        ws.freeze_panes = 'A2'
+        wb.save(file_name)
+
         print(f'{"Validation finished"}')
-        print(f'{conforms}')
+        print(f'Conforms?: {conforms}')
 
     @staticmethod
     def is_url(path):
         # Check if the path starts with "http://" or "https://"
         return path.startswith(("http://", "https://"))
+
+    # Function to convert column index to letter
+    def get_column_letter(self,col_idx):
+        dividend = col_idx
+        column_letter = ''
+        while dividend > 0:
+            modulo = (dividend - 1) % 26
+            column_letter = chr(65 + modulo) + column_letter
+            dividend = (dividend - modulo) // 26
+        return column_letter
 
     def load_owl_imports(self, file_path, visited_files=None):
         # If visited_files is not provided, create a new set
