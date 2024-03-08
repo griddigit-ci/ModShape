@@ -122,7 +122,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
         # local_shacl_graph_data = []
 
         for s, p, o in pyoxigraph_shacl_iterator:
-            if p.value == OWL.imports.__str__():
+            if p.value == OWL.imports.__str__() and o.value != 'http://www.w3.org/ns/shacl#':
                 file_path = o.value
                 with open(file_path, 'rb') as file:
                     content = file.read()
