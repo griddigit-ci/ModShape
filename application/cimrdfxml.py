@@ -542,11 +542,12 @@ class RDFXMLHandler(handler.ContentHandler):
                 literalLang = None
 
             #datatypes_mapping
-            datatype_from_map = self.datamapping.filter(pl.col("Property") == current.predicate)
-            if datatype_from_map.is_empty():
+            # datatype_from_map = self.datamapping.filter(pl.col("Property") == current.predicate)
+            datatype_from_map = current.predicate if current.predicate in self.datamapping["Property"] else None
+            if datatype_from_map is None:
                 current.object = Literal(current.data, literalLang, current.datatype)
             else:
-                current.object = Literal(current.data, literalLang, datatype_from_map[0, 1].__str__())
+                current.object = Literal(current.data, literalLang, datatype_from_map)
 
 
             current.data = None

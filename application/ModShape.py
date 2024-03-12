@@ -3,6 +3,7 @@
 # author: Chavdar Ivanov
 
 import io
+import json
 import os
 import sys
 import time
@@ -34,7 +35,8 @@ from openpyxl.styles import Alignment
 
 
 class ModShape(QDialog, gui.Ui_Dialog):
-    datatypes_mapping = pl.DataFrame()
+    datatypes_mapping = dict()
+    # datatypes_mapping = pl.DataFrame()
 
     def __init__(self, parent=None):
         super(ModShape, self).__init__(parent)
@@ -367,8 +369,13 @@ class ModShape(QDialog, gui.Ui_Dialog):
         #     self.merged_datatype_graph = self.merged_datatype_graph + local_datatype_mapping_graph
 
         # import from xlsx if the datatypes map is in xlsx
+        # for file in datatype_mapping:
+        #     ModShape.datatypes_mapping = pl.read_excel(source=file, sheet_name="RDFS Datatypes")
+
+        # import from json if the datatype map is in json
         for file in datatype_mapping:
-            ModShape.datatypes_mapping = pl.read_excel(source=file, sheet_name="RDFS Datatypes")
+            with open(file, "r") as json_file:
+                ModShape.datatypes_mapping = json.load(json_file)
 
         start_time_preparation = time.time()  # start time to prepare
         self.process_instance_data_contents(instance_data_files)
