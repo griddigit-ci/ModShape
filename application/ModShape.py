@@ -50,7 +50,7 @@ class ModShape(QDialog, gui.Ui_Dialog):
                               'label': self.labelSelectData},
             'SHACL Constraints': {'filter': "SHACL Constraints, *.ttl", 'button': self.SHACLConstraints,
                                   'label': self.labelSelectDataSHACL},
-            'RDF Datatypes': {'filter': "RDFS datatypes, *.xlsx", 'button': self.RDFDatatypes,
+            'RDF Datatypes': {'filter': "RDFS datatypes, *.json", 'button': self.RDFDatatypes,
                               'label': self.labelSelectRDFmap}
         }
 
@@ -360,7 +360,10 @@ class ModShape(QDialog, gui.Ui_Dialog):
             elif action == 'SHACL Constraints':
                 shacl_file = details.get('selection', [])
             elif action == 'RDF Datatypes':
-                datatype_mapping = details.get('selection', [])
+                if not details.get('selection', []):
+                    datatype_mapping = ['CGMES_v2_4_constraints/DatatypeMapping/rdfs_info_CGMES2415simple.json']
+                else:
+                    datatype_mapping = details.get('selection', [])
 
         # import to Graph if the map is in .rdf
         # for file in datatype_mapping:

@@ -543,7 +543,7 @@ class RDFXMLHandler(handler.ContentHandler):
 
             #datatypes_mapping
             # datatype_from_map = self.datamapping.filter(pl.col("Property") == current.predicate)
-            datatype_from_map = current.predicate if current.predicate in self.datamapping["Property"] else None
+            datatype_from_map = current.predicate if current.predicate in self.datamapping["Property-AttributeAssociation"] else None
             if datatype_from_map is None:
                 current.object = Literal(current.data, literalLang, current.datatype)
             else:
