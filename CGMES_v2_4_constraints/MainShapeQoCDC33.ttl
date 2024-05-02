@@ -1,0 +1,190 @@
+@base          <http://iec.ch/TC57/ns/CIM/CGMES/constraints/main/2.4> .
+@prefix entsoe: <http://entsoe.eu/CIM/SchemaExtension/3/1#> .
+@prefix cims:  <http://iec.ch/TC57/1999/rdf-schema-extensions-19990926#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix sh:    <http://www.w3.org/ns/shacl#> .
+@prefix cim:   <http://iec.ch/TC57/2013/CIM-schema-cim16#> .
+@prefix main:  <http://iec.ch/TC57/ns/CIM/CGMES/constraints/main/2.4#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dash:  <http://datashapes.org/dash#> .
+@prefix dl:    <http://entsoe.eu/CIM/DiagramLayout/3/1/Constraints#> .
+@prefix eq:    <http://iec.ch/TC57/ns/CIM/Equipment-EU/constraints/2.4#> .
+@prefix sv:    <http://entsoe.eu/CIM/StateVariables/4/1/Constraints#> .
+@prefix eqbd:   <http://entsoe.eu/CIM/EquipmentBoundary/3/1/Constraints#> .
+@prefix tpbd:   <http://entsoe.eu/CIM/TopologyBoundary/3/1/Constraints#> .
+@prefix ssh:    <http://entsoe.eu/CIM/SteadyStateHypothesis/1/1/Constraints#> .
+@prefix tp:     <http://entsoe.eu/CIM/Topology/4/1/Constraints#> .
+@prefix idoec:    <http://iec.ch/TC57/ns/CIM/IdentifiedObjectEC/constraints/3.0#> .
+
+#Constraints derived from RDFS
+#Node you need to activate the right EQ: either EQ core or EQ core operation or EQ Core Operation Schort Circuit or EQ Core Short Circuit
+# This is because in CGMES 2.4 these profiles are not split and not aligned
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//EquipmentProfileCore.ttl> .
+main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//EquipmentProfileCoreOperation.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//EquipmentProfileCoreShortCircuit.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//EquipmentProfileCoreOperationShortCircuit.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//DiagramLayoutProfile.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//DynamicsProfile.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//GeographicalLocationProfile.ttl> .
+main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//StateVariablesProfile.ttl> .
+main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//SteadyStateHypothesisProfile.ttl> .
+main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//TopologyProfile.ttl> .
+
+main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//FileHeaderProfile.ttl> .
+
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//TopologyBoundaryProfile.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//RDFS//EquipmentBoundaryProfile.ttl> .
+
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level2_CGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level2_IGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level2_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level3_IGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level3_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level4_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level4_IGMdiff.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level5_IGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level5_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level6_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level7_CGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level7_IGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level7_IGMCGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level8_CGM.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//QoCDC33//Level8_IGMCGM.ttl> .
+
+#Other
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//EQinv.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//OP_452_cp_explicit.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//OPinv.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//SC_452_cp.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//SV_456_cp_explicit.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//SVinv.ttl> .
+main:   owl:imports <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other2415//TP_456_cp_explicit.ttl> .
+
+
+##Consraints related to IdentifiedObject
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//IdentifiedObjecStringLength.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//All_600-1.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//BP_propDT.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EQ_301UML.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EQ_452.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EQ_600-2.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EQ_QoCDC.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SV_QoCDC.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SSH_QoCDC32.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//OP_452.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SolvedMAS_600-1.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EnergySource.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SSH_NotSolvedMAS_456.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SV_SolvedMAS_456.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SC_NotSolvedMAS_301UML.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//OP_NotSolvedMAS_452.ttl> .
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//TP_NotSolvedMAS_301UML.ttl> .
+#
+#
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//sanity.ttl> .
+
+
+#Consraints related to inverse associations
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//EQinv.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//OPinv.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SVinv.ttl> .
+
+#Consraints related to cross profile associations
+# not used as included in RDFS main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//OP_452_cp_explicit.ttl> .
+# not used as included in RDFS main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SC_452_cp.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//SV_456_cp_explicit.ttl> .
+#main:   owl:imports  <C://ServerDrive//ValiMate//SHACL_Constraints//ConstraintsCGMES2415//Other//TP_456_cp_explicit.ttl> .
+
+# This is deactivating the value type check for the association DiagramObject.IdentifiedObject because the sh:or statement would require to have references only to classes within the DL profile, which is not correct 
+#dl:DiagramObject.IdentifiedObject-valueTypeNodeShape
+#        a               sh:NodeShape ;
+#        sh:deactivated  true .
+
+#This is deactivating the cardinality check for the association Terminal.ConnectivityNode
+eq:Terminal.ConnectivityNode-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+
+# This is deactivated because the valueType constraint is not complete in the constraints converted from RDFS. This is checked in detail in the cross profile shapes.       
+sv:SvStatus.ConductingEquipment-valueType
+        a               sh:NodeShape ;
+        sh:deactivated  true .
+  
+#This is deactivating the checks coming from EQBD and TPBD which are making problem if activated together with the rest of IGM. The problem is in CGMES v2.4 in terms of setup
+eqbd:Terminal.ConductingEquipment-valueType
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+		
+eqbd:ConnectivityNode.fromEndName-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.fromEndNameTso-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.ConnectivityNodeContainer-valueType
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.toEndName-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.toEndIsoCode-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.fromEndIsoCode-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.toEndNameTso-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+eqbd:ConnectivityNode.boundaryPoint-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.toEndNameTso-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.fromEndNameTso-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.fromEndName-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.boundaryPoint-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.toEndIsoCode-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.fromEndIsoCode-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+tpbd:TopologicalNode.toEndName-cardinality
+        a               sh:PropertyShape ;
+        sh:deactivated  true .
+##The next three are disabled because of the terminal for the junction in boundary
+#ssh:ACDCTerminal.connected-cardinality
+#		a               sh:PropertyShape ;
+#        sh:deactivated  true .
+#tp:Terminal.TopologicalNode-cardinality
+#		a               sh:PropertyShape ;
+#        sh:deactivated  true .
+#idoec:IdentifiedObject.name-cardinality
+#		a               sh:PropertyShape ;
+#        sh:deactivated  true .
