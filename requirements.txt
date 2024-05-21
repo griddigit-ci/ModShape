@@ -2,7 +2,7 @@ rdflib~=7.0.0
 PyQt5~=5.15.10
 pyshacl~=0.25.0
 
-requests~=2.31.0
+requests~=2.32.1
 pyoxigraph~=0.3.22
 polars~=0.20.4
 numba~=0.58.1
